@@ -3,27 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046B92A9BF068004F6386 /* AppDelegate.swift */; };
 		A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */; };
-		A5B046BE2A9BF068004F6386 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046BD2A9BF068004F6386 /* ViewController.swift */; };
-		A5B046C12A9BF068004F6386 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B046BF2A9BF068004F6386 /* Main.storyboard */; };
 		A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B046C22A9BF069004F6386 /* Assets.xcassets */; };
 		A5B046C62A9BF069004F6386 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5B046C42A9BF069004F6386 /* LaunchScreen.storyboard */; };
+		A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046D52A9BF3D5004F6386 /* StartScreenController.swift */; };
+		A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046D72A9BF400004F6386 /* CustomTabBar.swift */; };
+		A5B046DB2A9BF440004F6386 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A5B046DA2A9BF440004F6386 /* SnapKit */; };
+		A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */; };
+		A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */; };
+		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A5B046B62A9BF068004F6386 /* CookingBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B046B92A9BF068004F6386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A5B046BD2A9BF068004F6386 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		A5B046C02A9BF068004F6386 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5B046C22A9BF069004F6386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5B046C52A9BF069004F6386 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5B046C72A9BF069004F6386 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5B046D52A9BF3D5004F6386 /* StartScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenController.swift; sourceTree = "<group>"; };
+		A5B046D72A9BF400004F6386 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5B046DB2A9BF440004F6386 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +64,146 @@
 		A5B046B82A9BF068004F6386 /* CookingBook */ = {
 			isa = PBXGroup;
 			children = (
-				A5B046B92A9BF068004F6386 /* AppDelegate.swift */,
-				A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */,
-				A5B046BD2A9BF068004F6386 /* ViewController.swift */,
-				A5B046BF2A9BF068004F6386 /* Main.storyboard */,
-				A5B046C22A9BF069004F6386 /* Assets.xcassets */,
-				A5B046C42A9BF069004F6386 /* LaunchScreen.storyboard */,
-				A5B046C72A9BF069004F6386 /* Info.plist */,
+				A5B046CD2A9BF2DF004F6386 /* App */,
+				A5B046CE2A9BF308004F6386 /* Resources */,
+				A5B046D02A9BF33F004F6386 /* Controllers */,
 			);
 			path = CookingBook;
+			sourceTree = "<group>";
+		};
+		A5B046CD2A9BF2DF004F6386 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046B92A9BF068004F6386 /* AppDelegate.swift */,
+				A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A5B046CE2A9BF308004F6386 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046C72A9BF069004F6386 /* Info.plist */,
+				A5B046C42A9BF069004F6386 /* LaunchScreen.storyboard */,
+				A5B046C22A9BF069004F6386 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		A5B046CF2A9BF32B004F6386 /* StartScreen */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046D22A9BF384004F6386 /* Controller */,
+				A5B046D12A9BF362004F6386 /* View */,
+			);
+			path = StartScreen;
+			sourceTree = "<group>";
+		};
+		A5B046D02A9BF33F004F6386 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E22A9BF780004F6386 /* Profile */,
+				A5B046DF2A9BF75A004F6386 /* Notifications */,
+				A5B046DC2A9BF656004F6386 /* Favorites */,
+				A5B046D42A9BF3AB004F6386 /* CustomTabBarController */,
+				A5B046CF2A9BF32B004F6386 /* StartScreen */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A5B046D12A9BF362004F6386 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5B046D22A9BF384004F6386 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046D52A9BF3D5004F6386 /* StartScreenController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A5B046D42A9BF3AB004F6386 /* CustomTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046D72A9BF400004F6386 /* CustomTabBar.swift */,
+			);
+			path = CustomTabBarController;
+			sourceTree = "<group>";
+		};
+		A5B046DC2A9BF656004F6386 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046DE2A9BF6C8004F6386 /* View */,
+				A5B046DD2A9BF6BF004F6386 /* Controller */,
+			);
+			path = Favorites;
+			sourceTree = "<group>";
+		};
+		A5B046DD2A9BF6BF004F6386 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A5B046DE2A9BF6C8004F6386 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5B046DF2A9BF75A004F6386 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E12A9BF777004F6386 /* View */,
+				A5B046E02A9BF76B004F6386 /* Controller */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		A5B046E02A9BF76B004F6386 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A5B046E12A9BF777004F6386 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A5B046E22A9BF780004F6386 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E42A9BF796004F6386 /* View */,
+				A5B046E32A9BF78E004F6386 /* Controller */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		A5B046E32A9BF78E004F6386 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A5B046E42A9BF796004F6386 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +222,9 @@
 			dependencies = (
 			);
 			name = CookingBook;
+			packageProductDependencies = (
+				A5B046DA2A9BF440004F6386 /* SnapKit */,
+			);
 			productName = CookingBook;
 			productReference = A5B046B62A9BF068004F6386 /* CookingBook.app */;
 			productType = "com.apple.product-type.application";
@@ -103,7 +245,7 @@
 				};
 			};
 			buildConfigurationList = A5B046B12A9BF068004F6386 /* Build configuration list for PBXProject "CookingBook" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -111,6 +253,9 @@
 				Base,
 			);
 			mainGroup = A5B046AD2A9BF068004F6386;
+			packageReferences = (
+				A5B046D92A9BF440004F6386 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = A5B046B72A9BF068004F6386 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,7 +272,6 @@
 			files = (
 				A5B046C62A9BF069004F6386 /* LaunchScreen.storyboard in Resources */,
 				A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */,
-				A5B046C12A9BF068004F6386 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,8 +282,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5B046BE2A9BF068004F6386 /* ViewController.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
+				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
+				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
+				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
+				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
+				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,14 +295,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		A5B046BF2A9BF068004F6386 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5B046C02A9BF068004F6386 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A5B046C42A9BF069004F6386 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,12 +429,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TWQL7PLAUC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CookingBook/Info.plist;
+				INFOPLIST_FILE = CookingBook/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,9 +442,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "zvontsov-adadigital.ru.CookingBook";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -317,12 +460,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TWQL7PLAUC;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CookingBook/Info.plist;
+				INFOPLIST_FILE = CookingBook/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -330,9 +473,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "zvontsov-adadigital.ru.CookingBook";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +504,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A5B046D92A9BF440004F6386 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A5B046DA2A9BF440004F6386 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A5B046D92A9BF440004F6386 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A5B046AE2A9BF068004F6386 /* Project object */;
 }
