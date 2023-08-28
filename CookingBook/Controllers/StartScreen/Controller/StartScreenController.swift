@@ -14,7 +14,7 @@ final class StartScreenController: UIViewController {
     
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
-    private var dataSourse: UICollectionViewDiffableDataSource<String, String>!
+    private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>!
     
     //MARK: - UI Elements
     
@@ -28,7 +28,7 @@ final class StartScreenController: UIViewController {
     
     private lazy var searchBar: UITextField = {
         let searchIcon = UIImageView(image: UIImage(systemName: "magnifyingglass"))
-        searchIcon.tintColor = .gray
+        searchIcon.tintColor = .darkGray
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Search recipes"
@@ -37,13 +37,13 @@ final class StartScreenController: UIViewController {
         textField.leftViewMode = .always
         return textField
     }()
-
+    
     //MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//      loadTableView()
+        
+        loadTableView()
         setupViews()
         configureCollectionView()
     }
@@ -67,7 +67,7 @@ final class StartScreenController: UIViewController {
             make.height.equalTo(31)
         }
     }
-        
+    
     private func loadTableView() {
         
         networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
@@ -75,7 +75,7 @@ final class StartScreenController: UIViewController {
             switch result {
             case .success(let response):
                 print(self.networkManager)
-                print(response)
+                print(response.recipes.first!)
             case .failure(let error):
                 print(error.customMessage)
             }
@@ -87,7 +87,7 @@ final class StartScreenController: UIViewController {
 //MARK: - Extension StartScreenController
 
 extension StartScreenController {
-        
+    
     private func configureCollectionView() {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.addSubview(collectionView)
