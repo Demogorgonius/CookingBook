@@ -45,7 +45,7 @@ final class StartScreenController: UIViewController {
 
 //      loadTableView()
         setupViews()
-       
+        configureCollectionView()
     }
     
     //MARK: - Properties
@@ -63,7 +63,7 @@ final class StartScreenController: UIViewController {
         
         searchBar.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.top.equalTo(headerlabel.snp.bottom).inset(-10)
+            make.top.equalTo(headerlabel.snp.bottom).inset(-16)
             make.height.equalTo(31)
         }
     }
@@ -87,10 +87,19 @@ final class StartScreenController: UIViewController {
 //MARK: - Extension StartScreenController
 
 extension StartScreenController {
-    
+        
     private func configureCollectionView() {
-        
-        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).inset(-16)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
     }
     
+    private func createLayout() -> UICollectionViewLayout {
+        
+        return UICollectionViewLayout()
+    }
 }
