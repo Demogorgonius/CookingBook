@@ -17,6 +17,15 @@
 		A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */; };
 		A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */; };
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
+		EB538A772A9C571100B62658 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A762A9C571100B62658 /* Endpoint.swift */; };
+		EB538A792A9C575700B62658 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A782A9C575700B62658 /* HTTPMethod.swift */; };
+		EB538A7D2A9C578500B62658 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A7C2A9C578500B62658 /* RequestError.swift */; };
+		EB538A802A9C581B00B62658 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A7F2A9C581B00B62658 /* Endpoints.swift */; };
+		EB538A842A9C5EBF00B62658 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A832A9C5EBF00B62658 /* NetworkManager.swift */; };
+		EB538A872A9C5ED300B62658 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A862A9C5ED300B62658 /* HTTPClient.swift */; };
+		EB538A8A2A9C605A00B62658 /* Servisable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A892A9C605A00B62658 /* Servisable.swift */; };
+		EB538A8D2A9C60B300B62658 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A8C2A9C60B300B62658 /* Services.swift */; };
+		EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +40,15 @@
 		A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		EB538A762A9C571100B62658 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EB538A782A9C575700B62658 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		EB538A7C2A9C578500B62658 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
+		EB538A7F2A9C581B00B62658 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
+		EB538A832A9C5EBF00B62658 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		EB538A862A9C5ED300B62658 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		EB538A892A9C605A00B62658 /* Servisable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Servisable.swift; sourceTree = "<group>"; };
+		EB538A8C2A9C60B300B62658 /* Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +85,7 @@
 				A5B046CD2A9BF2DF004F6386 /* App */,
 				A5B046CE2A9BF308004F6386 /* Resources */,
 				A5B046D02A9BF33F004F6386 /* Controllers */,
+				EB538A752A9C56C300B62658 /* NetworkService */,
 			);
 			path = CookingBook;
 			sourceTree = "<group>";
@@ -206,6 +225,70 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		EB538A752A9C56C300B62658 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A8E2A9C630000B62658 /* Model */,
+				EB538A7E2A9C57C400B62658 /* Base */,
+				EB538A812A9C582D00B62658 /* Endpoints */,
+				EB538A882A9C605300B62658 /* Servisable */,
+				EB538A8B2A9C60AD00B62658 /* Services */,
+				EB538A822A9C5EBC00B62658 /* NetworkManager */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		EB538A7E2A9C57C400B62658 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A762A9C571100B62658 /* Endpoint.swift */,
+				EB538A782A9C575700B62658 /* HTTPMethod.swift */,
+				EB538A7C2A9C578500B62658 /* RequestError.swift */,
+				EB538A862A9C5ED300B62658 /* HTTPClient.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		EB538A812A9C582D00B62658 /* Endpoints */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A7F2A9C581B00B62658 /* Endpoints.swift */,
+			);
+			name = Endpoints;
+			sourceTree = "<group>";
+		};
+		EB538A822A9C5EBC00B62658 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A832A9C5EBF00B62658 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		EB538A882A9C605300B62658 /* Servisable */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A892A9C605A00B62658 /* Servisable.swift */,
+			);
+			path = Servisable;
+			sourceTree = "<group>";
+		};
+		EB538A8B2A9C60AD00B62658 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A8C2A9C60B300B62658 /* Services.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EB538A8E2A9C630000B62658 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -282,13 +365,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB538A842A9C5EBF00B62658 /* NetworkManager.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
+				EB538A872A9C5ED300B62658 /* HTTPClient.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
+				EB538A772A9C571100B62658 /* Endpoint.swift in Sources */,
+				EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
+				EB538A792A9C575700B62658 /* HTTPMethod.swift in Sources */,
+				EB538A7D2A9C578500B62658 /* RequestError.swift in Sources */,
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
+				EB538A8D2A9C60B300B62658 /* Services.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
+				EB538A8A2A9C605A00B62658 /* Servisable.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
+				EB538A802A9C581B00B62658 /* Endpoints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -5,14 +5,51 @@
 //  Created by Sergey on 28.08.2023.
 //
 
-import Foundation
 import UIKit
+import SnapKit
 
-class StartScreenController: UIViewController {
+final class StartScreenController: UIViewController {
+    
+    //MARK: - Properties
+    
+    private var networkManager = NetworkManager()
+    
+    private var collectionView: UICollectionView!
+    private var dataSourse: UICollectionViewDiffableDataSource<String, String>!
+
+    //MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+
+      loadTableView()
+       
+    }
+    
+    //MARK: - Properties
+        
+    private func loadTableView() {
+        
+        networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                print(self.networkManager)
+                print(response)
+            case .failure(let error):
+                print(error.customMessage)
+            }
+        }
+    }
+}
+
+
+//MARK: - Extension StartScreenController
+
+extension StartScreenController {
+    
+    private func configureCollectionView() {
+        collectionView
     }
     
 }
