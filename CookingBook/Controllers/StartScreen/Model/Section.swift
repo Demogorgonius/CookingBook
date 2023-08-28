@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Section: Hashable {
-    let avatarImage: String
-    let avatarName: String
-    let foodName: String
-    let rating: String
-    let foodImage: String
-    var isFavorite: Bool = false
+enum Section: Int, Hashable, CustomStringConvertible {
+    case trending, popular, recent, creators
     
-    init(avatarImage: String, avatarName: String, foodName: String, rating: String, foodImage: String, isFavorite: Bool) {
-        self.avatarImage = avatarImage
-        self.avatarName = avatarName
-        self.foodName = foodName
-        self.rating = rating
-        self.foodImage = foodImage
-        self.isFavorite = isFavorite
+    var description: String {
+        switch self {
+            
+        case .trending:
+            return "Trending"
+        case .popular:
+            return "Popular"
+        case .recent:
+            return "Recent"
+        case .creators:
+            return "Creators"
+        }
     }
 }

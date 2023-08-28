@@ -12,9 +12,10 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
+    private var recipeData: [RecipeModel]?
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
-    private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>!
+    private var dataSourse: UICollectionViewDiffableDataSource<Section, RecipeModel>?
     
     //MARK: - UI Elements
     
@@ -43,12 +44,12 @@ final class StartScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadTableView()
+        loadRecipe()
         setupViews()
         configureCollectionView()
     }
     
-    //MARK: - Properties
+    //MARK: - Setup UI
     
     private func setupViews() {
         view.backgroundColor = .white
@@ -68,14 +69,15 @@ final class StartScreenController: UIViewController {
         }
     }
     
-    private func loadTableView() {
+    //MARK: - NetworkLoad
+    
+    private func loadRecipe() {
         
         networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                print(self.networkManager)
-                print(response.recipes.first!)
+                self.recipeData?.append(response)
             case .failure(let error):
                 print(error.customMessage)
             }
@@ -89,6 +91,7 @@ final class StartScreenController: UIViewController {
 extension StartScreenController {
     
     private func configureCollectionView() {
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
@@ -98,8 +101,17 @@ extension StartScreenController {
         }
     }
     
-    private func createLayout() -> UICollectionViewLayout {
+    func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),heightDimension: .absolute(44))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,subitems: [item])
+        let section = NSCollectionLayoutSection(group: group)
+        let layout = UICollectionViewCompositionalLayout(section: section)
+        return layout
+    }
+    
+    private func createDataSourse() {
         
-        return UICollectionViewLayout()
     }
 }

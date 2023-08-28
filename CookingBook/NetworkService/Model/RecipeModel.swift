@@ -9,12 +9,12 @@ import Foundation
 
 //MARK: - RecipeModel
 
-struct RecipeModel: Decodable {
+struct RecipeModel: Decodable, Hashable {
     var recipes: [Recipes]
 }
 
 // MARK: - Recipe
-struct Recipes: Decodable {
+struct Recipes: Decodable, Hashable {
     let vegetarian, vegan, glutenFree, dairyFree: Bool?
     let veryHealthy, cheap, veryPopular, sustainable: Bool?
     let weightWatcherSmartPoints: Int?
@@ -41,7 +41,7 @@ struct Recipes: Decodable {
 }
 
 // MARK: - ExtendedIngredient
-struct ExtendedIngredient: Decodable {
+struct ExtendedIngredient: Decodable, Hashable {
     let id: Int?
     let aisle: String?
     let image: String?

@@ -8,7 +8,11 @@
 import UIKit
 import SnapKit
 
-class TrendingCell: UICollectionViewCell {
+class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
+    
+    //MARK: - Properties
+    
+    static let identifier: String = "TrendingCell"
     
     //MARK: - UI Elements
     
@@ -34,6 +38,9 @@ class TrendingCell: UICollectionViewCell {
     
     private lazy var mainImage: UIImageView = {
         let image = UIImageView()
+        image.layer.cornerRadius = 5
+        image.clipsToBounds = true
+        image.contentMode = .scaleAspectFit
         return image
     }()
     
@@ -89,7 +96,7 @@ class TrendingCell: UICollectionViewCell {
         
         ratingViewStackView.addArrangedSubview(ratingImage)
         ratingViewStackView.addArrangedSubview(ratingLabel)
-        
+         
         stackView.addArrangedSubview(mainImage)
         stackView.addArrangedSubview(mainImage)
         
@@ -118,6 +125,12 @@ class TrendingCell: UICollectionViewCell {
     //MARK: - Target
     
     @objc private func tapFavoriteButton() {
+        
+    }
+    
+    //MARK: - Configure
+    
+    func configure(with model: Item) {
         
     }
 }

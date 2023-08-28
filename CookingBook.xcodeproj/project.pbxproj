@@ -29,6 +29,7 @@
 		EB538A932A9C97AA00B62658 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A922A9C97AA00B62658 /* TrendingCell.swift */; };
 		EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B52A9CDC8F008AC86B /* Section.swift */; };
 		EB6E47B82A9CDD71008AC86B /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B72A9CDD71008AC86B /* Item.swift */; };
+		EB6E47BA2A9CE08E008AC86B /* ConfigCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		EB538A922A9C97AA00B62658 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		EB6E47B52A9CDC8F008AC86B /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		EB6E47B72A9CDD71008AC86B /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCellProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,6 +302,7 @@
 		EB538A912A9C979600B62658 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */,
 				EB538A922A9C97AA00B62658 /* TrendingCell.swift */,
 			);
 			path = Cells;
@@ -398,6 +401,7 @@
 				EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
+				EB6E47BA2A9CE08E008AC86B /* ConfigCellProtocol.swift in Sources */,
 				EB538A792A9C575700B62658 /* HTTPMethod.swift in Sources */,
 				EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */,
 				EB538A7D2A9C578500B62658 /* RequestError.swift in Sources */,
