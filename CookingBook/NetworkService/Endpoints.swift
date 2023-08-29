@@ -53,7 +53,8 @@ extension RecipeEndpoint: Endpoint {
             
         case .getRandomRecipe:
             return [URLQueryItem(name: "number", value: "15"),
-                    URLQueryItem(name: "apiKey", value: "5f4e2fd189314d2a829f2dcd7b06f5c1")
+//                    URLQueryItem(name: "apiKey", value: "5f4e2fd189314d2a829f2dcd7b06f5c1")
+                    URLQueryItem(name: "apiKey", value: "d560af6bb33a4ad289d3cc2c562ab5a5")
             ]
             
         }

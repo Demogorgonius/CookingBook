@@ -14,6 +14,8 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     static let identifier: String = "TrendingCell"
     
+    private var networkManager = NetworkManager()
+    
     //MARK: - UI Elements
     
     private lazy var stackView: UIStackView = {
@@ -27,6 +29,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         let view = UIStackView()
         view.axis = .horizontal
         view.contentMode = .center
+        view.distribution = .fillProportionally
         view.spacing = 4
         return view
     }()
@@ -80,6 +83,12 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - Inits
     
+//    override func prepareForReuse() {
+//        super.prepareForReuse()
+//
+//        mainImage.image = nil
+//    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -109,8 +118,8 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         
         ratingViewStackView.snp.makeConstraints { make in
             make.top.left.equalToSuperview().inset(6)
-            make.width.equalTo(58)
-            make.height.equalTo(28)
+            make.width.equalTo(60)
+            make.height.equalTo(30)
         }
         
         favoriteButton.snp.makeConstraints { make in
@@ -128,6 +137,6 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     //MARK: - Configure
     
     func configure(with model: Recipes) {
-        nameLabel.text = model.sourceName
+        ratingLabel.text = String(model.aggregateLikes ?? 0)
     }
 }

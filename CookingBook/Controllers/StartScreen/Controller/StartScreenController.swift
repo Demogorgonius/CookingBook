@@ -13,6 +13,7 @@ final class StartScreenController: UIViewController {
     //MARK: - Properties
     
     private var recipeData = [Recipes]()
+    private var dataImages: [Data] = []
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSourse: UICollectionViewDiffableDataSource<Section, Recipes>?
@@ -104,6 +105,8 @@ extension StartScreenController {
         }
     }
     
+    //MARK: - Layout
+    
     private func createLayout() -> UICollectionViewLayout {
         
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
@@ -123,7 +126,7 @@ extension StartScreenController {
                 section.interGroupSpacing = 5
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
-
+                
             } else if sectionKind == .recent {
                 let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
                 section = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
@@ -144,6 +147,8 @@ extension StartScreenController {
         }
     }
     
+    //MARK: - DataSource
+    
     private func createDataSourse() {
         
         let trendingCell = registrTrending()
@@ -158,7 +163,6 @@ extension StartScreenController {
     private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Recipes>()
         snapshot.appendSections([.trending])
-        print(recipeData.count)
         snapshot.appendItems(recipeData, toSection: .trending)
         dataSourse?.apply(snapshot, animatingDifferences: true)
     }
