@@ -19,6 +19,7 @@
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
 		E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */; };
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
+		E5CF42E22A9E267F005FF4CF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		A5B046D02A9BF33F004F6386 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E5CF42DE2A9E2625005FF4CF /* Onboarding */,
 				A5B046E22A9BF780004F6386 /* Profile */,
 				A5B046DF2A9BF75A004F6386 /* Notifications */,
 				A5B046DC2A9BF656004F6386 /* Favorites */,
@@ -220,6 +223,30 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E5CF42DE2A9E2625005FF4CF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				E5CF42E02A9E2642005FF4CF /* View */,
+				E5CF42DF2A9E2635005FF4CF /* Controller */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		E5CF42DF2A9E2635005FF4CF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E5CF42E02A9E2642005FF4CF /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -303,6 +330,7 @@
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
+				E5CF42E22A9E267F005FF4CF /* OnboardingViewController.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
 				E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */,
 			);
