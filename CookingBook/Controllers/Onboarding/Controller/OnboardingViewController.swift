@@ -11,8 +11,8 @@ class OnboardingViewController: UIViewController {
     
     // MARK: - UI Elements
     
-    var backgroundImageView: UIImageView = {
-        var image = UIImageView()
+    let backgroundImageView: UIImageView = {
+        let image = UIImageView()
         image.image = UIImage(named: "onboardingScreenImage")
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -20,34 +20,21 @@ class OnboardingViewController: UIViewController {
         return image
     }()
     
+    let gradientEffectImageView: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "gradientEffect")
+        image.contentMode = .scaleAspectFill
+        image.translatesAutoresizingMaskIntoConstraints = false
     
-    //    extension UIImageView {
-    //        func addGradient(image: UIImageView, _ colors: [UIColor], locations: [NSNumber], frame: CGRect = .zero) {
-    //
-    //            // Create a new gradient layer
-    //            let gradientLayer = CAGradientLayer()
-    //
-    //            // Set the colors and locations for the gradient layer
-    //            gradientLayer.colors = colors.map{ $0.cgColor }
-    //            gradientLayer.locations = locations
-    //
-    //            // Set the start and end points for the gradient layer
-    //            gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-    //            gradientLayer.endPoint = CGPoint(x: 0.0, y: 1.0)
-    //
-    //            // Set the frame to the layer
-    //            gradientLayer.frame = frame
-    //
-    //            // Add the gradient layer as a sublayer to the background view
-    //            image.layer.insertSublayer(gradientLayer, at: 0)
-    //        }
-    //    }
+        return image
+    }()
+    
     private lazy var aboutRecipesTextStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
         stack.spacing = 0
-        stack.alignment = .bottom
+        stack.alignment = .top
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -56,6 +43,7 @@ class OnboardingViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "\u{2605}  "
+        label.font = .semiBold14()
         label.textAlignment = .center
         label.textColor = .neutral100
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -130,7 +118,7 @@ class OnboardingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         addSubviews()
         setupConstraints()
         
@@ -141,6 +129,7 @@ class OnboardingViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(backgroundImageView)
+        view.addSubview(gradientEffectImageView)
         
         view.addSubview(aboutRecipesTextStack)
         aboutRecipesTextStack.addArrangedSubview(starLabel)
@@ -161,6 +150,10 @@ class OnboardingViewController: UIViewController {
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            gradientEffectImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            gradientEffectImageView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor),
+            gradientEffectImageView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor),
             
             aboutRecipesTextStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             aboutRecipesTextStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
