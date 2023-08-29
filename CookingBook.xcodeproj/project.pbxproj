@@ -19,6 +19,8 @@
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
 		E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */; };
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
+		E5E83CE12A9E1DB400F96424 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */; };
+		E5E83CE32A9E1DCA00F96424 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 		A5B046CE2A9BF308004F6386 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5E83CDF2A9E1D9500F96424 /* Fonts */,
 				A5B046C72A9BF069004F6386 /* Info.plist */,
 				A5B046C42A9BF069004F6386 /* LaunchScreen.storyboard */,
 				A5B046C22A9BF069004F6386 /* Assets.xcassets */,
@@ -220,6 +225,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		E5E83CDF2A9E1D9500F96424 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */,
+				E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -284,6 +298,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5E83CE12A9E1DB400F96424 /* Poppins-Regular.ttf in Resources */,
+				E5E83CE32A9E1DCA00F96424 /* Poppins-SemiBold.ttf in Resources */,
 				A5B046C62A9BF069004F6386 /* LaunchScreen.storyboard in Resources */,
 				A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */,
 			);
