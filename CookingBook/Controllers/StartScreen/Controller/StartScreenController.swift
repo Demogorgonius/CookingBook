@@ -12,10 +12,10 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
-    private var recipeData = [RecipeModel]()
+    private var recipeData = [Recipes]()
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
-    private var dataSourse: UICollectionViewDiffableDataSource<Section, RecipeModel>?
+    private var dataSourse: UICollectionViewDiffableDataSource<Section, Recipes>?
     
     //MARK: - UI Elements
     
@@ -75,11 +75,11 @@ final class StartScreenController: UIViewController {
     
     private func loadRecipe() {
         
-        networkManager.fetch { [weak self] (result: Result<[RecipeModel], RequestError>) in
+        networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.recipeData.append(response)
+                self.recipeData.append(contentsOf: response.recipes)
                 self.applySnapshot()
             case .failure(let error):
                 print(error.customMessage)
@@ -136,11 +136,11 @@ extension StartScreenController {
         return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     }
     
-    private func registrTrending() -> UICollectionView.CellRegistration<TrendingCell, RecipeModel> {
+    private func registrTrending() -> UICollectionView.CellRegistration<TrendingCell, Recipes> {
         
-        return UICollectionView.CellRegistration<TrendingCell, RecipeModel> { (cell, indexPath, recipe) in
+        return UICollectionView.CellRegistration<TrendingCell, Recipes> { (cell, indexPath, recipe) in
             
-            cell.configure(with: self.recipeData[indexPath.row].recipes[indexPath.row])
+            cell.configure(with: self.recipeData[indexPath.row])
         }
     }
     
@@ -148,7 +148,7 @@ extension StartScreenController {
         
         let trendingCell = registrTrending()
         
-        dataSourse = UICollectionViewDiffableDataSource<Section, RecipeModel>(collectionView: collectionView) {
+        dataSourse = UICollectionViewDiffableDataSource<Section, Recipes>(collectionView: collectionView) {
             (collectionView, indexPath, recipe) -> UICollectionViewCell? in
             
             return collectionView.dequeueConfiguredReusableCell(using: trendingCell, for: indexPath, item: recipe)
@@ -156,11 +156,9 @@ extension StartScreenController {
     }
     
     private func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, RecipeModel>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Recipes>()
         snapshot.appendSections([.trending])
-        
-        recipeData.forEach { print("+++++++++++++++++++++++++ \($0.recipes)") }
-        
+        print(recipeData.count)
         snapshot.appendItems(recipeData, toSection: .trending)
         dataSourse?.apply(snapshot, animatingDifferences: true)
     }
