@@ -17,6 +17,8 @@
 		A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */; };
 		A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */; };
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
+		E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */; };
+		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +68,7 @@
 		A5B046B82A9BF068004F6386 /* CookingBook */ = {
 			isa = PBXGroup;
 			children = (
+				E5417A822A9D176A00AB0891 /* Extension */,
 				A5B046CD2A9BF2DF004F6386 /* App */,
 				A5B046CE2A9BF308004F6386 /* Resources */,
 				A5B046D02A9BF33F004F6386 /* Controllers */,
@@ -206,6 +211,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		E5417A822A9D176A00AB0891 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */,
+				E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -282,6 +296,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
@@ -289,6 +304,7 @@
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
+				E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
