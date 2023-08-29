@@ -9,5 +9,5 @@ import Foundation
 
 protocol ConfigCellProtocol {
     static var identifier: String { get }
-    func configure(with model: Item)
+    func configure(with model: Recipes)
 }

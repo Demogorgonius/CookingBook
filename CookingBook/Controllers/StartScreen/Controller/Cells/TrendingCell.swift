@@ -26,13 +26,15 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private lazy var ratingViewStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
+        view.contentMode = .center
         view.spacing = 4
         return view
     }()
     
     private lazy var ratingImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "star.fill")
+        image.image = UIImage(systemName: "hand.thumbsup.fill")
+        image.tintColor = .systemPink
         return image
     }()
     
@@ -41,6 +43,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         image.layer.cornerRadius = 5
         image.clipsToBounds = true
         image.contentMode = .scaleAspectFit
+        image.image = UIImage(named: "video")
         return image
     }()
     
@@ -71,6 +74,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "star.circle.fill"), for: .normal)
+        button.tintColor = .systemPink
         return button
     }()
     
@@ -91,35 +95,28 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     private func setupViews() {
         
+        contentView.addSubview(mainImage)
         mainImage.addSubview(ratingViewStackView)
         mainImage.addSubview(favoriteButton)
-        
         ratingViewStackView.addArrangedSubview(ratingImage)
         ratingViewStackView.addArrangedSubview(ratingLabel)
-         
-        stackView.addArrangedSubview(mainImage)
-        stackView.addArrangedSubview(mainImage)
         
         mainImage.snp.makeConstraints { make in
             make.width.equalTo(280)
             make.height.equalTo(180)
+            make.center.equalToSuperview()
         }
         
         ratingViewStackView.snp.makeConstraints { make in
-            make.left.top.equalToSuperview().inset(16)
+            make.top.left.equalToSuperview().inset(6)
             make.width.equalTo(58)
-            make.height.equalTo(26)
+            make.height.equalTo(28)
         }
-
+        
         favoriteButton.snp.makeConstraints { make in
+            make.top.right.equalToSuperview().inset(6)
             make.size.equalTo(32)
-            make.right.top.equalToSuperview().inset(16)
         }
-        
-        stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
     }
     
     //MARK: - Target
@@ -130,7 +127,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - Configure
     
-    func configure(with model: Item) {
-        
+    func configure(with model: Recipes) {
+        nameLabel.text = model.sourceName
     }
 }

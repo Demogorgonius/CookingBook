@@ -12,7 +12,7 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
-    private var recipeData: [RecipeModel]?
+    private var recipeData = [RecipeModel]()
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSourse: UICollectionViewDiffableDataSource<Section, RecipeModel>?
@@ -47,6 +47,8 @@ final class StartScreenController: UIViewController {
         loadRecipe()
         setupViews()
         configureCollectionView()
+        createDataSourse()
+        
     }
     
     //MARK: - Setup UI
@@ -73,11 +75,12 @@ final class StartScreenController: UIViewController {
     
     private func loadRecipe() {
         
-        networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
+        networkManager.fetch { [weak self] (result: Result<[RecipeModel], RequestError>) in
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.recipeData?.append(response)
+                self.recipeData.append(response)
+                self.applySnapshot()
             case .failure(let error):
                 print(error.customMessage)
             }
@@ -101,17 +104,64 @@ extension StartScreenController {
         }
     }
     
-    func createLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),heightDimension: .fractionalHeight(1.0))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),heightDimension: .absolute(44))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,subitems: [item])
-        let section = NSCollectionLayoutSection(group: group)
-        let layout = UICollectionViewCompositionalLayout(section: section)
-        return layout
+    private func createLayout() -> UICollectionViewLayout {
+        
+        let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            
+            guard let sectionKind = Section(rawValue: sectionIndex) else { return nil }
+            
+            let section: NSCollectionLayoutSection
+            
+            if sectionKind == .trending {
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalWidth(0.5))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 5
+                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+
+            } else if sectionKind == .recent {
+                let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+                section = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
+            } else {
+                fatalError("Unknown section!")
+            }
+            
+            return section
+        }
+        return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
+    }
+    
+    private func registrTrending() -> UICollectionView.CellRegistration<TrendingCell, RecipeModel> {
+        
+        return UICollectionView.CellRegistration<TrendingCell, RecipeModel> { (cell, indexPath, recipe) in
+            
+            cell.configure(with: self.recipeData[indexPath.row].recipes[indexPath.row])
+        }
     }
     
     private func createDataSourse() {
         
+        let trendingCell = registrTrending()
+        
+        dataSourse = UICollectionViewDiffableDataSource<Section, RecipeModel>(collectionView: collectionView) {
+            (collectionView, indexPath, recipe) -> UICollectionViewCell? in
+            
+            return collectionView.dequeueConfiguredReusableCell(using: trendingCell, for: indexPath, item: recipe)
+        }
+    }
+    
+    private func applySnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, RecipeModel>()
+        snapshot.appendSections([.trending])
+        
+        recipeData.forEach { print("+++++++++++++++++++++++++ \($0.recipes)") }
+        
+        snapshot.appendItems(recipeData, toSection: .trending)
+        dataSourse?.apply(snapshot, animatingDifferences: true)
     }
 }
