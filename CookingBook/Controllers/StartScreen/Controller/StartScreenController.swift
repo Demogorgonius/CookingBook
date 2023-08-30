@@ -97,6 +97,7 @@ extension StartScreenController {
     private func configureCollectionView() {
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        collectionView.register(TrendingHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TrendingHeader.identifier)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).inset(-16)
@@ -127,6 +128,15 @@ extension StartScreenController {
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
                 
+                ///header
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                                elementKind: UICollectionView.elementKindSectionHeader,
+                                                                                alignment: .top)
+                sectionHeader.pinToVisibleBounds = true
+                sectionHeader.zIndex = 2
+                section.boundarySupplementaryItems = [sectionHeader]
+                
             } else if sectionKind == .recent {
                 let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
                 section = NSCollectionLayoutSection.list(using: configuration, layoutEnvironment: layoutEnvironment)
@@ -139,6 +149,8 @@ extension StartScreenController {
         return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     }
     
+    //MARK: - Registr Cell
+    
     private func registrTrending() -> UICollectionView.CellRegistration<TrendingCell, Recipes> {
         
         return UICollectionView.CellRegistration<TrendingCell, Recipes> { (cell, indexPath, recipe) in
@@ -147,20 +159,35 @@ extension StartScreenController {
         }
     }
     
+    private func registrHeader() -> UICollectionView.SupplementaryRegistration<TrendingHeader> {
+        
+        return UICollectionView.SupplementaryRegistration<TrendingHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
+//            header.trendLabel.text = "HELLO"
+        }
+    }
+    
     //MARK: - DataSource
     
     private func createDataSourse() {
         
         let trendingCell = registrTrending()
+        let header = registrHeader()
         
         dataSourse = UICollectionViewDiffableDataSource<Section, Recipes>(collectionView: collectionView) {
             (collectionView, indexPath, recipe) -> UICollectionViewCell? in
             
             return collectionView.dequeueConfiguredReusableCell(using: trendingCell, for: indexPath, item: recipe)
         }
+        
+        dataSourse?.supplementaryViewProvider = { collectionView, kind, indexPath in
+               return collectionView.dequeueConfiguredReusableSupplementary(using: header, for: indexPath)
+           }
     }
     
+    //MARK: - SnapShot
+    
     private func applySnapshot() {
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, Recipes>()
         snapshot.appendSections([.trending])
         snapshot.appendItems(recipeData, toSection: .trending)

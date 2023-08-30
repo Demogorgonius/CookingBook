@@ -14,8 +14,6 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     static let identifier: String = "TrendingCell"
     
-    private var networkManager = NetworkManager()
-    
     //MARK: - UI Elements
     
     private lazy var stackView: UIStackView = {
@@ -52,6 +50,9 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
+        image.image = UIImage(named: "video")
+        image.layer.cornerRadius = 5
+        image.clipsToBounds = true
         return image
     }()
     
@@ -105,6 +106,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private func setupViews() {
         
         contentView.addSubview(mainImage)
+
         mainImage.addSubview(ratingViewStackView)
         mainImage.addSubview(favoriteButton)
         ratingViewStackView.addArrangedSubview(ratingImage)
@@ -126,6 +128,10 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
             make.top.right.equalToSuperview().inset(6)
             make.size.equalTo(32)
         }
+        
+      
+        
+      
     }
     
     //MARK: - Target

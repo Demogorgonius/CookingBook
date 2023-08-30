@@ -29,6 +29,7 @@
 		EB538A932A9C97AA00B62658 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A922A9C97AA00B62658 /* TrendingCell.swift */; };
 		EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B52A9CDC8F008AC86B /* Section.swift */; };
 		EB6E47BA2A9CE08E008AC86B /* ConfigCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */; };
+		EBC9AF912A9F005300488318 /* TrendingHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC9AF902A9F005300488318 /* TrendingHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		EB538A922A9C97AA00B62658 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		EB6E47B52A9CDC8F008AC86B /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCellProtocol.swift; sourceTree = "<group>"; };
+		EBC9AF902A9F005300488318 /* TrendingHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 			children = (
 				EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */,
 				EB538A922A9C97AA00B62658 /* TrendingCell.swift */,
+				EBC9AF902A9F005300488318 /* TrendingHeader.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -405,6 +408,7 @@
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				EB538A8D2A9C60B300B62658 /* Services.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
+				EBC9AF912A9F005300488318 /* TrendingHeader.swift in Sources */,
 				EB538A8A2A9C605A00B62658 /* Servisable.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
 				EB538A932A9C97AA00B62658 /* TrendingCell.swift in Sources */,
