@@ -20,16 +20,7 @@ class OnboardingViewController: UIViewController {
         return image
     }()
     
-    let gradientEffectImageView: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(named: "gradientEffect")
-        image.contentMode = .scaleAspectFill
-        image.translatesAutoresizingMaskIntoConstraints = false
-    
-        return image
-    }()
-    
-    private lazy var aboutRecipesTextStack: UIStackView = {
+    private lazy var topTextStack: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
@@ -50,7 +41,7 @@ class OnboardingViewController: UIViewController {
         return label
     }()
     
-    private let amountRecipesLabel: UILabel = {
+    private let amountOfRecipesLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.text = "100k+ "
@@ -76,16 +67,16 @@ class OnboardingViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fill
-        stack.spacing = 15
+        stack.spacing = -10
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    private let bestRecipeLabel: UILabel = {
+    private let bestTextLineLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Best \n Recipe"
+        label.text = "Best"
         label.textAlignment = .center
         label.font = .semiBold56()
         label.textColor = .white0
@@ -93,10 +84,21 @@ class OnboardingViewController: UIViewController {
         return label
     }()
     
-    private let secondLabel: UILabel = {
+    private let recipeTextLineLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Find best recipes for cooking"
+        label.text = "Recipe"
+        label.textAlignment = .center
+        label.font = .semiBold56()
+        label.textColor = .white0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let secondTextLineLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "\nFind best recipes for cooking"
         label.textAlignment = .center
         label.font = .regular16()
         label.textColor = .white0
@@ -129,18 +131,20 @@ class OnboardingViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(backgroundImageView)
-        view.addSubview(gradientEffectImageView)
         
-        view.addSubview(aboutRecipesTextStack)
-        aboutRecipesTextStack.addArrangedSubview(starLabel)
-        aboutRecipesTextStack.addArrangedSubview(amountRecipesLabel)
-        aboutRecipesTextStack.addArrangedSubview(recipesTextLabel)
+        view.addSubview(topTextStack)
+        topTextStack.addArrangedSubview(starLabel)
+        topTextStack.addArrangedSubview(amountOfRecipesLabel)
+        topTextStack.addArrangedSubview(recipesTextLabel)
         
         view.addSubview(mainTextStack)
-        mainTextStack.addArrangedSubview(bestRecipeLabel)
-        mainTextStack.addArrangedSubview(secondLabel)
+        mainTextStack.addArrangedSubview(bestTextLineLabel)
+        mainTextStack.addArrangedSubview(recipeTextLineLabel)
+        mainTextStack.addArrangedSubview(secondTextLineLabel)
         
         view.addSubview(startButton)
+        
+        backgroundImageView.addGradient([.clear, .neutral100], locations: [0.3, 1], frame: view.bounds)
     }
     
     
@@ -151,13 +155,9 @@ class OnboardingViewController: UIViewController {
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            gradientEffectImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            gradientEffectImageView.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor),
-            gradientEffectImageView.bottomAnchor.constraint(equalTo: backgroundImageView.bottomAnchor),
-            
-            aboutRecipesTextStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            aboutRecipesTextStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            aboutRecipesTextStack.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
+            topTextStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            topTextStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topTextStack.widthAnchor.constraint(lessThanOrEqualToConstant: 300),
             
             mainTextStack.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -32),
             mainTextStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),

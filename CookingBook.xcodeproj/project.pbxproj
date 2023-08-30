@@ -21,6 +21,7 @@
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
 		E5B809152A9E629500A903FE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B809132A9E629500A903FE /* Poppins-Regular.ttf */; };
 		E5B809162A9E629500A903FE /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B809142A9E629500A903FE /* Poppins-SemiBold.ttf */; };
+		E5B809182A9F20DB00A903FE /* UIImageView + Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */; };
 		E5CF42E22A9E267F005FF4CF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		E5B809132A9E629500A903FE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		E5B809142A9E629500A903FE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Exstension.swift"; sourceTree = "<group>"; };
 		E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -224,6 +226,7 @@
 			children = (
 				E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */,
 				E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */,
+				E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 			files = (
 				E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
+				E5B809182A9F20DB00A903FE /* UIImageView + Exstension.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
