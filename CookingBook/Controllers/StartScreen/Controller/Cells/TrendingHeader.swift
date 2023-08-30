@@ -60,7 +60,8 @@ final class TrendingHeader: UICollectionReusableView {
         stackView.addArrangedSubview(trendButton)
         
         stackView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.verticalEdges.equalToSuperview()
         }
     }
     

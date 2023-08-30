@@ -30,33 +30,23 @@ class NetworkManager: NetworkManagerProtocol {
     
     //MARK: - LoadImage
     
-    func loadImage(from model: [Recipes], completion: @escaping ([UIImage]?) -> Void) {
+    func loadImage(from urlString: String?, completion: @escaping (UIImage) -> Void) {
         
-        let group = DispatchGroup()
-        var imageData: [UIImage]? = []
-        
-        DispatchQueue.global().async(group: group) {
+        DispatchQueue.global().async {
             
-            model.forEach {
-                guard let imageLink = $0.image else { return }
-                
-                if let cachedImege = self.imageCache.object(forKey: imageLink as NSString) {
-                    imageData?.append(cachedImege)
-                } else {
-                    guard let url = URL(string: imageLink) else { return }
-                    
-                    let data = try? Data(contentsOf: url)
-                    
-                    guard let data = data else { return }
-                    
-                    let image = UIImage(data: data) ?? UIImage()
-                    imageData?.append(image)
-                    
-                    self.imageCache.setObject(image, forKey: imageLink as NSString)
-                }
+            guard let urlString = urlString,
+                  let url = URL(string: urlString) else { return }
+            
+            if let cachedImege = self.imageCache.object(forKey: urlString as NSString) {
+                completion(cachedImege)
+            } else {
+                let data = try? Data(contentsOf: url)
+                guard let data = data else { return }
+                let image = UIImage(data: data) ?? UIImage()
+                self.imageCache.setObject(image, forKey: urlString as NSString)
+                completion(image)
             }
         }
-        
-        group.notify(queue: .main) { completion(imageData) }
     }
 }
+

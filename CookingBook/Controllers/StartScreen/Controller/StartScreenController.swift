@@ -120,16 +120,16 @@ extension StartScreenController {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalWidth(0.5))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 5
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
                 
                 ///header
-                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(44))
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(28))
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                                 elementKind: UICollectionView.elementKindSectionHeader,
                                                                                 alignment: .top)
@@ -162,7 +162,7 @@ extension StartScreenController {
     private func registrHeader() -> UICollectionView.SupplementaryRegistration<TrendingHeader> {
         
         return UICollectionView.SupplementaryRegistration<TrendingHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
-//            header.trendLabel.text = "HELLO"
+            //            header.trendLabel.text = "HELLO"
         }
     }
     
@@ -180,8 +180,8 @@ extension StartScreenController {
         }
         
         dataSourse?.supplementaryViewProvider = { collectionView, kind, indexPath in
-               return collectionView.dequeueConfiguredReusableSupplementary(using: header, for: indexPath)
-           }
+            return collectionView.dequeueConfiguredReusableSupplementary(using: header, for: indexPath)
+        }
     }
     
     //MARK: - SnapShot

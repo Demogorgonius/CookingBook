@@ -8,20 +8,15 @@
 import UIKit
 import SnapKit
 
-class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
+final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - Properties
     
     static let identifier: String = "TrendingCell"
     
-    //MARK: - UI Elements
+    private var networkManager = NetworkManager()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .vertical
-        view.spacing = 20
-        return view
-    }()
+    //MARK: - UI Elements
     
     private lazy var ratingViewStackView: UIStackView = {
         let view = UIStackView()
@@ -29,6 +24,8 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         view.contentMode = .center
         view.distribution = .fillProportionally
         view.spacing = 4
+        view.backgroundColor = .systemGray2
+        view.layer.cornerRadius = 10
         return view
     }()
     
@@ -41,24 +38,22 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     private lazy var mainImage: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 5
-        image.clipsToBounds = true
-        image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "video")
+        image.contentMode = .center
         return image
     }()
     
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "video")
-        image.layer.cornerRadius = 5
+        image.layer.cornerRadius = 20
         image.clipsToBounds = true
         return image
     }()
     
     private lazy var avatarLabel: UILabel = {
         let label = UILabel()
-        label.text = "name name"
+        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.textColor = .systemGray
         return label
     }()
     
@@ -71,6 +66,7 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "How to sharwama at home"
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
         return label
     }()
     
@@ -82,13 +78,21 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         return button
     }()
     
+    private lazy var additionalButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
+        button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.tintColor = .systemPink
+        return button
+    }()
+    
     //MARK: - Inits
     
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//
-//        mainImage.image = nil
-//    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        mainImage.image = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,7 +110,11 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private func setupViews() {
         
         contentView.addSubview(mainImage)
-
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(avatarImage)
+        contentView.addSubview(avatarLabel)
+        contentView.addSubview(additionalButton)
+        
         mainImage.addSubview(ratingViewStackView)
         mainImage.addSubview(favoriteButton)
         ratingViewStackView.addArrangedSubview(ratingImage)
@@ -129,9 +137,28 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
             make.size.equalTo(32)
         }
         
-      
+        nameLabel.snp.makeConstraints { make in
+            make.horizontalEdges.equalTo(mainImage.snp.horizontalEdges)
+            make.top.equalTo(mainImage.snp.bottom).inset(-16)
+        }
         
-      
+        avatarImage.snp.makeConstraints { make in
+            make.size.equalTo(32)
+            make.left.equalTo(mainImage.snp.left)
+            make.top.equalTo(nameLabel.snp.bottom).inset(-8)
+        }
+        
+        avatarLabel.snp.makeConstraints { make in
+            make.left.equalTo(avatarImage.snp.right).inset(-8)
+            make.right.equalTo(mainImage.snp.right)
+            make.centerY.equalTo(avatarImage.snp.centerY)
+        }
+        
+        additionalButton.snp.makeConstraints { make in
+            make.size.equalTo(18)
+            make.right.equalTo(mainImage.snp.right)
+            make.centerY.equalTo(avatarImage.snp.centerY)
+        }
     }
     
     //MARK: - Target
@@ -144,5 +171,12 @@ class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     func configure(with model: Recipes) {
         ratingLabel.text = String(model.aggregateLikes ?? 0)
+        nameLabel.text = model.title
+        avatarLabel.text = model.sourceName
+        mainImage.layer.cornerRadius = 20
+        mainImage.clipsToBounds = true
+        networkManager.loadImage(from: model.image) { [weak self] image in
+            DispatchQueue.main.async { self?.mainImage.image = image }
+        }
     }
 }
