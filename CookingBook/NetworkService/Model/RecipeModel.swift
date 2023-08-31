@@ -31,13 +31,6 @@ struct Recipes: Decodable, Hashable {
     let readyInMinutes: Int?
     let image: String?
     let imageType, instructions: String?
-
-//    enum CodingKeys: String, CodingKey {
-//        case vegetarian, vegan, glutenFree, dairyFree, veryHealthy, cheap, veryPopular, sustainable, weightWatcherSmartPoints, gaps, lowFodmap, ketogenic, whole30, servings, preparationMinutes, cookingMinutes
-//        case sourceURL = "sourceUrl"
-//        case spoonacularSourceURL = "spoonacularSourceUrl"
-//        case aggregateLikes, creditText, sourceName, extendedIngredients, id, title, readyInMinutes, image, imageType, instructions
-//    }
 }
 
 // MARK: - ExtendedIngredient

@@ -11,6 +11,7 @@ import UIKit
 
 protocol NetworkManagerProtocol {
     func fetch<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void)
+    func searchRecipe<T: Decodable>(type: String, completion: @escaping (Result<T, RequestError>) -> Void)
 }
 
 //MARK: - NetworkManager
@@ -24,6 +25,14 @@ class NetworkManager: NetworkManagerProtocol {
     func fetch<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void) {
         Task(priority: .background) {
             let result: Result<T, RequestError> = await service.getRecipe()
+            completion(result)
+        }
+    }
+    
+    func searchRecipe<T: Decodable>(type: String, completion: @escaping (Result<T, RequestError>) -> Void) {
+        
+        Task(priority: .background) {
+            let result: Result<T, RequestError> = await service.searchRecipe(type: type)
             completion(result)
         }
     }

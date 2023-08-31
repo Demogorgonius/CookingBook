@@ -11,6 +11,7 @@ import Foundation
 
 enum RecipeEndpoint {
     case getRandomRecipe
+    case getCategoryRecipe
 }
 
 //MARK: - Extension RecipeEndpoint
@@ -21,6 +22,8 @@ extension RecipeEndpoint: Endpoint {
             
         case .getRandomRecipe:
             return nil
+        case .getCategoryRecipe:
+            return nil
         }
     }
     
@@ -29,6 +32,8 @@ extension RecipeEndpoint: Endpoint {
             
         case .getRandomRecipe:
             return "/recipes/random"
+        case .getCategoryRecipe:
+            return "/recipes/complexSearch"
         }
     }
     
@@ -36,6 +41,8 @@ extension RecipeEndpoint: Endpoint {
         switch self {
             
         case .getRandomRecipe:
+            return .get
+        case .getCategoryRecipe:
             return .get
         }
     }
@@ -45,6 +52,8 @@ extension RecipeEndpoint: Endpoint {
             
         case .getRandomRecipe:
             return nil
+        case .getCategoryRecipe:
+            return nil
         }
     }
     
@@ -53,10 +62,13 @@ extension RecipeEndpoint: Endpoint {
             
         case .getRandomRecipe:
             return [URLQueryItem(name: "number", value: "15"),
-//                    URLQueryItem(name: "apiKey", value: "5f4e2fd189314d2a829f2dcd7b06f5c1")
-                    URLQueryItem(name: "apiKey", value: "d560af6bb33a4ad289d3cc2c562ab5a5")
+                    //                    URLQueryItem(name: "apiKey", value: "5f4e2fd189314d2a829f2dcd7b06f5c1")
+                    //                    URLQueryItem(name: "apiKey", value: "d560af6bb33a4ad289d3cc2c562ab5a5")
+                    URLQueryItem(name: "apiKey", value: "7a8cd7f64b124dd3841868f8dc77bfb8")
             ]
             
+        case .getCategoryRecipe:
+            return nil
         }
     }
 }

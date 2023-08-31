@@ -18,8 +18,7 @@ final class TrendingHeader: UICollectionReusableView {
     
     var trendLabel: UILabel = {
         let label = UILabel()
-        label.text = "Trending now 🔥"
-        label.font = .systemFont(ofSize: 26, weight: .semibold)
+        label.font = .systemFont(ofSize: 24, weight: .semibold)
         return label
     }()
     
