@@ -17,12 +17,15 @@
 		A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */; };
 		A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */; };
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
+		E539D4062AA06FC300B6BF83 /* OnboardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D4052AA06FC300B6BF83 /* OnboardingPageViewController.swift */; };
+		E539D4082AA070C900B6BF83 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D4072AA070C900B6BF83 /* OnboardingViewController.swift */; };
+		E539D40A2AA073E600B6BF83 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D4092AA073E600B6BF83 /* OnboardingData.swift */; };
 		E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */; };
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
 		E5B809152A9E629500A903FE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B809132A9E629500A903FE /* Poppins-Regular.ttf */; };
 		E5B809162A9E629500A903FE /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B809142A9E629500A903FE /* Poppins-SemiBold.ttf */; };
 		E5B809182A9F20DB00A903FE /* UIImageView + Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */; };
-		E5CF42E22A9E267F005FF4CF /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */; };
+		E5CF42E22A9E267F005FF4CF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CF42E12A9E267F005FF4CF /* WelcomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +40,15 @@
 		A5B046E52A9BF7B1004F6386 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A5B046E72A9BF7FE004F6386 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		E539D4052AA06FC300B6BF83 /* OnboardingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageViewController.swift; sourceTree = "<group>"; };
+		E539D4072AA070C900B6BF83 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E539D4092AA073E600B6BF83 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
 		E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		E5B809132A9E629500A903FE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		E5B809142A9E629500A903FE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView + Exstension.swift"; sourceTree = "<group>"; };
-		E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		E5CF42E12A9E267F005FF4CF /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,7 +258,9 @@
 		E5CF42DF2A9E2635005FF4CF /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E5CF42E12A9E267F005FF4CF /* OnboardingViewController.swift */,
+				E5CF42E12A9E267F005FF4CF /* WelcomeViewController.swift */,
+				E539D4052AA06FC300B6BF83 /* OnboardingPageViewController.swift */,
+				E539D4072AA070C900B6BF83 /* OnboardingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -260,6 +268,7 @@
 		E5CF42E02A9E2642005FF4CF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E539D4092AA073E600B6BF83 /* OnboardingData.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -342,15 +351,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E539D4082AA070C900B6BF83 /* OnboardingViewController.swift in Sources */,
 				E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
 				E5B809182A9F20DB00A903FE /* UIImageView + Exstension.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
+				E539D4062AA06FC300B6BF83 /* OnboardingPageViewController.swift in Sources */,
+				E539D40A2AA073E600B6BF83 /* OnboardingData.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
-				E5CF42E22A9E267F005FF4CF /* OnboardingViewController.swift in Sources */,
+				E5CF42E22A9E267F005FF4CF /* WelcomeViewController.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
 				E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */,
 			);
