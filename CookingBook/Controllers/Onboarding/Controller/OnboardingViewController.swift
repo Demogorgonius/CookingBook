@@ -17,6 +17,7 @@ class OnboardingViewController: UIViewController {
     private let backgroundImage: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 25
+        view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -90,11 +91,9 @@ class OnboardingViewController: UIViewController {
     private func configureInfoPageControll() {
         pageControll.numberOfPages = OnboardingDataManager.dataArray.count
         pageControll.currentPage = 0
-        if #available(iOS 14.0, *) {
-            pageControll.preferredIndicatorImage = UIImage(named: "unselectedPage")
-        }
-        pageControll.pageIndicatorTintColor = .white
-        //pageControll.currentPageIndicatorTintColor = .black
+        pageControll.preferredIndicatorImage = UIImage(named: "unselectedPage")
+        pageControll.pageIndicatorTintColor = .neutral20
+        pageControll.currentPageIndicatorTintColor = .rating100
         pageControll.setIndicatorImage(UIImage(named: "selectedPage"), forPage: currentPageNumber)
         if #available(iOS 16.0, *) {
             pageControll.preferredCurrentPageIndicatorImage = UIImage(named: "selectedPage")
@@ -104,7 +103,6 @@ class OnboardingViewController: UIViewController {
     
     private func updateUI(pageNumber number: Int) {
         if number < OnboardingDataManager.dataArray.count {
-                //let indexPath = NSIndexPath(row: number, section: 0)
                 let data = OnboardingDataManager.dataArray[number]
                 pageControll.currentPage = number
                 textLabel.text = data.text
@@ -125,7 +123,7 @@ class OnboardingViewController: UIViewController {
         view.addSubview(pageControll)
         view.addSubview(textLabel)
         
-        
+        backgroundImage.addGradient([.clear, .neutral100.withAlphaComponent(0.6)], locations: [0, 0.75], frame: view.bounds)
         
     }
     
@@ -147,10 +145,10 @@ class OnboardingViewController: UIViewController {
             pageControll.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -12),
             pageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
+            textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: pageControll.topAnchor, constant: 0),
+            textLabel.bottomAnchor.constraint(equalTo: pageControll.topAnchor, constant: -12),
             
            
             

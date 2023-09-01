@@ -16,8 +16,13 @@ struct OnboardingDataModel {
 
 //class AttribitedTextStrings {
 //    var text1 = "Recipes from \nall over the \nWorld"
-//    let attribitedString1 = NSAttributedString(string: "over the \nWorld", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
+//let attribitedString1 = NSAttributedString(string: "over the \nWorld", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
 //
+//var text2 = "Recipes with \neach and every \ndetail"
+//let attribitedString2 = NSAttributedString(string: "each and every \ndetail", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
+//
+//var text3 = "Cook it now or \nsave it for later"
+//let attribitedString3 = NSAttributedString(string: "save it for later", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
 //
 //}
 
