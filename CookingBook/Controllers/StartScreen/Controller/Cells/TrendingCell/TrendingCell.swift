@@ -18,20 +18,28 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - UI Elements
     
-    private lazy var ratingViewStackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.contentMode = .center
-        view.distribution = .fillProportionally
-        view.spacing = 4
-        view.backgroundColor = .systemGray2
+    //    private lazy var ratingViewStackView: UIStackView = {
+    //        let view = UIStackView()
+    //        view.axis = .horizontal
+    //        view.contentMode = .center
+    //        view.distribution = .fillProportionally
+    //        view.spacing = 4
+    //        view.backgroundColor = .systemGray2
+    //        view.layer.cornerRadius = 10
+    //        return view
+    //    }()
+    
+    private lazy var ratingView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray3
         view.layer.cornerRadius = 10
+        view.clipsToBounds = true
         return view
     }()
     
     private lazy var ratingImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "hand.thumbsup.fill")
+        image.image = UIImage(systemName: "heart.fill")
         image.tintColor = .systemPink
         return image
     }()
@@ -60,6 +68,8 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
         label.text = "4.5"
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -73,7 +83,7 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     private lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
-        button.setBackgroundImage(UIImage(systemName: "star.circle.fill"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
         button.tintColor = .systemPink
         return button
     }()
@@ -92,6 +102,7 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         super.prepareForReuse()
         
         mainImage.image = nil
+        
     }
     
     override init(frame: CGRect) {
@@ -115,10 +126,11 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
         contentView.addSubview(avatarLabel)
         contentView.addSubview(additionalButton)
         
-        mainImage.addSubview(ratingViewStackView)
+        mainImage.addSubview(ratingView)
         mainImage.addSubview(favoriteButton)
-        ratingViewStackView.addArrangedSubview(ratingImage)
-        ratingViewStackView.addArrangedSubview(ratingLabel)
+        
+        ratingView.addSubview(ratingImage)
+        ratingView.addSubview(ratingLabel)
         
         mainImage.snp.makeConstraints { make in
             make.width.equalTo(280)
@@ -126,14 +138,27 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
             make.center.equalToSuperview()
         }
         
-        ratingViewStackView.snp.makeConstraints { make in
-            make.top.left.equalToSuperview().inset(6)
+        ratingView.snp.makeConstraints { make in
+            make.top.left.equalToSuperview().inset(16)
             make.width.equalTo(60)
             make.height.equalTo(30)
         }
         
+        ratingImage.snp.makeConstraints { make in
+            make.size.equalTo(20)
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().inset(6)
+        }
+        
+        ratingLabel.snp.makeConstraints { make in
+            make.height.equalTo(16)
+            make.centerY.equalToSuperview()
+            make.left.equalTo(ratingImage.snp.right).inset(-4)
+            make.right.equalToSuperview().inset(6)
+        }
+        
         favoriteButton.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(6)
+            make.top.right.equalToSuperview().inset(16)
             make.size.equalTo(32)
         }
         
@@ -170,7 +195,11 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     //MARK: - Configure
     
     func configure(with model: Recipes) {
-        ratingLabel.text = String(model.aggregateLikes ?? 0)
+        
+        let likes = model.aggregateLikes ?? 0
+        let rating = likes.description.count >= 4 ? "\(likes.description.first ?? "1") K" : likes.description
+        
+        ratingLabel.text = rating
         nameLabel.text = model.title
         avatarLabel.text = model.sourceName
         mainImage.layer.cornerRadius = 20

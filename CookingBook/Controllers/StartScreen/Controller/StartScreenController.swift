@@ -18,7 +18,7 @@ final class StartScreenController: UIViewController {
     private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>?
     private var categoryFood = [Results]()
     private var categoryModel = [
-        CategoryModel(category: "Salad"), CategoryModel(category: "Breakfast"),
+        CategoryModel(category: "Salad", isSelected: true), CategoryModel(category: "Breakfast"),
         CategoryModel(category: "Dessert"), CategoryModel(category: "Appetizer"),
         CategoryModel(category: "Soup"), CategoryModel(category: "Snack"),
         CategoryModel(category: "Drink")
@@ -54,13 +54,12 @@ final class StartScreenController: UIViewController {
         super.viewDidLoad()
         
         loadRecipe()
-        loadCategory(type: "salad")
+        loadCategory(type: "Breakfast")
         setupViews()
         configureCollectionView()
         createDataSourse()
         
     }
-    
     
     //MARK: - Setup UI
     
@@ -105,7 +104,7 @@ final class StartScreenController: UIViewController {
             switch result {
             case .success(let data):
                 guard let food = data.results else { return }
-                self.categoryFood.append(contentsOf: food)
+                self.categoryFood = food
                 self.applySnapshot()
             case .failure(let error):
                 print(error.customMessage)
@@ -157,7 +156,7 @@ extension StartScreenController {
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                                 elementKind: UICollectionView.elementKindSectionHeader,
                                                                                 alignment: .top)
-                sectionHeader.pinToVisibleBounds = true
+                sectionHeader.pinToVisibleBounds = false
                 sectionHeader.zIndex = 2
                 section.boundarySupplementaryItems = [sectionHeader]
                 
@@ -169,8 +168,9 @@ extension StartScreenController {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalWidth(0.2))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 14
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
                 
                 ///header
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
@@ -210,27 +210,9 @@ extension StartScreenController {
         }
     }
     
-    private func registrPopularCell() -> UICollectionView.CellRegistration<UICollectionViewCell, CategoryModel> {
-        return UICollectionView.CellRegistration<UICollectionViewCell, CategoryModel> { (cell, indexPath, label) in
-            var content = UIListContentConfiguration.cell()
-            content.text = label.category
-            content.textProperties.font = .boldSystemFont(ofSize: 12)
-            content.textProperties.alignment = .center
-            content.directionalLayoutMargins = .zero
-            cell.contentConfiguration = content
-            
-            var background = UIBackgroundConfiguration.listPlainCell()
-            background.cornerRadius = 8
-            background.strokeWidth = 1.0 / cell.traitCollection.displayScale
-            background.backgroundColor = .white
-            cell.backgroundConfiguration = background
-            
-            let selectedView = UIView()
-            selectedView.backgroundColor = .systemPink
-            selectedView.layer.cornerRadius = 8
-            selectedView.clipsToBounds = true
-            cell.selectedBackgroundView = selectedView
-            
+    private func registrPopularCell() -> UICollectionView.CellRegistration<CategoryCell, CategoryModel> {
+        return UICollectionView.CellRegistration<CategoryCell, CategoryModel> { (cell, indexPath, label) in
+            cell.configure(with: self.categoryModel[indexPath.row])
         }
     }
     
@@ -325,7 +307,14 @@ extension StartScreenController: UICollectionViewDelegate {
         case .trending:
             print("trending: \(indexPath.row)")
         case .popular:
+            
+            for i in 0..<categoryModel.count {
+                categoryModel[i].isSelected = false
+            }
+            
+            categoryModel[indexPath.row].isSelected = true
             loadCategory(type: popular)
+            
         case .popularFood:
             print("popularFood: \(indexPath.row)")
         }

@@ -13,4 +13,5 @@ struct Item: Hashable {
     var category: CategoryModel?
     var recipes: Recipes?
     var categoryFood: Results?
+    let identifier = UUID()
 }

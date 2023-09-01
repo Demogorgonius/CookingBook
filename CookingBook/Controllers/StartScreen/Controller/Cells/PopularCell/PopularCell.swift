@@ -10,10 +10,10 @@ import SnapKit
 
 final class PopularCell: UICollectionViewCell {
     
-    
     //MARK: - Properties
     
     static let identifier = "PopularCell"
+    private let networkManager = NetworkManager()
     
     //MARK: - UI Elements
     
@@ -45,24 +45,31 @@ final class PopularCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "Time"
         label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.tintColor = .systemGray
+        label.textColor = .systemGray
         return label
     }()
     
     private lazy var minutesLabel: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .semibold)
         return label
     }()
     
     private lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
-        button.setBackgroundImage(UIImage(systemName: "star.circle.fill"), for: .normal)
+        button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
         button.tintColor = .systemPink
         return button
     }()
     
     //MARK: - Inits
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        logoImage.image = nil
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,6 +90,8 @@ final class PopularCell: UICollectionViewCell {
         contentView.addSubview(logoImage)
         contentView.addSubview(nameLabel)
         contentView.addSubview(favoriteButton)
+        contentView.addSubview(minutesLabel)
+        contentView.addSubview(timeLabel)
         
         backgroungView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
@@ -98,11 +107,20 @@ final class PopularCell: UICollectionViewCell {
         
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(logoImage.snp.bottom).inset(-12)
-            make.horizontalEdges.equalToSuperview().inset(2)
+            make.horizontalEdges.equalToSuperview().inset(10)
         }
         
         favoriteButton.snp.makeConstraints { make in
-            make.right.bottom.equalToSuperview().inset(16)
+            make.right.bottom.equalToSuperview().inset(10)
+        }
+        
+        minutesLabel.snp.makeConstraints { make in
+            make.left.bottom.equalToSuperview().inset(10)
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.bottom.equalTo(minutesLabel.snp.top).inset(-4)
+            make.left.equalToSuperview().inset(10)
         }
         
     }
@@ -116,7 +134,11 @@ final class PopularCell: UICollectionViewCell {
     //MARK: - Configure
     
     func configure(with model: Results) {
-        //        nameLabel.text = model.title
-        //        minutesLabel.text = "5"
+        nameLabel.text = model.title
+        minutesLabel.text = "\(model.readyInMinutes?.description ?? "5") Mins"
+        
+        networkManager.loadImage(from: model.image) { [weak self] image in
+            DispatchQueue.main.async { self?.logoImage.image = image }
+        }
     }
 }
