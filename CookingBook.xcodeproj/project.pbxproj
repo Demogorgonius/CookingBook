@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D8C5FB82AA2560B00DB7DB6 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C5FB72AA2560B00DB7DB6 /* TableViewCell.swift */; };
 		A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046B92A9BF068004F6386 /* AppDelegate.swift */; };
 		A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */; };
 		A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B046C22A9BF069004F6386 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D8C5FB72AA2560B00DB7DB6 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		A5B046B62A9BF068004F6386 /* CookingBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B046B92A9BF068004F6386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6D8C5FB62AA255C800DB7DB6 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D8C5FB72AA2560B00DB7DB6 /* TableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A5B046AD2A9BF068004F6386 = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +166,7 @@
 		A5B046DD2A9BF6BF004F6386 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6D8C5FB62AA255C800DB7DB6 /* Cell */,
 				A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */,
 			);
 			path = Controller;
@@ -317,6 +328,7 @@
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
+				6D8C5FB82AA2560B00DB7DB6 /* TableViewCell.swift in Sources */,
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
