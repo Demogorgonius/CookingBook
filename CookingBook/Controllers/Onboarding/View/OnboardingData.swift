@@ -14,11 +14,31 @@ struct OnboardingDataModel {
     
 }
 
+//class AttribitedTextStrings {
+//    var text1 = "Recipes from \nall over the \nWorld"
+//    let attribitedString1 = NSAttributedString(string: "over the \nWorld", attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
+//
+//
+//}
+
 struct OnboardingDataManager {
+    
     static let dataArray : [OnboardingDataModel] = [
-        .init(backImage: UIImage(named: "onboardingImagePage1")!, text: "Recipes from all over the World", buttonText: "Continue"),
-        .init(backImage: UIImage(named: "onboardingImagePage2")!, text: "Recipes with each and every detail", buttonText: "Continue"),
-        .init(backImage: UIImage(named: "onboardingImagePage3")!, text: "Cook it now or save it for later", buttonText: "Start cooking")
+        .init(
+            backImage: UIImage(named: "onboardingImagePage1")!,
+            text: "Recipes from \nall over the \nWorld",
+            buttonText: "Continue"
+        ),
+        .init(
+            backImage: UIImage(named: "onboardingImagePage2")!,
+            text: "Recipes with \neach and every \ndetail",
+            buttonText: "Continue"
+        ),
+        .init(
+            backImage: UIImage(named: "onboardingImagePage3")!,
+            text: "Cook it now or \nsave it for later",
+            buttonText: "Start cooking"
+        )
         
-        ]
-    }
+    ]
+}

@@ -9,7 +9,7 @@ import UIKit
 
 class OnboardingViewController: UIViewController {
     
-    private var currentPageNumber = 1
+    private var currentPageNumber = 0
     
     //MARK: - UI Elements
     
@@ -24,6 +24,8 @@ class OnboardingViewController: UIViewController {
     
     private let textLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
         label.textColor = .white0
         label.font = UIFont.semiBold40()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -40,8 +42,9 @@ class OnboardingViewController: UIViewController {
     private lazy var continueButton: UIButton = {
         let button = UIButton()
         button.titleLabel?.font = .semiBold16()
-        button.layer.cornerRadius = 50
+        button.layer.cornerRadius = 23
         button.backgroundColor = UIColor.primary50
+        button.addTarget(self, action: #selector(continueButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -62,6 +65,7 @@ class OnboardingViewController: UIViewController {
         addSubViews()
         setupConstraints()
         configureInfoPageControll()
+        updateUI(pageNumber: currentPageNumber)
         
     }
     
@@ -76,11 +80,11 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    @objc func continueButtonTaped() {
+    @objc func continueButtonTapped() {
         if currentPageNumber <= 3 {
             currentPageNumber += 1
         }
-        //updateUI(pageNumber: currentPageNumber)
+        updateUI(pageNumber: currentPageNumber)
     }
     
     private func configureInfoPageControll() {
@@ -90,11 +94,29 @@ class OnboardingViewController: UIViewController {
             pageControll.preferredIndicatorImage = UIImage(named: "unselectedPage")
         }
         pageControll.pageIndicatorTintColor = .white
-        pageControll.currentPageIndicatorTintColor = .black
+        //pageControll.currentPageIndicatorTintColor = .black
+        pageControll.setIndicatorImage(UIImage(named: "selectedPage"), forPage: currentPageNumber)
         if #available(iOS 16.0, *) {
             pageControll.preferredCurrentPageIndicatorImage = UIImage(named: "selectedPage")
         }
+        
     }
+    
+    private func updateUI(pageNumber number: Int) {
+        if number < OnboardingDataManager.dataArray.count {
+                //let indexPath = NSIndexPath(row: number, section: 0)
+                let data = OnboardingDataManager.dataArray[number]
+                pageControll.currentPage = number
+                textLabel.text = data.text
+                continueButton.setTitle(data.buttonText, for: .normal)
+                backgroundImage.image = data.backImage
+            } else {
+                let newVC = WelcomeViewController()
+                newVC.modalPresentationStyle = .fullScreen
+                present(newVC, animated: true)
+            }
+
+        }
     
     private func addSubViews() {
         view.addSubview(backgroundImage)
@@ -114,22 +136,27 @@ class OnboardingViewController: UIViewController {
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
+            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            continueButton.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: -12),
+            continueButton.heightAnchor.constraint(equalToConstant: 44),
+            continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 193),
+            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            pageControll.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -12),
+            pageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
             textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textLabel.bottomAnchor.constraint(equalTo: pageControll.topAnchor, constant: 0),
             
-            pageControll.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: 0),
-            pageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+           
             
-            continueButton.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: 0),
-            continueButton.heightAnchor.constraint(equalToConstant: 44),
-            //continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 156),
-            continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+          
             
-            skipButton.bottomAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 0),
-            skipButton.heightAnchor.constraint(equalToConstant: 56),
-            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
         ])
     }
 }

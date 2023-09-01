@@ -19,6 +19,7 @@
 		A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */; };
 		E539D4082AA070C900B6BF83 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D4072AA070C900B6BF83 /* OnboardingViewController.swift */; };
 		E539D40A2AA073E600B6BF83 /* OnboardingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D4092AA073E600B6BF83 /* OnboardingData.swift */; };
+		E539D40C2AA1F61500B6BF83 /* String + Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E539D40B2AA1F61500B6BF83 /* String + Exstension.swift */; };
 		E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */; };
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
 		E5B809152A9E629500A903FE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5B809132A9E629500A903FE /* Poppins-Regular.ttf */; };
@@ -41,6 +42,7 @@
 		A5B046E92A9BF84F004F6386 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		E539D4072AA070C900B6BF83 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		E539D4092AA073E600B6BF83 /* OnboardingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingData.swift; sourceTree = "<group>"; };
+		E539D40B2AA1F61500B6BF83 /* String + Exstension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Exstension.swift"; sourceTree = "<group>"; };
 		E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		E5B809132A9E629500A903FE /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				E5417A832A9D17AB00AB0891 /* UIFont + Extension.swift */,
 				E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */,
 				E5B809172A9F20DB00A903FE /* UIImageView + Exstension.swift */,
+				E539D40B2AA1F61500B6BF83 /* String + Exstension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
 				E5CF42E22A9E267F005FF4CF /* WelcomeViewController.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
+				E539D40C2AA1F61500B6BF83 /* String + Exstension.swift in Sources */,
 				E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
