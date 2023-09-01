@@ -134,6 +134,7 @@ final class PopularCell: UICollectionViewCell {
     //MARK: - Configure
     
     func configure(with model: Results) {
+        
         nameLabel.text = model.title
         minutesLabel.text = "\(model.readyInMinutes?.description ?? "5") Mins"
         

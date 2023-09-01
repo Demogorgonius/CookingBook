@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 final class CategoryCell: UICollectionViewCell {
-
+    
     //MARK: - Properties
-
+    
     static let identifier = "CategoryCell32131"
-
+    
     //MARK: - UI Elements
-
+    
     lazy var cellView: UIView = {
         let view = UIView()
         view.clipsToBounds = true
@@ -31,23 +31,23 @@ final class CategoryCell: UICollectionViewCell {
         label.sizeToFit()
         return label
     }()
-
+    
     //MARK: - Inits
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         setupViews()
         addShadowLayer()
         
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     //MARK: - Setup UI
-
+    
     private func setupViews() {
         
         addSubview(cellView)
@@ -63,6 +63,7 @@ final class CategoryCell: UICollectionViewCell {
     }
     
     private func addShadowLayer() {
+        
         let shadowLayer = CALayer()
         shadowLayer.backgroundColor = UIColor.white.cgColor
         shadowLayer.shadowColor = UIColor.black.cgColor
@@ -76,10 +77,11 @@ final class CategoryCell: UICollectionViewCell {
         
         layer.insertSublayer(shadowLayer, at: 0)
     }
-
+    
     //MARK: - Configure
-
+    
     func configure(with model: CategoryModel) {
+        
         categoryLabel.text = model.category
         categoryLabel.textColor = model.isSelected ? .white : .systemPink
         cellView.backgroundColor = model.isSelected ? .systemPink : .white

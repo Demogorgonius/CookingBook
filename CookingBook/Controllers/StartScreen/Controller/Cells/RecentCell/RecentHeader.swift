@@ -8,9 +8,6 @@
 import UIKit
 import SnapKit
 
-import UIKit
-import SnapKit
-
 final class RecentHeader: UICollectionReusableView {
     
     //MARK: - Properties
@@ -56,6 +53,7 @@ final class RecentHeader: UICollectionReusableView {
     //MARK: - Methods
     
     private func setupViews() {
+        
         addSubview(stackView)
         
         stackView.addArrangedSubview(recentLabel)

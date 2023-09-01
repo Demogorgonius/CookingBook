@@ -64,6 +64,7 @@ final class StartScreenController: UIViewController {
     //MARK: - Setup UI
     
     private func setupViews() {
+        
         view.backgroundColor = .white
         
         view.addSubview(headerlabel)
@@ -214,6 +215,27 @@ extension StartScreenController {
                 sectionHeader.zIndex = 2
                 section.boundarySupplementaryItems = [sectionHeader]
                 
+            } else if sectionKind == .creators {
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(124), heightDimension: .fractionalWidth(0.5))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 20
+                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 90, trailing: 16)
+                
+                ///header
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                                elementKind: UICollectionView.elementKindSectionHeader,
+                                                                                alignment: .top)
+                sectionHeader.pinToVisibleBounds = false
+                sectionHeader.zIndex = 2
+                section.boundarySupplementaryItems = [sectionHeader]
+                
             } else {
                 fatalError("Unknown section!")
             }
@@ -267,10 +289,22 @@ extension StartScreenController {
         }
     }
     
+    private func registrCreatorsHeader() -> UICollectionView.SupplementaryRegistration<HeaderCreators> {
+        return UICollectionView.SupplementaryRegistration<HeaderCreators>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
+            header.recentLabel.text = "Popular creators"
+        }
+    }
+    
+    private func registrCreators() -> UICollectionView.CellRegistration<CreatorsCell, Item> {
+        return UICollectionView.CellRegistration<CreatorsCell, Item> { (cell, indexPath, recipe) in
+            cell.configure(with: self.recipeData[indexPath.row])
+        }
+    }
     
     //MARK: - DataSource
     
     private func createDataSourse() {
+        
         let trendingCell = registrTrending()
         let popularCell = registrPopularCell()
         let trendHeader = registrHeader()
@@ -278,6 +312,8 @@ extension StartScreenController {
         let popularFood = registrPopularFood()
         let recentHeader = registrRecentHeader()
         let recentCell = registrRecent()
+        let creatorsHeader = registrCreatorsHeader()
+        let creatorsCell = registrCreators()
         
         dataSourse = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
             (collectionView, indexPath, recipe) -> UICollectionViewCell? in
@@ -293,6 +329,8 @@ extension StartScreenController {
                 return collectionView.dequeueConfiguredReusableCell(using: popularFood, for: indexPath, item: recipe.categoryFood)
             case .recent:
                 return collectionView.dequeueConfiguredReusableCell(using: recentCell, for: indexPath, item: recipe)
+            case .creators:
+                return collectionView.dequeueConfiguredReusableCell(using: creatorsCell, for: indexPath, item: recipe)
             }
         }
         
@@ -308,6 +346,8 @@ extension StartScreenController {
                         return nil
                     case .recent:
                         return collectionView.dequeueConfiguredReusableSupplementary(using: recentHeader, for: indexPath)
+                    case .creators:
+                        return collectionView.dequeueConfiguredReusableSupplementary(using: creatorsHeader, for: indexPath)
                     }
                 }
             }
@@ -320,15 +360,20 @@ extension StartScreenController {
     private func applySnapshot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.trending, .popular, .popularFood, .recent])
+        snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
+        
         let item = recipeData.map { Item(recipes: $0) }
         let item2 = categoryModel.map { Item(category: $0) }
         let item3 = categoryFood.map { Item(categoryFood: $0) }
         let item4 = recipeData.map { Item(recipes: $0) }
+        let item5 = recipeData.map { Item(recipes: $0) }
+        
         snapshot.appendItems(item, toSection: .trending)
         snapshot.appendItems(item2, toSection: .popular)
         snapshot.appendItems(item3, toSection: .popularFood)
         snapshot.appendItems(item4, toSection: .recent)
+        snapshot.appendItems(item5, toSection: .creators)
+        
         dataSourse?.apply(snapshot, animatingDifferences: true)
     }
 }
@@ -361,6 +406,8 @@ extension StartScreenController: UICollectionViewDelegate {
             print("popularFood: \(indexPath.row)")
         case .recent:
             print("recent: \(indexPath.row)")
+        case .creators:
+            print("creators: \(indexPath.row)")
         }
     }
 }

@@ -1,25 +1,33 @@
 //
-//  PopularHeader.swift
+//  HeaderCreators.swift
 //  CookingBook
 //
-//  Created by sidzhe on 31.08.2023.
+//  Created by sidzhe on 01.09.2023.
 //
 
 import UIKit
 import SnapKit
 
-final class PopularHeader: UICollectionReusableView {
+final class HeaderCreators: UICollectionReusableView {
     
     //MARK: - Properties
     
-    static let identifier = "PopularHeader"
+    static let identifier = "HeaderCreators"
     
     //MARK: - UI Elements
     
-    var trendLabel: UILabel = {
+    var recentLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 26, weight: .semibold)
+        label.font = .systemFont(ofSize: 24, weight: .semibold)
         return label
+    }()
+    
+    private lazy var recentButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("See all ->", for: .normal)
+        button.setTitleColor(.systemPink, for: .normal)
+        button.addTarget(self, action: #selector(tapTrendButton), for: .touchUpInside)
+        return button
     }()
     
     private lazy var stackView: UIStackView = {
@@ -48,11 +56,16 @@ final class PopularHeader: UICollectionReusableView {
         
         addSubview(stackView)
         
-        stackView.addArrangedSubview(trendLabel)
+        stackView.addArrangedSubview(recentLabel)
+        stackView.addArrangedSubview(recentButton)
         
         stackView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
             make.verticalEdges.equalToSuperview()
         }
+    }
+    
+    @objc private func tapTrendButton() {
+        
     }
 }
