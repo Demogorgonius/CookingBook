@@ -18,17 +18,6 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - UI Elements
     
-    //    private lazy var ratingViewStackView: UIStackView = {
-    //        let view = UIStackView()
-    //        view.axis = .horizontal
-    //        view.contentMode = .center
-    //        view.distribution = .fillProportionally
-    //        view.spacing = 4
-    //        view.backgroundColor = .systemGray2
-    //        view.layer.cornerRadius = 10
-    //        return view
-    //    }()
-    
     private lazy var ratingView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGray3

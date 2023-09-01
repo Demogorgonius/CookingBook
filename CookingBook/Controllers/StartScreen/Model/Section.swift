@@ -8,8 +8,8 @@
 import Foundation
 
 enum Section: Int, Hashable, CustomStringConvertible {
-    case trending, popular, popularFood
-//    , recent, creators
+    case trending, popular, popularFood, recent
+//    , creators
     
     var description: String {
         switch self {
@@ -20,8 +20,8 @@ enum Section: Int, Hashable, CustomStringConvertible {
             return "Popular"
         case .popularFood:
             return "popularFood"
-//        case .recent:
-//            return "Recent"
+        case .recent:
+            return "Recent"
 //        case .creators:
 //            return "Creators"
         }

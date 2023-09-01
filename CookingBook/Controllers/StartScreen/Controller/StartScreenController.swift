@@ -177,7 +177,7 @@ extension StartScreenController {
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
                                                                                 elementKind: UICollectionView.elementKindSectionHeader,
                                                                                 alignment: .top)
-                sectionHeader.pinToVisibleBounds = true
+                sectionHeader.pinToVisibleBounds = false
                 sectionHeader.zIndex = 2
                 section.boundarySupplementaryItems = [sectionHeader]
                 
@@ -192,6 +192,27 @@ extension StartScreenController {
                 section.interGroupSpacing = 5
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.contentInsets = NSDirectionalEdgeInsets(top: -40, leading: 16, bottom: 10, trailing: 16)
+                
+            } else if sectionKind == .recent {
+                
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(124), heightDimension: .fractionalWidth(0.5))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 20
+                section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 90, trailing: 16)
+                
+                ///header
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                                elementKind: UICollectionView.elementKindSectionHeader,
+                                                                                alignment: .top)
+                sectionHeader.pinToVisibleBounds = false
+                sectionHeader.zIndex = 2
+                section.boundarySupplementaryItems = [sectionHeader]
                 
             } else {
                 fatalError("Unknown section!")
@@ -234,6 +255,19 @@ extension StartScreenController {
         }
     }
     
+    private func registrRecentHeader() -> UICollectionView.SupplementaryRegistration<RecentHeader> {
+        return UICollectionView.SupplementaryRegistration<RecentHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
+            header.recentLabel.text = "Recent recipe"
+        }
+    }
+    
+    private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
+        return UICollectionView.CellRegistration<RecentCell, Item> { (cell, indexPath, recipe) in
+            cell.configure(with: self.recipeData[indexPath.row])
+        }
+    }
+    
+    
     //MARK: - DataSource
     
     private func createDataSourse() {
@@ -242,6 +276,8 @@ extension StartScreenController {
         let trendHeader = registrHeader()
         let popularHeader = registrPopularHeaher()
         let popularFood = registrPopularFood()
+        let recentHeader = registrRecentHeader()
+        let recentCell = registrRecent()
         
         dataSourse = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
             (collectionView, indexPath, recipe) -> UICollectionViewCell? in
@@ -255,6 +291,8 @@ extension StartScreenController {
                 return collectionView.dequeueConfiguredReusableCell(using: popularCell, for: indexPath, item: recipe.category)
             case .popularFood:
                 return collectionView.dequeueConfiguredReusableCell(using: popularFood, for: indexPath, item: recipe.categoryFood)
+            case .recent:
+                return collectionView.dequeueConfiguredReusableCell(using: recentCell, for: indexPath, item: recipe)
             }
         }
         
@@ -268,6 +306,8 @@ extension StartScreenController {
                         return collectionView.dequeueConfiguredReusableSupplementary(using: popularHeader, for: indexPath)
                     case .popularFood:
                         return nil
+                    case .recent:
+                        return collectionView.dequeueConfiguredReusableSupplementary(using: recentHeader, for: indexPath)
                     }
                 }
             }
@@ -280,13 +320,15 @@ extension StartScreenController {
     private func applySnapshot() {
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.trending, .popular, .popularFood])
+        snapshot.appendSections([.trending, .popular, .popularFood, .recent])
         let item = recipeData.map { Item(recipes: $0) }
         let item2 = categoryModel.map { Item(category: $0) }
         let item3 = categoryFood.map { Item(categoryFood: $0) }
+        let item4 = recipeData.map { Item(recipes: $0) }
         snapshot.appendItems(item, toSection: .trending)
         snapshot.appendItems(item2, toSection: .popular)
         snapshot.appendItems(item3, toSection: .popularFood)
+        snapshot.appendItems(item4, toSection: .recent)
         dataSourse?.apply(snapshot, animatingDifferences: true)
     }
 }
@@ -317,6 +359,8 @@ extension StartScreenController: UICollectionViewDelegate {
             
         case .popularFood:
             print("popularFood: \(indexPath.row)")
+        case .recent:
+            print("recent: \(indexPath.row)")
         }
     }
 }
