@@ -10,6 +10,6 @@ import UIKit
 struct OnboardingDataModel {
     
     var backImage = UIImage()
-    var text = String()
+    var text = NSMutableAttributedString()
     var buttonText = String()
 }

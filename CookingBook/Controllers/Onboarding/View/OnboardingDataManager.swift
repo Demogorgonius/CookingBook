@@ -11,22 +11,25 @@ import UIKit
 
 struct OnboardingDataManager {
     
+    
+    
     static let dataArray : [OnboardingDataModel] = [
         .init(
             backImage: UIImage(named: "onboardingImagePage1")!,
-            text: "Recipes from \nall over the \nWorld",
+            text: NSMutableAttributedString().createString("Recipes from \nall ", "over the \nWorld" , UIColor.secondary20),
             buttonText: "Continue"
         ),
         .init(
             backImage: UIImage(named: "onboardingImagePage2")!,
-            text: "Recipes with \neach and every \ndetail",
+            text: NSMutableAttributedString().createString("Recipes with \n", "each and every \ndetail" , UIColor.secondary20),
             buttonText: "Continue"
         ),
         .init(
             backImage: UIImage(named: "onboardingImagePage3")!,
-            text: "Cook it now or \nsave it for later",
+            text: NSMutableAttributedString().createString("Cook it now or \n", "save it for later" , UIColor.secondary20),
             buttonText: "Start cooking"
         )
     ]
+    
 }
 

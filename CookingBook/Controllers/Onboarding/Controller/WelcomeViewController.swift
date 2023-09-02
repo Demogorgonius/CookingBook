@@ -23,7 +23,7 @@ class WelcomeViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .equalSpacing
-        stack.spacing = 0
+        stack.spacing = -1.5
         stack.alignment = .top
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -105,7 +105,7 @@ class WelcomeViewController: UIViewController {
         return label
     }()
     
-    private let startButton: UIButton = {
+    private lazy var startButton: UIButton = {
         let button = UIButton()
         button.setTitle("Get started", for: .normal)
         button.titleLabel?.font = .semiBold16()
@@ -134,15 +134,17 @@ class WelcomeViewController: UIViewController {
             self.startButton.alpha = 1
             let newVC = OnboardingViewController()
             newVC.modalPresentationStyle = .fullScreen
+            newVC.modalTransitionStyle = .flipHorizontal
             self.present(newVC, animated: true)
         }
     }
     
     // MARK: - Configure UI
     
+   
+    
     private func addSubviews() {
         view.addSubview(backgroundImageView)
-        
         view.addSubview(topTextStack)
         topTextStack.addArrangedSubview(starLabel)
         topTextStack.addArrangedSubview(amountOfRecipesLabel)
@@ -155,7 +157,8 @@ class WelcomeViewController: UIViewController {
         
         view.addSubview(startButton)
         
-        backgroundImageView.addGradient([.clear, .neutral100], locations: [0.3, 1], frame: view.bounds)
+        backgroundImageView.addGradient([.clear, .black], locations: [0.3, 0.97], frame: view.bounds)
+        
     }
     
     

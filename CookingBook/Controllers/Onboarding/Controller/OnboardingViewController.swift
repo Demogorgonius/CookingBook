@@ -34,7 +34,7 @@ class OnboardingViewController: UIViewController {
     
     private lazy var pageControll: UIPageControl = {
         let control = UIPageControl()
-        control.isUserInteractionEnabled = false
+        control.isUserInteractionEnabled = true
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
@@ -79,6 +79,7 @@ class OnboardingViewController: UIViewController {
             self.skipButton.alpha = 1
             let newVC = WelcomeViewController()
             newVC.modalPresentationStyle = .fullScreen
+            newVC.modalTransitionStyle = .crossDissolve
             self.present(newVC, animated: true)
         }
     }
@@ -104,22 +105,95 @@ class OnboardingViewController: UIViewController {
         view.addSubview(skipButton)
         
         backgroundImage.addGradient([.clear, .neutral100.withAlphaComponent(0.6)], locations: [0, 0.75], frame: view.bounds)
-        
+        view.addGestureRecognizer(createSwipe(direction: .left))
+        view.addGestureRecognizer(createSwipe(direction: .right))
+        //backgroundImage.addGradient([.clear, .black], locations: [0.3, 1], frame: view.bounds)
     }
     
     private func updateUI(pageNumber number: Int) {
         if number < OnboardingDataManager.dataArray.count{
             let data = OnboardingDataManager.dataArray[number]
-            pageControll.currentPage = number
-            textLabel.text = data.text
-            continueButton.setTitle(data.buttonText, for: .normal)
-            backgroundImage.image = data.backImage
+            UIView.transition(with: self.pageControll,
+                                      duration: 1.0,
+                              options: .transitionCrossDissolve,
+                                      animations: {
+                self.pageControll.currentPage = number
+                    }, completion: nil)
+//            pageControll.currentPage = number
+            UIView.transition(with: self.textLabel,
+                                      duration: 1.0,
+                              options: .transitionCrossDissolve,
+                                      animations: {
+                self.textLabel.attributedText = data.text
+                    }, completion: nil)
+            //textLabel.text = data.text
+            UIView.transition(with: self.continueButton,
+                                      duration: 1.0,
+                              options: .transitionCrossDissolve,
+                                      animations: {
+                self.continueButton.setTitle(data.buttonText, for: .normal)
+                    }, completion: nil)
+//            continueButton.setTitle(data.buttonText, for: .normal)
+            UIView.transition(with: self.backgroundImage,
+                                      duration: 1.0,
+                              options: .transitionCrossDissolve,
+                                      animations: {
+                self.backgroundImage.image = data.backImage
+                    }, completion: nil)
+            //backgroundImage.image = data.backImage
+            if number == OnboardingDataManager.dataArray.count - 1 {
+                skipButton.isHidden = true
+            }
         } else {
             let newVC = WelcomeViewController()
             newVC.modalPresentationStyle = .fullScreen
+            newVC.modalTransitionStyle = .crossDissolve
             present(newVC, animated: true)
         }
         
+    }
+    
+    private func createSwipe(direction: UISwipeGestureRecognizer.Direction) -> UISwipeGestureRecognizer {
+        
+        let swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(_:)))
+        
+        swipeGestureRecognizer.direction = direction
+        
+        return swipeGestureRecognizer
+    }
+    
+    @objc func didSwipe(_ sender: UISwipeGestureRecognizer) {
+        switch sender.direction {
+        case .left:
+            continueButton.alpha = 0.5
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.continueButton.alpha = 1
+                if self.currentPageNumber <= 3 {
+                    self.currentPageNumber += 1
+                }
+                self.updateUI(pageNumber: self.currentPageNumber)
+            }
+        case .right:
+            continueButton.alpha = 0.5
+            if currentPageNumber == 0 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.continueButton.alpha = 1
+                
+                }
+                break
+            } else  {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.continueButton.alpha = 1
+                    if self.currentPageNumber <= 3 {
+                        self.currentPageNumber -= 1
+                    }
+                    self.updateUI(pageNumber: self.currentPageNumber)
+                }
+            }
+            
+        default:
+            break
+        }
     }
     
     private func configureInfoPageControll() {
@@ -132,6 +206,13 @@ class OnboardingViewController: UIViewController {
         if #available(iOS 16.0, *) {
             pageControll.preferredCurrentPageIndicatorImage = UIImage(named: "selectedPage")
         }
+        pageControll.addTarget(self, action: #selector(pageTapped(_:)), for: .touchUpInside)
+        
+    }
+    
+    @objc func pageTapped(_ sender: UIPageControl) {
+        print("sender page: \(sender.currentPage)\n current page: \(pageControll.currentPage)")
+        continueButtonTapped()
         
     }
     
@@ -161,6 +242,7 @@ class OnboardingViewController: UIViewController {
             
         ])
     }
+    
     
 }
 
