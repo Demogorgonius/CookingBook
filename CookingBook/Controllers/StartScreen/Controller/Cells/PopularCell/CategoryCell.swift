@@ -10,10 +10,6 @@ import SnapKit
 
 final class CategoryCell: UICollectionViewCell {
     
-    //MARK: - Properties
-    
-    static let identifier = "CategoryCell32131"
-    
     //MARK: - UI Elements
     
     lazy var cellView: UIView = {

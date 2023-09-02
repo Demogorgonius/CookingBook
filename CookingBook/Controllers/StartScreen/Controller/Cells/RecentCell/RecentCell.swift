@@ -8,11 +8,9 @@
 import UIKit
 import SnapKit
 
-final class RecentCell: UICollectionViewCell, ConfigCellProtocol {
+final class RecentCell: UICollectionViewCell {
     
     //MARK: - Properties
-    
-    static let identifier: String = "RecentCell"
     
     private var networkManager = NetworkManager()
     
@@ -92,7 +90,7 @@ final class RecentCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - Configure
     
-    func configure(with model: Recipes) {
+    func configure(with model: Results) {
         
         nameLabel.text = model.title
         avatarLabel.text = model.sourceName

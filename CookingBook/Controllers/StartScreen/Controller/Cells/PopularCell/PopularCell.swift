@@ -12,7 +12,6 @@ final class PopularCell: UICollectionViewCell {
     
     //MARK: - Properties
     
-    static let identifier = "PopularCell"
     private let networkManager = NetworkManager()
     
     //MARK: - UI Elements
@@ -128,7 +127,7 @@ final class PopularCell: UICollectionViewCell {
     //MARK: - Target
     
     @objc private func tapFavoriteButton() {
-        
+        print("Tap tap tap")
     }
     
     //MARK: - Configure
@@ -136,7 +135,7 @@ final class PopularCell: UICollectionViewCell {
     func configure(with model: Results) {
         
         nameLabel.text = model.title
-        minutesLabel.text = "\(model.readyInMinutes?.description ?? "5") Mins"
+        minutesLabel.text = "\(model.readyInMinutes?.description ?? "5")  Mins"
         
         networkManager.loadImage(from: model.image) { [weak self] image in
             DispatchQueue.main.async { self?.logoImage.image = image }

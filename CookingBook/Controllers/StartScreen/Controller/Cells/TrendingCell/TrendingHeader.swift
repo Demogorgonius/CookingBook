@@ -9,11 +9,7 @@ import UIKit
 import SnapKit
 
 final class TrendingHeader: UICollectionReusableView {
-    
-    //MARK: - Properties
-    
-    static let identifier = "TrendingHeader"
-    
+        
     //MARK: - UI Elements
     
     var trendLabel: UILabel = {

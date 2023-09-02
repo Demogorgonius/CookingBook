@@ -10,10 +10,6 @@ import SnapKit
 
 final class RecentHeader: UICollectionReusableView {
     
-    //MARK: - Properties
-    
-    static let identifier = "RecentHeader"
-    
     //MARK: - UI Elements
     
     var recentLabel: UILabel = {

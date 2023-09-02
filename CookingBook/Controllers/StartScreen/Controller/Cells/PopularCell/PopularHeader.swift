@@ -10,10 +10,6 @@ import SnapKit
 
 final class PopularHeader: UICollectionReusableView {
     
-    //MARK: - Properties
-    
-    static let identifier = "PopularHeader"
-    
     //MARK: - UI Elements
     
     var trendLabel: UILabel = {

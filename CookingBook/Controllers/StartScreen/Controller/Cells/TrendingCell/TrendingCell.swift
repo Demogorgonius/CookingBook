@@ -8,11 +8,9 @@
 import UIKit
 import SnapKit
 
-final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
+final class TrendingCell: UICollectionViewCell {
     
     //MARK: - Properties
-    
-    static let identifier: String = "TrendingCell"
     
     private var networkManager = NetworkManager()
     
@@ -71,17 +69,17 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     
     private lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
         button.tintColor = .systemPink
+        button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         return button
     }()
     
     private lazy var additionalButton: UIButton = {
         let button = UIButton()
-        button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button.tintColor = .systemPink
+        button.addTarget(self, action: #selector(tapAdditionalButton), for: .touchUpInside)
         return button
     }()
     
@@ -178,15 +176,35 @@ final class TrendingCell: UICollectionViewCell, ConfigCellProtocol {
     //MARK: - Target
     
     @objc private func tapFavoriteButton() {
+        print("Tap tap tap")
+    }
+    
+    @objc private func tapAdditionalButton() {
+        print("Tap tap tap")
+    }
+    
+    //MARK: - checkLikes
+    
+    private func checkLikes(with like: String) -> String {
         
+        switch like.count {
+        case 1...3:
+            return like
+        case 4:
+            return String(like[like.startIndex..<like.index(like.startIndex, offsetBy: 1)] + " K")
+        case 5:
+            return String(like[like.startIndex..<like.index(like.startIndex, offsetBy: 2)] + " K")
+        default:
+            return String(like[like.startIndex..<like.index(like.startIndex, offsetBy: 3)] + " K")
+        }
     }
     
     //MARK: - Configure
     
-    func configure(with model: Recipes) {
+    func configure(with model: Results) {
         
         let likes = model.aggregateLikes ?? 0
-        let rating = likes.description.count >= 4 ? "\(likes.description.first ?? "1") K" : likes.description
+        let rating = checkLikes(with: likes.description)
         
         ratingLabel.text = rating
         nameLabel.text = model.title

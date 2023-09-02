@@ -8,11 +8,9 @@
 import UIKit
 import SnapKit
 
-final class CreatorsCell: UICollectionViewCell, ConfigCellProtocol {
+final class CreatorsCell: UICollectionViewCell {
     
     //MARK: - Properties
-    
-    static let identifier: String = "CreatorsCell"
     
     private var networkManager = NetworkManager()
     
@@ -21,8 +19,6 @@ final class CreatorsCell: UICollectionViewCell, ConfigCellProtocol {
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .center
-        image.layer.cornerRadius = 55
-        image.clipsToBounds = true
         return image
     }()
     
@@ -79,11 +75,14 @@ final class CreatorsCell: UICollectionViewCell, ConfigCellProtocol {
     
     //MARK: - Configure
     
-    func configure(with model: Recipes) {
+    func configure(with model: Results) {
         
         avatarLabel.text = model.sourceName
         
-        networkManager.loadImage(from: model.sourceURL) { [weak self] image in
+        avatarImage.layer.cornerRadius = 55
+        avatarImage.clipsToBounds = true
+        
+        networkManager.loadImage(from: model.image) { [weak self] image in
             DispatchQueue.main.async { self?.avatarImage.image = image }
         }
     }

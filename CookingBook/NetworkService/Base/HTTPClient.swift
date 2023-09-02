@@ -64,9 +64,9 @@ extension RecipeClient {
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
         urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: "7a8cd7f64b124dd3841868f8dc77bfb8"),
-            URLQueryItem(name: "type", value: type),
-            URLQueryItem(name: "addRecipeInformation", value: "true")
+            URLQueryItem(name: "apiKey", value: "76c720e3086144478cbcd27fb948b527"),
+            URLQueryItem(name: "addRecipeInformation", value: "true"),
+            URLQueryItem(name: "type", value: type)
             
         ]
         
@@ -88,7 +88,6 @@ extension RecipeClient {
             switch response.statusCode {
                 
             case 200...299:
-                
                 guard let decode = try? JSONDecoder().decode(responseModel, from: data) else { return .failure(.decode)}
                 return .success(decode)
             case 401:

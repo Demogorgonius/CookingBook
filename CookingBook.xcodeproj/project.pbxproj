@@ -28,7 +28,6 @@
 		EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */; };
 		EB538A932A9C97AA00B62658 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A922A9C97AA00B62658 /* TrendingCell.swift */; };
 		EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B52A9CDC8F008AC86B /* Section.swift */; };
-		EB6E47BA2A9CE08E008AC86B /* ConfigCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */; };
 		EBC0157D2AA1C3AD0006E7A5 /* RecentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC0157C2AA1C3AD0006E7A5 /* RecentHeader.swift */; };
 		EBC0157F2AA1C5B70006E7A5 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC0157E2AA1C5B70006E7A5 /* RecentCell.swift */; };
 		EBC015822AA1D0850006E7A5 /* HeaderCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC015812AA1D0850006E7A5 /* HeaderCreators.swift */; };
@@ -65,7 +64,6 @@
 		EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		EB538A922A9C97AA00B62658 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		EB6E47B52A9CDC8F008AC86B /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigCellProtocol.swift; sourceTree = "<group>"; };
 		EBC0157C2AA1C3AD0006E7A5 /* RecentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeader.swift; sourceTree = "<group>"; };
 		EBC0157E2AA1C5B70006E7A5 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		EBC015812AA1D0850006E7A5 /* HeaderCreators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCreators.swift; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 		EB538A912A9C979600B62658 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				EB6E47B92A9CE08E008AC86B /* ConfigCellProtocol.swift */,
 				EB1A2BC52A9F7E60004703B1 /* TrendingCell */,
 				EB1A2BC62A9F7FB4004703B1 /* PopularCell */,
 				EBC0157B2AA1C3790006E7A5 /* RecentCell */,
@@ -461,7 +458,6 @@
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
 				EBC0157F2AA1C5B70006E7A5 /* RecentCell.swift in Sources */,
-				EB6E47BA2A9CE08E008AC86B /* ConfigCellProtocol.swift in Sources */,
 				EB538A792A9C575700B62658 /* HTTPMethod.swift in Sources */,
 				EBD517C72AA07E44002A2C75 /* CategoryCell.swift in Sources */,
 				EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */,

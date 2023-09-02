@@ -11,7 +11,7 @@ import Foundation
 
 struct Item: Hashable {
     var category: CategoryModel?
-    var recipes: Recipes?
+    var recipes: Results?
     var categoryFood: Results?
     let identifier = UUID()
 }

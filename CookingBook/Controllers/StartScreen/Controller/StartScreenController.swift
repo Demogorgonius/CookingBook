@@ -12,10 +12,10 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
-    private var recipeData = [Recipes]()
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>?
+    private var recipeData = [Results]()
     private var categoryFood = [Results]()
     private var categoryModel = [
         CategoryModel(category: "Salad", isSelected: true), CategoryModel(category: "Breakfast"),
@@ -48,13 +48,18 @@ final class StartScreenController: UIViewController {
         return textField
     }()
     
+    private lazy var sharedControl: UIActivityViewController = {
+        let view = UIActivityViewController(activityItems: [], applicationActivities: nil)
+        return view
+    }()
+    
     //MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadRecipe()
-        loadCategory(type: "Breakfast")
+        loadCategory(type: "Salad")
         setupViews()
         configureCollectionView()
         createDataSourse()
@@ -90,7 +95,7 @@ final class StartScreenController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let response):
-                self.recipeData.append(contentsOf: response.recipes)
+                self.recipeData = response.results
                 self.applySnapshot()
             case .failure(let error):
                 print(error.customMessage)
@@ -104,8 +109,7 @@ final class StartScreenController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                guard let food = data.results else { return }
-                self.categoryFood = food
+                self.categoryFood = data.results
                 self.applySnapshot()
             case .failure(let error):
                 print(error.customMessage)
@@ -144,7 +148,7 @@ extension StartScreenController {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 10, trailing: 8)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 8, bottom: 10, trailing: 8)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalWidth(0.5))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
@@ -163,15 +167,15 @@ extension StartScreenController {
                 
             } else if sectionKind == .popular {
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.3))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(0.7))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2, bottom: 0, trailing: 2)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 2, bottom: 10, trailing: 2)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2), heightDimension: .fractionalWidth(0.2))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 14
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 40, trailing: 16)
                 
                 ///header
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
@@ -198,13 +202,13 @@ extension StartScreenController {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 8, bottom: 0, trailing: 8)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(124), heightDimension: .fractionalWidth(0.5))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 20
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 90, trailing: 16)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 16)
                 
                 ///header
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
@@ -219,13 +223,13 @@ extension StartScreenController {
                 
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+                item.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 8, bottom: 0, trailing: 8)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(124), heightDimension: .fractionalWidth(0.5))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 20
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 90, trailing: 16)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
                 
                 ///header
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
@@ -248,20 +252,42 @@ extension StartScreenController {
     //MARK: - Registration
     
     private func registrTrending() -> UICollectionView.CellRegistration<TrendingCell, Item> {
-        return UICollectionView.CellRegistration<TrendingCell, Item> { (cell, indexPath, recipe) in
+        
+        return UICollectionView.CellRegistration<TrendingCell, Item> { [weak self] (cell, indexPath, recipe) in
+            guard let self = self else { return }
             cell.configure(with: self.recipeData[indexPath.row])
         }
     }
     
     private func registrPopularCell() -> UICollectionView.CellRegistration<CategoryCell, CategoryModel> {
-        return UICollectionView.CellRegistration<CategoryCell, CategoryModel> { (cell, indexPath, label) in
+        
+        return UICollectionView.CellRegistration<CategoryCell, CategoryModel> { [weak self] (cell, indexPath, label) in
+            guard let self = self else { return }
             cell.configure(with: self.categoryModel[indexPath.row])
         }
     }
     
     private func registrPopularFood() -> UICollectionView.CellRegistration<PopularCell, Results> {
-        return UICollectionView.CellRegistration<PopularCell, Results> { (cell, indexPath, recipe) in
+        
+        return UICollectionView.CellRegistration<PopularCell, Results> { [weak self] (cell, indexPath, recipe) in
+            guard let self = self else { return }
             cell.configure(with: self.categoryFood[indexPath.row])
+        }
+    }
+    
+    private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
+        
+        return UICollectionView.CellRegistration<RecentCell, Item> { [weak self] (cell, indexPath, recipe) in
+            guard let self = self else { return }
+            cell.configure(with: self.recipeData[indexPath.row])
+        }
+    }
+    
+    private func registrCreators() -> UICollectionView.CellRegistration<CreatorsCell, Item> {
+        
+        return UICollectionView.CellRegistration<CreatorsCell, Item> { [weak self] (cell, indexPath, recipe) in
+            guard let self = self else { return }
+            cell.configure(with: self.recipeData[indexPath.row])
         }
     }
     
@@ -283,21 +309,9 @@ extension StartScreenController {
         }
     }
     
-    private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
-        return UICollectionView.CellRegistration<RecentCell, Item> { (cell, indexPath, recipe) in
-            cell.configure(with: self.recipeData[indexPath.row])
-        }
-    }
-    
     private func registrCreatorsHeader() -> UICollectionView.SupplementaryRegistration<HeaderCreators> {
         return UICollectionView.SupplementaryRegistration<HeaderCreators>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.recentLabel.text = "Popular creators"
-        }
-    }
-    
-    private func registrCreators() -> UICollectionView.CellRegistration<CreatorsCell, Item> {
-        return UICollectionView.CellRegistration<CreatorsCell, Item> { (cell, indexPath, recipe) in
-            cell.configure(with: self.recipeData[indexPath.row])
         }
     }
     
@@ -394,7 +408,6 @@ extension StartScreenController: UICollectionViewDelegate {
         case .trending:
             print("trending: \(indexPath.row)")
         case .popular:
-            
             for i in 0..<categoryModel.count {
                 categoryModel[i].isSelected = false
             }
