@@ -13,7 +13,6 @@ class OnboardingViewController: UIViewController {
     
     //MARK: - UI Elements
     
-    
     private let backgroundImage: UIImageView = {
         let view = UIImageView()
         view.layer.cornerRadius = 25
@@ -33,7 +32,7 @@ class OnboardingViewController: UIViewController {
         return label
     }()
     
-    private lazy var pageControll : UIPageControl = {
+    private lazy var pageControll: UIPageControl = {
         let control = UIPageControl()
         control.isUserInteractionEnabled = false
         control.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +49,7 @@ class OnboardingViewController: UIViewController {
         return button
     }()
     
-    private lazy var skipButton : UIButton = {
+    private lazy var skipButton: UIButton = {
         let button = UIButton()
         button.setTitle("Skip", for: .normal)
         button.setTitleColor(.white0, for: .normal)
@@ -59,6 +58,8 @@ class OnboardingViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+    // MARK: - LifeCycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,6 +71,7 @@ class OnboardingViewController: UIViewController {
         
     }
     
+    // MARK: - Buttons Methods
     
     @objc func skipTapped(_ sender:AnyObject) {
         skipButton.alpha = 0.5
@@ -81,11 +83,43 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    @objc func continueButtonTapped() {
-        if currentPageNumber <= 3 {
-            currentPageNumber += 1
+    @objc private func continueButtonTapped() {
+        continueButton.alpha = 0.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.continueButton.alpha = 1
+            if self.currentPageNumber <= 3 {
+                self.currentPageNumber += 1
+            }
+            self.updateUI(pageNumber: self.currentPageNumber)
         }
-        updateUI(pageNumber: currentPageNumber)
+    }
+    
+    // MARK: - Configure UI
+    
+    private func addSubViews() {
+        view.addSubview(backgroundImage)
+        view.addSubview(continueButton)
+        view.addSubview(pageControll)
+        view.addSubview(textLabel)
+        view.addSubview(skipButton)
+        
+        backgroundImage.addGradient([.clear, .neutral100.withAlphaComponent(0.6)], locations: [0, 0.75], frame: view.bounds)
+        
+    }
+    
+    private func updateUI(pageNumber number: Int) {
+        if number < OnboardingDataManager.dataArray.count{
+            let data = OnboardingDataManager.dataArray[number]
+            pageControll.currentPage = number
+            textLabel.text = data.text
+            continueButton.setTitle(data.buttonText, for: .normal)
+            backgroundImage.image = data.backImage
+        } else {
+            let newVC = WelcomeViewController()
+            newVC.modalPresentationStyle = .fullScreen
+            present(newVC, animated: true)
+        }
+        
     }
     
     private func configureInfoPageControll() {
@@ -101,32 +135,6 @@ class OnboardingViewController: UIViewController {
         
     }
     
-    private func updateUI(pageNumber number: Int) {
-        if number < OnboardingDataManager.dataArray.count {
-                let data = OnboardingDataManager.dataArray[number]
-                pageControll.currentPage = number
-                textLabel.text = data.text
-                continueButton.setTitle(data.buttonText, for: .normal)
-                backgroundImage.image = data.backImage
-            } else {
-                let newVC = WelcomeViewController()
-                newVC.modalPresentationStyle = .fullScreen
-                present(newVC, animated: true)
-            }
-
-        }
-    
-    private func addSubViews() {
-        view.addSubview(backgroundImage)
-        view.addSubview(skipButton)
-        view.addSubview(continueButton)
-        view.addSubview(pageControll)
-        view.addSubview(textLabel)
-        
-        backgroundImage.addGradient([.clear, .neutral100.withAlphaComponent(0.6)], locations: [0, 0.75], frame: view.bounds)
-        
-    }
-    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             backgroundImage.topAnchor.constraint(equalTo: view.topAnchor),
@@ -134,10 +142,7 @@ class OnboardingViewController: UIViewController {
             backgroundImage.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            skipButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15),
-            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            continueButton.bottomAnchor.constraint(equalTo: skipButton.topAnchor, constant: -12),
+            continueButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -55),
             continueButton.heightAnchor.constraint(equalToConstant: 44),
             continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 193),
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -150,64 +155,64 @@ class OnboardingViewController: UIViewController {
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textLabel.bottomAnchor.constraint(equalTo: pageControll.topAnchor, constant: -12),
             
-           
-            
-          
+            skipButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 12),
+            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
         ])
     }
+    
 }
 
-class CustomImagePageControl: UIPageControl {
-    
-    let activeImage:UIImage = UIImage(named: "selectedPage")!
-    let inactiveImage:UIImage = UIImage(named: "unselectedPage")!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.pageIndicatorTintColor = UIColor.clear
-        self.currentPageIndicatorTintColor = UIColor.clear
-        self.clipsToBounds = false
-    }
-    
-    func updateDots() {
-        var i = 0
-        for view in self.subviews {
-            if let imageView = self.imageForSubview(view) {
-                if i == self.currentPage {
-                    imageView.image = self.activeImage
-                } else {
-                    imageView.image = self.inactiveImage
-                }
-                i = i + 1
-            } else {
-                var dotImage = self.inactiveImage
-                if i == self.currentPage {
-                    dotImage = self.activeImage
-                }
-                view.clipsToBounds = false
-                view.addSubview(UIImageView(image:dotImage))
-                i = i + 1
-            }
-        }
-    }
-    
-    fileprivate func imageForSubview(_ view:UIView) -> UIImageView? {
-        var dot:UIImageView?
-        
-        if let dotImageView = view as? UIImageView {
-            dot = dotImageView
-        } else {
-            for foundView in view.subviews {
-                if let imageView = foundView as? UIImageView {
-                    dot = imageView
-                    break
-                }
-            }
-        }
-        
-        return dot
-    }
-}
+//class CustomImagePageControl: UIPageControl {
+//    
+//    let activeImage:UIImage = UIImage(named: "selectedPage")!
+//    let inactiveImage:UIImage = UIImage(named: "unselectedPage")!
+//    
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//        
+//        self.pageIndicatorTintColor = UIColor.clear
+//        self.currentPageIndicatorTintColor = UIColor.clear
+//        self.clipsToBounds = false
+//    }
+//    
+//    func updateDots() {
+//        var i = 0
+//        for view in self.subviews {
+//            if let imageView = self.imageForSubview(view) {
+//                if i == self.currentPage {
+//                    imageView.image = self.activeImage
+//                } else {
+//                    imageView.image = self.inactiveImage
+//                }
+//                i = i + 1
+//            } else {
+//                var dotImage = self.inactiveImage
+//                if i == self.currentPage {
+//                    dotImage = self.activeImage
+//                }
+//                view.clipsToBounds = false
+//                view.addSubview(UIImageView(image:dotImage))
+//                i = i + 1
+//            }
+//        }
+//    }
+//    
+//    fileprivate func imageForSubview(_ view:UIView) -> UIImageView? {
+//        var dot:UIImageView?
+//        
+//        if let dotImageView = view as? UIImageView {
+//            dot = dotImageView
+//        } else {
+//            for foundView in view.subviews {
+//                if let imageView = foundView as? UIImageView {
+//                    dot = imageView
+//                    break
+//                }
+//            }
+//        }
+//        
+//        return dot
+//    }
+//}

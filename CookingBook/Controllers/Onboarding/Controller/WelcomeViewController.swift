@@ -16,7 +16,6 @@ class WelcomeViewController: UIViewController {
         image.image = UIImage(named: "onboardingScreenImage")
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
-    
         return image
     }()
     
@@ -112,6 +111,7 @@ class WelcomeViewController: UIViewController {
         button.titleLabel?.font = .semiBold16()
         button.layer.cornerRadius = 8
         button.backgroundColor = UIColor.primary50
+        button.addTarget(self, action: #selector(getStartedTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -126,6 +126,17 @@ class WelcomeViewController: UIViewController {
         
     }
     
+    // MARK: - Buttons Methods
+    
+    @objc private func getStartedTapped(_ sender:AnyObject) {
+        startButton.alpha = 0.5
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            self.startButton.alpha = 1
+            let newVC = OnboardingViewController()
+            newVC.modalPresentationStyle = .fullScreen
+            self.present(newVC, animated: true)
+        }
+    }
     
     // MARK: - Configure UI
     
@@ -173,15 +184,5 @@ class WelcomeViewController: UIViewController {
             
         ])
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
