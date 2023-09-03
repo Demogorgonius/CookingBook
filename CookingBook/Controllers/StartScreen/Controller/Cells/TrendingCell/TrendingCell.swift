@@ -12,6 +12,8 @@ final class TrendingCell: UICollectionViewCell {
     
     //MARK: - Properties
     
+    var tappedButton: (() -> Void)?
+    
     private var networkManager = NetworkManager()
     
     //MARK: - UI Elements
@@ -122,7 +124,7 @@ final class TrendingCell: UICollectionViewCell {
         mainImage.snp.makeConstraints { make in
             make.width.equalTo(280)
             make.height.equalTo(180)
-            make.center.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
         ratingView.snp.makeConstraints { make in
@@ -180,7 +182,7 @@ final class TrendingCell: UICollectionViewCell {
     }
     
     @objc private func tapAdditionalButton() {
-        print("Tap tap tap")
+        tappedButton?()
     }
     
     //MARK: - checkLikes

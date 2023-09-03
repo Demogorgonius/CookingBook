@@ -26,7 +26,7 @@ final class PopularCell: UICollectionViewCell {
     private lazy var logoImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "video")
-        image.layer.cornerRadius = 45
+        image.layer.cornerRadius = 50
         image.clipsToBounds = true
         return image
     }()

@@ -19,6 +19,8 @@ final class CreatorsCell: UICollectionViewCell {
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .center
+        image.layer.cornerRadius = 55
+        image.clipsToBounds = true
         return image
     }()
     
@@ -59,11 +61,12 @@ final class CreatorsCell: UICollectionViewCell {
         avatarImage.snp.makeConstraints { make in
             make.size.equalTo(110)
             make.top.equalToSuperview()
+            make.left.equalToSuperview()
         }
         
         avatarLabel.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
             make.top.equalTo(avatarImage.snp.bottom).inset(-8)
+            make.centerX.equalTo(avatarImage.snp.centerX)
         }
     }
     
@@ -78,9 +81,6 @@ final class CreatorsCell: UICollectionViewCell {
     func configure(with model: Results) {
         
         avatarLabel.text = model.sourceName
-        
-        avatarImage.layer.cornerRadius = 55
-        avatarImage.clipsToBounds = true
         
         networkManager.loadImage(from: model.image) { [weak self] image in
             DispatchQueue.main.async { self?.avatarImage.image = image }
