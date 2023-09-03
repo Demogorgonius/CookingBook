@@ -68,6 +68,7 @@ final class PopularCell: UICollectionViewCell {
         super.prepareForReuse()
         
         logoImage.image = nil
+        
     }
     
     override init(frame: CGRect) {

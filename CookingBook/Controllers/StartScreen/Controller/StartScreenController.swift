@@ -15,14 +15,8 @@ final class StartScreenController: UIViewController {
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>?
-    private var recipeData = [Results]()
-    private var categoryFood = [Results]()
-    private var categoryModel = [
-        CategoryModel(category: "Salad", isSelected: true), CategoryModel(category: "Breakfast"),
-        CategoryModel(category: "Dessert"), CategoryModel(category: "Appetizer"),
-        CategoryModel(category: "Soup"), CategoryModel(category: "Snack"),
-        CategoryModel(category: "Drink")
-    ]
+    private var recipeData: [Results]
+    private var categoryFood: [Results]
     
     //MARK: - UI Elements
     
@@ -55,14 +49,23 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Init
     
+    init() {
+        self.recipeData = MainModel.shared.recipeData
+        self.categoryFood = MainModel.shared.categoryFood
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadRecipe()
-        loadCategory(type: "Salad")
         setupViews()
         configureCollectionView()
         createDataSourse()
+        applySnapshot()
         
     }
     
@@ -89,20 +92,6 @@ final class StartScreenController: UIViewController {
     
     //MARK: - NetworkLoad
     
-    private func loadRecipe() {
-        
-        networkManager.fetch { [weak self] (result: Result<RecipeModel, RequestError>) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let response):
-                self.recipeData = response.results
-                self.applySnapshot()
-            case .failure(let error):
-                print(error.customMessage)
-            }
-        }
-    }
-    
     private func loadCategory(type: String) {
         
         networkManager.searchRecipe(type: type) { [weak self] (result: Result<CategoryRecipe, RequestError>) in
@@ -110,7 +99,7 @@ final class StartScreenController: UIViewController {
             switch result {
             case .success(let data):
                 self.categoryFood = data.results
-                self.applySnapshot()
+                DispatchQueue.main.async { self.applySnapshot() }
             case .failure(let error):
                 print(error.customMessage)
             }
@@ -261,9 +250,8 @@ extension StartScreenController {
     
     private func registrPopularCell() -> UICollectionView.CellRegistration<CategoryCell, CategoryModel> {
         
-        return UICollectionView.CellRegistration<CategoryCell, CategoryModel> { [weak self] (cell, indexPath, label) in
-            guard let self = self else { return }
-            cell.configure(with: self.categoryModel[indexPath.row])
+        return UICollectionView.CellRegistration<CategoryCell, CategoryModel> { (cell, indexPath, label) in
+            cell.configure(with: MainModel.shared.categoryModel[indexPath.row])
         }
     }
     
@@ -377,7 +365,7 @@ extension StartScreenController {
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
         let item = recipeData.map { Item(recipes: $0) }
-        let item2 = categoryModel.map { Item(category: $0) }
+        let item2 = MainModel.shared.categoryModel.map { Item(category: $0) }
         let item3 = categoryFood.map { Item(categoryFood: $0) }
         let item4 = recipeData.map { Item(recipes: $0) }
         let item5 = recipeData.map { Item(recipes: $0) }
@@ -399,7 +387,7 @@ extension StartScreenController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let popular = categoryModel[indexPath.row].category
+        let popular = MainModel.shared.categoryModel[indexPath.row].category
         
         guard let sectionKind = Section(rawValue: indexPath.section) else { return }
         
@@ -408,12 +396,13 @@ extension StartScreenController: UICollectionViewDelegate {
         case .trending:
             print("trending: \(indexPath.row)")
         case .popular:
-            for i in 0..<categoryModel.count {
-                categoryModel[i].isSelected = false
+            
+            loadCategory(type: popular)
+            for i in 0..<MainModel.shared.categoryModel.count {
+                MainModel.shared.categoryModel[i].isSelected = false
             }
             
-            categoryModel[indexPath.row].isSelected = true
-            loadCategory(type: popular)
+            MainModel.shared.categoryModel[indexPath.row].isSelected = true
             
         case .popularFood:
             print("popularFood: \(indexPath.row)")

@@ -20,7 +20,7 @@ class CustomTabBarController: UITabBarController {
     private func createCTabBar() {
         
         viewControllers = [
-            makeViewControllers(vc: StartScreenController(), title: "Home", icon: UIImage(systemName: "house.fill")),
+//            makeViewControllers(vc: StartScreenController(), title: "Home", icon: UIImage(systemName: "house.fill")),
             makeViewControllers(vc: FavoritesViewController(), title: "Favorites", icon: UIImage(systemName: "bookmark.fill")),
             makeViewControllers(vc: NotificationViewController(), title: "Notifications", icon: UIImage(systemName: "bell.fill")),
             makeViewControllers(vc: ProfileViewController(), title: "Profile", icon: UIImage(systemName: "person.crop.circle"))
