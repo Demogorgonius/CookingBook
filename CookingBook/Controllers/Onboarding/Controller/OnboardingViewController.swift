@@ -85,14 +85,19 @@ class OnboardingViewController: UIViewController {
     
     @objc private func continueButtonTapped() {
         continueButton.alpha = 0.5
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
             self.continueButton.alpha = 1
             if self.currentPageNumber <= 3 {
                 self.currentPageNumber += 1
             }
             self.updateUI(pageNumber: self.currentPageNumber)
+            self.onboardingWillTransitonToIndex(currentPageNumber)
         }
     }
+    
+    func onboardingWillTransitonToIndex(_ index: Int) {
+            skipButton.isHidden = index == 2 ? false : true
+        }
     
     // MARK: - Configure UI
     
@@ -108,10 +113,16 @@ class OnboardingViewController: UIViewController {
     }
     
     private func updateUI(pageNumber number: Int) {
-        if number < OnboardingDataManager.dataArray.count{
+        if number < OnboardingDataManager.dataArray.count {
             let data = OnboardingDataManager.dataArray[number]
             pageControll.currentPage = number
-            textLabel.text = data.text
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.paragraphSpacing = -10
+            let attributedString = NSMutableAttributedString(string: data.text, attributes: [NSAttributedString.Key.paragraphStyle: paragraphStyle])
+            let secondString = NSAttributedString(string: data.attributedText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.rating100])
+            attributedString.append(secondString)
+            textLabel.attributedText = attributedString
+            textLabel.textAlignment = .center
             continueButton.setTitle(data.buttonText, for: .normal)
             backgroundImage.image = data.backImage
         } else {
@@ -163,6 +174,12 @@ class OnboardingViewController: UIViewController {
     }
     
 }
+
+//extension OnboardingViewController: PaperOnboardingDelegate {
+//
+//    func onboardingWillTransitonToIndex(_ index: Int) {
+//        skipButton.isHidden = index == 2 ? false : true
+//    }
 
 //class CustomImagePageControl: UIPageControl {
 //    

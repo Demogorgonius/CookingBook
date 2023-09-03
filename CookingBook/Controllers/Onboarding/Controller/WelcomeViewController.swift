@@ -66,7 +66,7 @@ class WelcomeViewController: UIViewController {
         let stack = UIStackView()
         stack.axis = .vertical
         stack.distribution = .fill
-        stack.spacing = -10
+        stack.spacing = -13
         stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
@@ -125,6 +125,10 @@ class WelcomeViewController: UIViewController {
         setupConstraints()
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+        }
     
     // MARK: - Buttons Methods
     

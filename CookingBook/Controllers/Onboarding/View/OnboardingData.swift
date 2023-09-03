@@ -11,5 +11,6 @@ struct OnboardingDataModel {
     
     var backImage = UIImage()
     var text = String()
+    var attributedText = String()
     var buttonText = String()
 }
