@@ -18,19 +18,25 @@ final class TrendingHeader: UICollectionReusableView {
         return label
     }()
     
-    private lazy var trendButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("See all ->", for: .normal)
-        button.setTitleColor(.systemPink, for: .normal)
-        button.addTarget(self, action: #selector(tapTrendButton), for: .touchUpInside)
-        return button
+    private lazy var seeAllLabel: UILabel = {
+        let label = UILabel()
+        label.text = "See all "
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .systemPink
+        return label
     }()
     
-    private lazy var stackView: UIStackView = {
-        let view = UIStackView()
-        view.axis = .horizontal
-        view.spacing = 20
-        return view
+    private lazy var seeAllImage: UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(systemName: "arrow.right")
+        image.tintColor = .black
+        return image
+    }()
+    
+    private lazy var trendButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(tapTrendButton), for: .touchUpInside)
+        return button
     }()
     
     //MARK: - Inits
@@ -49,18 +55,37 @@ final class TrendingHeader: UICollectionReusableView {
     //MARK: - Methods
     
     private func setupViews() {
-        addSubview(stackView)
         
-        stackView.addArrangedSubview(trendLabel)
-        stackView.addArrangedSubview(trendButton)
+        addSubview(trendLabel)
+        addSubview(seeAllLabel)
+        addSubview(seeAllImage)
+        addSubview(trendButton)
+
+        trendLabel.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+
+        seeAllImage.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.size.equalTo(18)
+        }
         
-        stackView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
-            make.verticalEdges.equalToSuperview()
+        seeAllLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalTo(seeAllImage.snp.left)
+        }
+        
+        trendButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(seeAllLabel.snp.left)
+            make.right.equalTo(seeAllImage.snp.right)
+            make.height.equalTo(12)
         }
     }
     
     @objc private func tapTrendButton() {
-        
+        print("Tap see all")
     }
 }

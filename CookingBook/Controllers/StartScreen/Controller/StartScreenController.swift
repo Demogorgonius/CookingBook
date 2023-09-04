@@ -15,8 +15,8 @@ final class StartScreenController: UIViewController {
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>?
-    private var recipeData: [Results]
-    private var categoryFood: [Results]
+    private var recipeData = MainModel.shared.recipeData
+    private var categoryFood = MainModel.shared.categoryFood
     
     //MARK: - UI Elements
     
@@ -48,16 +48,6 @@ final class StartScreenController: UIViewController {
     }()
     
     //MARK: - Init
-    
-    init() {
-        self.recipeData = MainModel.shared.recipeData
-        self.categoryFood = MainModel.shared.categoryFood
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -243,8 +233,9 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<TrendingCell, Item> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
-            cell.configure(with: self.recipeData[indexPath.row])
+            cell.favoriteButton.tag = indexPath.row
             cell.tappedButton = { self.present(self.sharedControl, animated: true) }
+            cell.configure(with: self.recipeData[indexPath.row], state: MainModel.shared.createState()[indexPath.row])
         }
     }
     
@@ -259,7 +250,7 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<PopularCell, Results> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
-            cell.configure(with: self.categoryFood[indexPath.row])
+            cell.configure(with: self.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[indexPath.row])
         }
     }
     
@@ -299,7 +290,7 @@ extension StartScreenController {
     
     private func registrCreatorsHeader() -> UICollectionView.SupplementaryRegistration<HeaderCreators> {
         return UICollectionView.SupplementaryRegistration<HeaderCreators>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
-            header.recentLabel.text = "Popular creators"
+            header.creatorsLabel.text = "Popular creators"
         }
     }
     
@@ -395,6 +386,7 @@ extension StartScreenController: UICollectionViewDelegate {
             
         case .trending:
             print("trending: \(indexPath.row)")
+            
         case .popular:
             
             loadCategory(type: popular)

@@ -69,11 +69,11 @@ final class TrendingCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var favoriteButton: UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
-        button.tintColor = .systemPink
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
+        button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
+        button.tintColor = .systemGray3
         return button
     }()
     
@@ -114,9 +114,9 @@ final class TrendingCell: UICollectionViewCell {
         contentView.addSubview(avatarImage)
         contentView.addSubview(avatarLabel)
         contentView.addSubview(additionalButton)
+        contentView.addSubview(favoriteButton)
         
         mainImage.addSubview(ratingView)
-        mainImage.addSubview(favoriteButton)
         
         ratingView.addSubview(ratingImage)
         ratingView.addSubview(ratingLabel)
@@ -147,8 +147,9 @@ final class TrendingCell: UICollectionViewCell {
         }
         
         favoriteButton.snp.makeConstraints { make in
-            make.top.right.equalToSuperview().inset(16)
-            make.size.equalTo(32)
+            make.size.equalTo(30)
+            make.centerY.equalTo(ratingLabel.snp.centerY)
+            make.right.equalToSuperview().inset(42)
         }
         
         nameLabel.snp.makeConstraints { make in
@@ -177,8 +178,10 @@ final class TrendingCell: UICollectionViewCell {
     
     //MARK: - Target
     
-    @objc private func tapFavoriteButton() {
-        print("Tap tap tap")
+    @objc private func tapFavoriteButton(_ sender: UIButton) {
+        
+        sender.tintColor = sender.tintColor == .systemGray3 ? .systemPink : .systemGray3
+        MainModel.shared.checkTrendingIndex(tag: sender.tag)
     }
     
     @objc private func tapAdditionalButton() {
@@ -203,16 +206,16 @@ final class TrendingCell: UICollectionViewCell {
     
     //MARK: - Configure
     
-    func configure(with model: Results) {
+    func configure(with model: Results, state: Bool) {
         
         let likes = model.aggregateLikes ?? 0
         let rating = checkLikes(with: likes.description)
-        
         ratingLabel.text = rating
         nameLabel.text = model.title
         avatarLabel.text = model.sourceName
         mainImage.layer.cornerRadius = 20
         mainImage.clipsToBounds = true
+        favoriteButton.tintColor = state ? .systemPink : .systemGray3
         networkManager.loadImage(from: model.image) { [weak self] image in
             DispatchQueue.main.async { self?.mainImage.image = image }
         }

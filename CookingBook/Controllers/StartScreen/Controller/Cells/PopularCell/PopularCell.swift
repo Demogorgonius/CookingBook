@@ -58,7 +58,7 @@ final class PopularCell: UICollectionViewCell {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
-        button.tintColor = .systemPink
+        button.tintColor = .systemGray
         return button
     }()
     
@@ -127,14 +127,17 @@ final class PopularCell: UICollectionViewCell {
     
     //MARK: - Target
     
-    @objc private func tapFavoriteButton() {
-        print("Tap tap tap")
+    @objc private func tapFavoriteButton(_ sender: UIButton) {
+        
+        sender.tintColor = sender.tintColor == .systemGray ? .systemPink : .systemGray
+        MainModel.shared.checkPopularIndex(tag: sender.tag)
     }
     
     //MARK: - Configure
     
-    func configure(with model: Results) {
+    func configure(with model: Results, state: Bool) {
         
+        favoriteButton.tintColor = state ? .systemPink : .systemGray
         nameLabel.text = model.title
         minutesLabel.text = "\(model.readyInMinutes?.description ?? "5")  Mins"
         
