@@ -27,13 +27,14 @@ class FavoritesViewController: UIViewController {
     private let recipeTable: UITableView = {
         let element = UITableView()
         element.translatesAutoresizingMaskIntoConstraints = false
-        element.backgroundColor = .systemGreen
+        element.backgroundColor = .clear
         element.alwaysBounceVertical = true
+        element.separatorStyle = .none
         return element
     }()
     
 // MARK: - properties
-    var favouritesArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    var favouritesArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
     
 // MARK: - life cycle funcs
     override func viewDidLoad() {
@@ -76,11 +77,12 @@ class FavoritesViewController: UIViewController {
             recipeTable.topAnchor.constraint(equalTo: labelView.bottomAnchor, constant: 0),
             recipeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
             recipeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            recipeTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            recipeTable.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0)
         ])
     }
 }
 
+// MARK: - extension
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 282.0
