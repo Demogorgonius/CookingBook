@@ -54,7 +54,7 @@ final class PopularCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var favoriteButton: UIButton = {
+    lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)

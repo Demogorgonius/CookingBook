@@ -18,7 +18,7 @@ class MainModel {
     var recipeData = [Results]()
     var categoryFood = [Results]()
     var categoryModel = [
-        CategoryModel(category: "Salad", isSelected: true), CategoryModel(category: "Breakfast"),
+        CategoryModel(category: "Salad", isSelectedCategory: true), CategoryModel(category: "Breakfast"),
         CategoryModel(category: "Dessert"), CategoryModel(category: "Appetizer"),
         CategoryModel(category: "Soup"), CategoryModel(category: "Snack"),
         CategoryModel(category: "Drink")
@@ -27,8 +27,9 @@ class MainModel {
     var indexTrending = Set<Int>()
     var stateTrending: [Bool]?
     
-    var indexPopular = Set<Int>()
-    var statePopular: [Bool]?
+    var indexPopular: [String : [Int]] = ["Salad" : [], "Breakfast" : [], "Dessert" : [], "Appetizer" : [], "Soup" : [], "Snack" : [], "Drink" : []]
+    var statePopular: [String : [Bool]]?
+    var keyCategory = "Salad"
     
     //MARK: - Private init
     
@@ -41,7 +42,7 @@ class MainModel {
         return stateTrending!
     }
     
-    func createPopulatState() -> [Bool] {
+    func createPopulatState() -> [String : [Bool]] {
         checkPopularState()
         return statePopular!
     }
@@ -57,19 +58,26 @@ class MainModel {
     
     func checkPopularIndex(tag: Int) {
         
-        if indexPopular.contains(tag) {
-            indexPopular.remove(tag)
+        if indexPopular[keyCategory] != nil, indexPopular[keyCategory]!.contains(tag) {
+            for (index, value) in indexPopular[keyCategory]!.enumerated() {
+                if value == tag {
+                    indexPopular[keyCategory]?.remove(at: index)
+                }
+            }
         } else {
-            indexPopular.insert(tag)
+            indexPopular[keyCategory]?.append(tag)
         }
     }
     
     private func checkPopularState() {
         
-        var item = Array(repeating: false, count: categoryFood.count)
-
-        indexPopular.forEach {
-            item[$0] = !item[$0]
+        let keys = categoryModel.map { $0.category }
+        let values = Array(repeating: false, count: categoryFood.count)
+        var item = [String : [Bool]]()
+        keys.forEach { item[$0] = values }
+        
+        indexPopular[keyCategory]?.forEach { index in
+            item[keyCategory]![index] = !item[keyCategory]![index]
         }
         
         statePopular = item
@@ -78,7 +86,7 @@ class MainModel {
     private func checkTrendingState() {
         
         var item = Array(repeating: false, count: recipeData.count)
-
+        
         indexTrending.forEach {
             item[$0] = !item[$0]
         }

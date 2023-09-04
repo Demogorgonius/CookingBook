@@ -21,7 +21,6 @@ final class CategoryCell: UICollectionViewCell {
     
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.text = "BTC/USDT"
         label.font = UIFont.systemFont(ofSize: 15)
         label.textColor = .black
         label.sizeToFit()
@@ -79,7 +78,7 @@ final class CategoryCell: UICollectionViewCell {
     func configure(with model: CategoryModel) {
         
         categoryLabel.text = model.category
-        categoryLabel.textColor = model.isSelected ? .white : .systemPink
-        cellView.backgroundColor = model.isSelected ? .systemPink : .white
+        categoryLabel.textColor = model.isSelectedCategory ? .white : .systemPink
+        cellView.backgroundColor = model.isSelectedCategory ? .systemPink : .white
     }
 }

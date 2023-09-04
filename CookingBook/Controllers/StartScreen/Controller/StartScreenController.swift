@@ -14,7 +14,7 @@ final class StartScreenController: UIViewController {
     
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
-    private var dataSourse: UICollectionViewDiffableDataSource<Section, Item>?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     private var recipeData = MainModel.shared.recipeData
     private var categoryFood = MainModel.shared.categoryFood
     
@@ -83,6 +83,8 @@ final class StartScreenController: UIViewController {
     //MARK: - NetworkLoad
     
     private func loadCategory(type: String) {
+        
+        MainModel.shared.keyCategory = type
         
         networkManager.searchRecipe(type: type) { [weak self] (result: Result<CategoryRecipe, RequestError>) in
             guard let self = self else { return }
@@ -250,7 +252,8 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<PopularCell, Results> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
-            cell.configure(with: self.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[indexPath.row])
+            cell.configure(with: self.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row])
+            cell.favoriteButton.tag = indexPath.row
         }
     }
     
@@ -308,7 +311,7 @@ extension StartScreenController {
         let creatorsHeader = registrCreatorsHeader()
         let creatorsCell = registrCreators()
         
-        dataSourse = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
             (collectionView, indexPath, recipe) -> UICollectionViewCell? in
             
             guard let sectionKind = Section(rawValue: indexPath.section) else { return nil }
@@ -327,7 +330,7 @@ extension StartScreenController {
             }
         }
         
-        dataSourse?.supplementaryViewProvider = { collectionView, kind, indexPath in
+        dataSource?.supplementaryViewProvider = { collectionView, kind, indexPath in
             if kind == UICollectionView.elementKindSectionHeader {
                 if let sectionKind = Section(rawValue: indexPath.section) {
                     switch sectionKind {
@@ -367,7 +370,7 @@ extension StartScreenController {
         snapshot.appendItems(item4, toSection: .recent)
         snapshot.appendItems(item5, toSection: .creators)
         
-        dataSourse?.apply(snapshot, animatingDifferences: true)
+        dataSource?.apply(snapshot, animatingDifferences: true)
     }
 }
 
@@ -391,10 +394,10 @@ extension StartScreenController: UICollectionViewDelegate {
             
             loadCategory(type: popular)
             for i in 0..<MainModel.shared.categoryModel.count {
-                MainModel.shared.categoryModel[i].isSelected = false
+                MainModel.shared.categoryModel[i].isSelectedCategory = false
             }
             
-            MainModel.shared.categoryModel[indexPath.row].isSelected = true
+            MainModel.shared.categoryModel[indexPath.row].isSelectedCategory = true
             
         case .popularFood:
             print("popularFood: \(indexPath.row)")
