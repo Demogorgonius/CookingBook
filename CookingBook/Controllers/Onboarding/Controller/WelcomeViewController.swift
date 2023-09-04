@@ -138,6 +138,7 @@ class WelcomeViewController: UIViewController {
             self.startButton.alpha = 1
             let newVC = OnboardingViewController()
             newVC.modalPresentationStyle = .fullScreen
+            newVC.modalTransitionStyle = .crossDissolve
             self.present(newVC, animated: true)
         }
     }

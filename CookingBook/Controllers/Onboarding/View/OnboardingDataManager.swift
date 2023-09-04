@@ -14,22 +14,18 @@ struct OnboardingDataManager {
     static let dataArray : [OnboardingDataModel] = [
         .init(
             backImage: UIImage(named: "onboardingImagePage1")!,
-            text: "Recipes from \nall ",
-            attributedText: "over the \nWorld",
+            text: NSMutableAttributedString().createAttributedString("Recipes from \nall ", attributedStr: "over the \nWorld", color: .rating100),
             buttonText: "Continue"
         ),
         .init(
             backImage: UIImage(named: "onboardingImagePage2")!,
-            text: "Recipes with \n",
-            attributedText: "each and every \ndetail",
+            text: NSMutableAttributedString().createAttributedString("Recipes with \n", attributedStr: "each and every \ndetail", color: .rating100),
             buttonText: "Continue"
         ),
         .init(
             backImage: UIImage(named: "onboardingImagePage3")!,
-            text: "Cook it now or \n",
-            attributedText: "save it for later",
+            text: NSMutableAttributedString().createAttributedString("Cook it now or \n", attributedStr: "save it for later", color: .rating100),
             buttonText: "Start cooking"
         )
     ]
 }
-
