@@ -28,7 +28,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 }
 
 // MARK: - extension
-extension CustomTabBarController  {
+extension CustomTabBarController {
 // MARK: - flow funcs
     private func setUpView() {
         customDesignedView.isUserInteractionEnabled = false
@@ -44,13 +44,12 @@ extension CustomTabBarController  {
         emptyViewController.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 2)
         
         viewControllers = [
-            makeViewControllers(vc: StartScreenController(), image: UIImage(systemName: "house"), selectedImage: UIImage(systemName: "house.fill")?.withTintColor(UIColor.primary10,renderingMode: .alwaysOriginal)),
-            makeViewControllers(vc: FavoritesViewController(), image: UIImage(systemName: "bookmark"), selectedImage: UIImage(systemName: "bookmark.fill")?.withTintColor(UIColor.primary10,renderingMode: .alwaysOriginal)),
+            makeViewControllers(vc: StartScreenController(), image: UIImage(named: "home"), selectedImage: UIImage(named: "home.selected")),
+            makeViewControllers(vc: FavoritesViewController(), image: UIImage(named: "bookmark"), selectedImage: UIImage(named: "bookmark.selected")),
             emptyViewController,
-            makeViewControllers(vc: NotificationViewController(), image: UIImage(systemName: "bell"), selectedImage: UIImage(systemName: "bell.fill")?.withTintColor(UIColor.primary10,renderingMode: .alwaysOriginal)),
-            makeViewControllers(vc: ProfileViewController(), image: UIImage(systemName: "person"), selectedImage: UIImage(systemName: "person.fill")?.withTintColor(UIColor.primary10,renderingMode: .alwaysOriginal))
+            makeViewControllers(vc: NotificationViewController(), image: UIImage(named: "bell"), selectedImage: UIImage(named: "bell.selected")),
+            makeViewControllers(vc: ProfileViewController(), image: UIImage(named: "person"), selectedImage: UIImage(named: "person.selected"))
         ]
-        tabBar.unselectedItemTintColor = UIColor.neutral40
     }
     
     private func makeViewControllers(vc: UIViewController, image: UIImage?, selectedImage: UIImage?) -> UIViewController {
