@@ -15,8 +15,6 @@ final class StartScreenController: UIViewController {
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
-    private var recipeData = MainModel.shared.recipeData
-    private var categoryFood = MainModel.shared.categoryFood
     
     //MARK: - UI Elements
     
@@ -90,7 +88,7 @@ final class StartScreenController: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let data):
-                self.categoryFood = data.results
+                MainModel.shared.categoryFood = data.results
                 DispatchQueue.main.async { self.applySnapshot() }
             case .failure(let error):
                 print(error.customMessage)
@@ -237,7 +235,7 @@ extension StartScreenController {
             guard let self = self else { return }
             cell.favoriteButton.tag = indexPath.row
             cell.tappedButton = { self.present(self.sharedControl, animated: true) }
-            cell.configure(with: self.recipeData[indexPath.row], state: MainModel.shared.createState()[indexPath.row])
+            cell.configure(with: MainModel.shared.recipeData[indexPath.row], state: MainModel.shared.createState()[indexPath.row])
         }
     }
     
@@ -250,26 +248,23 @@ extension StartScreenController {
     
     private func registrPopularFood() -> UICollectionView.CellRegistration<PopularCell, Results> {
         
-        return UICollectionView.CellRegistration<PopularCell, Results> { [weak self] (cell, indexPath, recipe) in
-            guard let self = self else { return }
-            cell.configure(with: self.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row])
+        return UICollectionView.CellRegistration<PopularCell, Results> { (cell, indexPath, recipe) in
+            cell.configure(with: MainModel.shared.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row])
             cell.favoriteButton.tag = indexPath.row
         }
     }
     
     private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
         
-        return UICollectionView.CellRegistration<RecentCell, Item> { [weak self] (cell, indexPath, recipe) in
-            guard let self = self else { return }
-            cell.configure(with: self.recipeData[indexPath.row])
+        return UICollectionView.CellRegistration<RecentCell, Item> { (cell, indexPath, recipe) in
+            cell.configure(with: MainModel.shared.recipeData[indexPath.row])
         }
     }
     
     private func registrCreators() -> UICollectionView.CellRegistration<CreatorsCell, Item> {
         
-        return UICollectionView.CellRegistration<CreatorsCell, Item> { [weak self] (cell, indexPath, recipe) in
-            guard let self = self else { return }
-            cell.configure(with: self.recipeData[indexPath.row])
+        return UICollectionView.CellRegistration<CreatorsCell, Item> { (cell, indexPath, recipe) in
+            cell.configure(with: MainModel.shared.recipeData[indexPath.row])
         }
     }
     
@@ -358,11 +353,11 @@ extension StartScreenController {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
-        let item = recipeData.map { Item(recipes: $0) }
+        let item = MainModel.shared.recipeData.map { Item(recipes: $0) }
         let item2 = MainModel.shared.categoryModel.map { Item(category: $0) }
-        let item3 = categoryFood.map { Item(categoryFood: $0) }
-        let item4 = recipeData.map { Item(recipes: $0) }
-        let item5 = recipeData.map { Item(recipes: $0) }
+        let item3 = MainModel.shared.categoryFood.map { Item(categoryFood: $0) }
+        let item4 = MainModel.shared.recipeData.map { Item(recipes: $0) }
+        let item5 = MainModel.shared.recipeData.map { Item(recipes: $0) }
         
         snapshot.appendItems(item, toSection: .trending)
         snapshot.appendItems(item2, toSection: .popular)
@@ -381,8 +376,6 @@ extension StartScreenController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let popular = MainModel.shared.categoryModel[indexPath.row].category
-        
         guard let sectionKind = Section(rawValue: indexPath.section) else { return }
         
         switch sectionKind {
@@ -391,6 +384,8 @@ extension StartScreenController: UICollectionViewDelegate {
             print("trending: \(indexPath.row)")
             
         case .popular:
+            
+            let popular = MainModel.shared.categoryModel[indexPath.row].category
             
             loadCategory(type: popular)
             for i in 0..<MainModel.shared.categoryModel.count {
