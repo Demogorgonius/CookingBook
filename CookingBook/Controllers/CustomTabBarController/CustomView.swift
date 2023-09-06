@@ -41,7 +41,7 @@ class CustomView: UIView {
         let centerFirstArcEnd = CGPoint(x: centerArcBegin.x + 15, y: centerArcBegin.y + 10)
         let centerFirstArcCP = CGPoint(x: centerFirstArcEnd.x - 5, y: centerArcBegin.y)
         path.addQuadCurve(to: centerFirstArcEnd, controlPoint: centerFirstArcCP)
-        let centerSecondArcEnd = CGPoint(x: rect.midX, y: centerFirstArcEnd.y + 20)
+        let centerSecondArcEnd = CGPoint(x: rect.midX + 1, y: centerFirstArcEnd.y + 20)
         let centerSecondArcCP = CGPoint(x: centerFirstArcEnd.x + 5, y: centerFirstArcEnd.y + 10)
         let centerSecondArcCP2 = CGPoint(x: centerFirstArcEnd.x + 15, y: centerSecondArcEnd.y)
         path.addCurve(to: centerSecondArcEnd, controlPoint1: centerSecondArcCP, controlPoint2: centerSecondArcCP2)
@@ -61,9 +61,9 @@ class CustomView: UIView {
         backgroundColor = .clear
         heightAnchor.constraint(greaterThanOrEqualToConstant: minimumPossibleHeight).isActive = true
         layer.shadowColor = UIColor.lightGray.cgColor
-        layer.shadowRadius = 0
-        layer.shadowOffset = CGSize(width: 0, height: -2)
-        layer.shadowOpacity = 0.7
+        layer.shadowRadius = 2
+        layer.shadowOffset = CGSize(width: 0, height: -4)
+        layer.shadowOpacity = 0.2
     }
 }
 

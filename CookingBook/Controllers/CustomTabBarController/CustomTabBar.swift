@@ -15,6 +15,23 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         return element
     }()
 
+    private let addingView: UIView = {
+        let element = UIView()
+        element.backgroundColor = UIColor.primary50
+        element.layer.cornerRadius = 24
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return element
+    }()
+    
+    private let addButton: UIButton = {
+        let element = UIButton()
+        element.setImage(UIImage(named: "plus"), for: .normal)
+        element.backgroundColor = .clear
+        element.layer.cornerRadius = 24
+        element.translatesAutoresizingMaskIntoConstraints = false
+        return  element
+    }()
+    
 // MARK: - life cycle funcs
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +51,8 @@ extension CustomTabBarController {
         customDesignedView.isUserInteractionEnabled = false
         tabBar.layer.zPosition = 1
         view.addSubview(customDesignedView)
+        view.addSubview(addingView)
+        addingView.addSubview(addButton)
         setConstraints()
         delegate = self
         createCTabBar()
@@ -70,7 +89,17 @@ extension CustomTabBarController {
         NSLayoutConstraint.activate([
             customDesignedView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
             customDesignedView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            customDesignedView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+            customDesignedView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            
+            addingView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            addingView.topAnchor.constraint(equalTo: customDesignedView.topAnchor, constant: -25),
+            addingView.heightAnchor.constraint(equalToConstant: 48),
+            addingView.widthAnchor.constraint(equalToConstant: 48),
+            
+            addButton.heightAnchor.constraint(equalToConstant: 48),
+            addButton.widthAnchor.constraint(equalToConstant: 48),
+            addButton.centerXAnchor.constraint(equalTo: addingView.centerXAnchor),
+            addButton.centerYAnchor.constraint(equalTo: addingView.centerYAnchor)
         ])
     }
 }
