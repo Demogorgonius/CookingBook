@@ -21,6 +21,7 @@
 		E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */; };
 		E5E83CE12A9E1DB400F96424 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */; };
 		E5E83CE32A9E1DCA00F96424 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */; };
+		E8DC70582AA8A8850026AFA2 /* RecipeInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		E5417A852A9D215F00AB0891 /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInformationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 		A5B046D02A9BF33F004F6386 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E8DC70562AA8A4C50026AFA2 /* RecipeInformation */,
 				A5B046E22A9BF780004F6386 /* Profile */,
 				A5B046DF2A9BF75A004F6386 /* Notifications */,
 				A5B046DC2A9BF656004F6386 /* Favorites */,
@@ -234,6 +237,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		E8DC70562AA8A4C50026AFA2 /* RecipeInformation */ = {
+			isa = PBXGroup;
+			children = (
+				E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */,
+			);
+			path = RecipeInformation;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -321,6 +332,7 @@
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
 				A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */,
 				E5417A842A9D17AB00AB0891 /* UIFont + Extension.swift in Sources */,
+				E8DC70582AA8A8850026AFA2 /* RecipeInformationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
