@@ -32,7 +32,7 @@ class OnboardingViewController: UIViewController {
         return label
     }()
     
-    private lazy var pageControll: UIPageControl = {
+    private lazy var pageControl: UIPageControl = {
         let control = UIPageControl()
         control.isUserInteractionEnabled = true
         control.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +66,7 @@ class OnboardingViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = true
         addSubViews()
         setupConstraints()
-        configureInfoPageControll()
+        configureInfoPageControl()
         updateUI(pageNumber: currentPageNumber)
         
     }
@@ -100,7 +100,7 @@ class OnboardingViewController: UIViewController {
     private func addSubViews() {
         view.addSubview(backgroundImage)
         view.addSubview(continueButton)
-        view.addSubview(pageControll)
+        view.addSubview(pageControl)
         view.addSubview(textLabel)
         view.addSubview(skipButton)
         
@@ -115,11 +115,11 @@ class OnboardingViewController: UIViewController {
         if number < OnboardingDataManager.dataArray.count {
             let data = OnboardingDataManager.dataArray[number]
             UIView.transition(
-                with: self.pageControll,
+                with: self.pageControl,
                 duration: 0.5,
                 options: .transitionCrossDissolve,
                 animations: {
-                    self.pageControll.currentPage = number
+                    self.pageControl.currentPage = number
                 },
                 completion: nil)
             UIView.transition(
@@ -197,23 +197,21 @@ class OnboardingViewController: UIViewController {
             }
         }
         
-    
-    private func configureInfoPageControll() {
-        pageControll.numberOfPages = OnboardingDataManager.dataArray.count
-        pageControll.currentPage = 0
-        pageControll.preferredIndicatorImage = UIImage(named: "unselectedPage")
-        pageControll.pageIndicatorTintColor = .neutral20
-        pageControll.currentPageIndicatorTintColor = .rating100
-        pageControll.setIndicatorImage(UIImage(named: "selectedPage"), forPage: currentPageNumber)
+    private func configureInfoPageControl() {
+        pageControl.numberOfPages = OnboardingDataManager.dataArray.count
+        pageControl.currentPage = 0
+        pageControl.preferredIndicatorImage = UIImage(named: "unselectedPage")
+        pageControl.pageIndicatorTintColor = .neutral20
+        pageControl.currentPageIndicatorTintColor = .rating100
         if #available(iOS 16.0, *) {
-            pageControll.preferredCurrentPageIndicatorImage = UIImage(named: "selectedPage")
+            pageControl.preferredCurrentPageIndicatorImage = UIImage(named: "selectedPage")
         }
-        pageControll.addTarget(self, action: #selector(pageTapped(_:)), for: .touchUpInside)
+        pageControl.addTarget(self, action: #selector(pageTapped(_:)), for: .touchUpInside)
         
     }
     
     @objc func pageTapped(_ sender: UIPageControl) {
-            print("sender page: \(sender.currentPage)\n current page: \(pageControll.currentPage)")
+            print("sender page: \(sender.currentPage)\n current page: \(pageControl.currentPage)")
         continueButtonTapped()
         }
     
@@ -229,13 +227,13 @@ class OnboardingViewController: UIViewController {
             continueButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 193),
             continueButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            pageControll.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -12),
-            pageControll.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: continueButton.topAnchor, constant: -12),
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             textLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20),
             textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
             textLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textLabel.bottomAnchor.constraint(equalTo: pageControll.topAnchor, constant: -12),
+            textLabel.bottomAnchor.constraint(equalTo: pageControl.topAnchor, constant: -12),
             
             skipButton.topAnchor.constraint(equalTo: continueButton.bottomAnchor, constant: 12),
             skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
