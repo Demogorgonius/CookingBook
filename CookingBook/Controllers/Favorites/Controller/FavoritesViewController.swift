@@ -11,7 +11,7 @@ class FavoritesViewController: UIViewController {
 // MARK: - ui constants
     private let labelView: UIView = {
         let element = UIView()
-        element.backgroundColor = .systemCyan
+        element.backgroundColor = .clear
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
