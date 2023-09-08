@@ -41,7 +41,6 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "video")
         image.layer.cornerRadius = 20
         image.clipsToBounds = true
         return image
@@ -56,7 +55,6 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.text = "4.5"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -64,7 +62,6 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "How to sharwama at home"
         label.font = .systemFont(ofSize: 22, weight: .semibold)
         return label
     }()
@@ -216,8 +213,13 @@ final class TrendingCell: UICollectionViewCell {
         mainImage.layer.cornerRadius = 20
         mainImage.clipsToBounds = true
         favoriteButton.tintColor = state ? .systemPink : .systemGray3
-        networkManager.loadImage(from: model.image) { [weak self] image in
-            DispatchQueue.main.async { self?.mainImage.image = image }
+        
+        if mainImage.image == nil {
+            networkManager.loadImage(from: model.image) { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.mainImage.image = image
+                }
+            }
         }
     }
 }

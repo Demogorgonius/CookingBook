@@ -46,34 +46,17 @@ class NetworkManager: NetworkManagerProtocol {
             guard let urlString = urlString,
                   let url = URL(string: urlString) else { return }
             
-            if let cachedImege = self.imageCache.object(forKey: urlString as NSString) {
+            let uniqueKey = urlString + UUID().uuidString
+            
+            if let cachedImege = self.imageCache.object(forKey: uniqueKey as NSString) {
                 completion(cachedImege)
             } else {
                 let data = try? Data(contentsOf: url)
                 guard let data = data else { return }
                 let image = UIImage(data: data) ?? UIImage()
-                self.imageCache.setObject(image, forKey: urlString as NSString)
+                self.imageCache.setObject(image, forKey: uniqueKey as NSString)
                 completion(image)
             }
-        }
-    }
-    
-    func loadImages(from urls: [String?], completion: @escaping ([UIImage]) -> Void) {
-        
-        let group = DispatchGroup()
-        var images = [UIImage]()
-        
-        DispatchQueue.global().async(group: group) {
-            urls.forEach { image in
-                guard let urlString = image,
-                      let url = URL(string: urlString) else { return }
-                let data = try? Data(contentsOf: url)
-                guard let data = data else { return }
-                let image = UIImage(data: data) ?? UIImage()
-                self.imageCache.setObject(image, forKey: urlString as NSString)
-            }
-            
-            group.notify(queue: .global()) { completion(images) }
         }
     }
 }

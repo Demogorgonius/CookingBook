@@ -70,20 +70,21 @@ final class CreatorsCell: UICollectionViewCell {
         }
     }
     
-    //MARK: - Target
-    
-    @objc private func tapFavoriteButton() {
-        
-    }
-    
     //MARK: - Configure
     
     func configure(with model: Results) {
         
         avatarLabel.text = model.sourceName
         
-        networkManager.loadImage(from: model.image) { [weak self] image in
-            DispatchQueue.main.async { self?.avatarImage.image = image }
+        if avatarImage.image == nil {
+            networkManager.loadImage(from: model.image) { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.avatarImage.image = image
+                    self?.avatarImage.clipsToBounds = true
+                    let minSize = min(self?.avatarImage.frame.size.width ?? 100.0, self?.avatarImage.frame.size.height ?? 100.0)
+                    self?.avatarImage.layer.cornerRadius = minSize / 2
+                }
+            }
         }
     }
 }
