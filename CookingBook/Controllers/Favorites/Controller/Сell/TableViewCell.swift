@@ -21,8 +21,8 @@ class TableViewCell: UITableViewCell {
         let element = UIImageView()
         element.layer.cornerRadius = 16
         element.backgroundColor = .systemMint
-        //element.image = UIImage(named: "SC")
-        element.contentMode = .scaleAspectFill
+        element.image = UIImage(named: "SC")
+        element.contentMode = .scaleToFill
         element.clipsToBounds = true
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
@@ -31,7 +31,8 @@ class TableViewCell: UITableViewCell {
     private let ratingStack: UIView = {
         let element =  UIView()
         element.layer.cornerRadius = 8
-        element.backgroundColor = .clear
+        element.backgroundColor = .lightGray
+        element.alpha = 1
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -127,15 +128,22 @@ class TableViewCell: UITableViewCell {
             imgView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 0),
             imgView.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 0),
             imgView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: 0),
+            imgView.heightAnchor.constraint(equalToConstant: 200),
             imgView.bottomAnchor.constraint(equalTo: nameStack.topAnchor, constant: -5),
             
             nameStack.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 0),
             nameStack.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: 0),
             nameStack.bottomAnchor.constraint(equalTo: authorStack.topAnchor, constant: -5),
+            nameLabel.leadingAnchor.constraint(equalTo: nameStack.leadingAnchor, constant: 5),
+            moreButton.trailingAnchor.constraint(equalTo: nameStack.trailingAnchor, constant: 0),
             
             authorStack.leadingAnchor.constraint(equalTo: cellView.leadingAnchor, constant: 0),
             authorStack.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: 0),
-            authorStack.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -10),
+            authorStack.bottomAnchor.constraint(equalTo: cellView.bottomAnchor, constant: -2),
+            avatar.leadingAnchor.constraint(equalTo: authorStack.leadingAnchor, constant: 2),
+            avatar.centerYAnchor.constraint(equalTo: authorStack.centerYAnchor),
+            authorName.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 5),
+            authorName.centerYAnchor.constraint(equalTo: authorStack.centerYAnchor),
             
             ratingStack.topAnchor.constraint(equalTo: imgView.topAnchor, constant: 8),
             ratingStack.leadingAnchor.constraint(equalTo: imgView.leadingAnchor, constant: 8),
@@ -171,10 +179,10 @@ class TableViewCell: UITableViewCell {
         authorStack.addSubview(avatar)
         authorStack.addSubview(authorName)
         
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
-        blurView.translatesAutoresizingMaskIntoConstraints = false
-        blurView.frame = ratingStack.bounds
-        ratingStack.addSubview(blurView)
+//        let blurEffect = UIBlurEffect(style: .light)
+//        let blurView = UIVisualEffectView(effect: blurEffect)
+//        blurView.translatesAutoresizingMaskIntoConstraints = false
+//        blurView.frame = ratingStack.bounds
+//        ratingStack.addSubview(blurView)
     }
 }
