@@ -24,7 +24,7 @@ final class CreatorsCell: UICollectionViewCell {
     
     private lazy var avatarLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont.boldSize(size: 12)
         label.textAlignment = .center
         return label
     }()

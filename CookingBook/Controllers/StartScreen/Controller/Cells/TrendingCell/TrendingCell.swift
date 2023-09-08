@@ -29,7 +29,7 @@ final class TrendingCell: UICollectionViewCell {
     private lazy var ratingImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "heart.fill")
-        image.tintColor = .systemPink
+        image.tintColor = UIColor.primary50
         return image
     }()
     
@@ -48,7 +48,7 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var avatarLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.regular12()
         label.textColor = .systemGray
         label.textAlignment = .left
         return label
@@ -56,14 +56,14 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var ratingLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.boldSize(size: 14)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.font = UIFont.boldSize(size: 20)
         return label
     }()
     
@@ -78,7 +78,7 @@ final class TrendingCell: UICollectionViewCell {
     private lazy var additionalButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        button.tintColor = .systemPink
+        button.tintColor = UIColor.primary50
         button.addTarget(self, action: #selector(tapAdditionalButton), for: .touchUpInside)
         return button
     }()
@@ -213,7 +213,7 @@ final class TrendingCell: UICollectionViewCell {
         avatarLabel.text = model.sourceName
         mainImage.layer.cornerRadius = 20
         mainImage.clipsToBounds = true
-        favoriteButton.tintColor = state ? .systemPink : .systemGray3
+        favoriteButton.tintColor = state ? .primary50 : .systemGray3
         
         if mainImage.image == nil {
             networkManager.loadImage(from: model.image) { [weak self] image in

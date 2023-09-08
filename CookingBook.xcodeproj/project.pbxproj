@@ -29,7 +29,12 @@
 		EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */; };
 		EB538A932A9C97AA00B62658 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB538A922A9C97AA00B62658 /* TrendingCell.swift */; };
 		EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6E47B52A9CDC8F008AC86B /* Section.swift */; };
-		EBA4A9A42AAAEB4200FFB12F /* Extension in Resources */ = {isa = PBXBuildFile; fileRef = EBA4A9A32AAAEB4200FFB12F /* Extension */; };
+		EB8831C12AAAEC8200D92D3D /* String + Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8831BC2AAAEC8200D92D3D /* String + Exstension.swift */; };
+		EB8831C22AAAEC8200D92D3D /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8831BD2AAAEC8200D92D3D /* UIFont + Extension.swift */; };
+		EB8831C32AAAEC8200D92D3D /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8831BE2AAAEC8200D92D3D /* UIColor + Extension.swift */; };
+		EB8831C42AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8831BF2AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift */; };
+		EB8831C52AAAEC8200D92D3D /* UIImageView + Exstension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8831C02AAAEC8200D92D3D /* UIImageView + Exstension.swift */; };
+		EB8831C82AAAEFD000D92D3D /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8831C72AAAEFD000D92D3D /* Poppins-Bold.ttf */; };
 		EBC0157D2AA1C3AD0006E7A5 /* RecentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC0157C2AA1C3AD0006E7A5 /* RecentHeader.swift */; };
 		EBC0157F2AA1C5B70006E7A5 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC0157E2AA1C5B70006E7A5 /* RecentCell.swift */; };
 		EBC015822AA1D0850006E7A5 /* HeaderCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC015812AA1D0850006E7A5 /* HeaderCreators.swift */; };
@@ -67,7 +72,12 @@
 		EB538A8F2A9C6B3D00B62658 /* RecipeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeModel.swift; sourceTree = "<group>"; };
 		EB538A922A9C97AA00B62658 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		EB6E47B52A9CDC8F008AC86B /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
-		EBA4A9A32AAAEB4200FFB12F /* Extension */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Extension; sourceTree = "<group>"; };
+		EB8831BC2AAAEC8200D92D3D /* String + Exstension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String + Exstension.swift"; sourceTree = "<group>"; };
+		EB8831BD2AAAEC8200D92D3D /* UIFont + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
+		EB8831BE2AAAEC8200D92D3D /* UIColor + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
+		EB8831BF2AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString + Extension.swift"; sourceTree = "<group>"; };
+		EB8831C02AAAEC8200D92D3D /* UIImageView + Exstension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView + Exstension.swift"; sourceTree = "<group>"; };
+		EB8831C72AAAEFD000D92D3D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		EBC0157C2AA1C3AD0006E7A5 /* RecentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentHeader.swift; sourceTree = "<group>"; };
 		EBC0157E2AA1C5B70006E7A5 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		EBC015812AA1D0850006E7A5 /* HeaderCreators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCreators.swift; sourceTree = "<group>"; };
@@ -112,7 +122,7 @@
 		A5B046B82A9BF068004F6386 /* CookingBook */ = {
 			isa = PBXGroup;
 			children = (
-				EBA4A9A32AAAEB4200FFB12F /* Extension */,
+				EB8831BB2AAAEC8200D92D3D /* Extension */,
 				A5B046CD2A9BF2DF004F6386 /* App */,
 				A5B046CE2A9BF308004F6386 /* Resources */,
 				A5B046D02A9BF33F004F6386 /* Controllers */,
@@ -356,6 +366,27 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		EB8831BB2AAAEC8200D92D3D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EB8831C62AAAEFA200D92D3D /* Font */,
+				EB8831BC2AAAEC8200D92D3D /* String + Exstension.swift */,
+				EB8831BD2AAAEC8200D92D3D /* UIFont + Extension.swift */,
+				EB8831BE2AAAEC8200D92D3D /* UIColor + Extension.swift */,
+				EB8831BF2AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift */,
+				EB8831C02AAAEC8200D92D3D /* UIImageView + Exstension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EB8831C62AAAEFA200D92D3D /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				EB8831C72AAAEFD000D92D3D /* Poppins-Bold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		EBC0157B2AA1C3790006E7A5 /* RecentCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,8 +470,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A5B046C62A9BF069004F6386 /* LaunchScreen.storyboard in Resources */,
+				EB8831C82AAAEFD000D92D3D /* Poppins-Bold.ttf in Resources */,
 				A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */,
-				EBA4A9A42AAAEB4200FFB12F /* Extension in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -451,21 +482,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB8831C42AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift in Sources */,
 				EBC0157D2AA1C3AD0006E7A5 /* RecentHeader.swift in Sources */,
 				EB538A842A9C5EBF00B62658 /* NetworkManager.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
 				EB538A872A9C5ED300B62658 /* HTTPClient.swift in Sources */,
 				EBD517BF2AA05086002A2C75 /* PopularCell.swift in Sources */,
+				EB8831C12AAAEC8200D92D3D /* String + Exstension.swift in Sources */,
 				EBC015822AA1D0850006E7A5 /* HeaderCreators.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
 				EBD517C52AA06A02002A2C75 /* Item.swift in Sources */,
 				EB4E93D22AA469E100C0E556 /* MainModel.swift in Sources */,
 				EB538A772A9C571100B62658 /* Endpoint.swift in Sources */,
+				EB8831C52AAAEC8200D92D3D /* UIImageView + Exstension.swift in Sources */,
 				EBD517C12AA05F97002A2C75 /* CategoryRecipe.swift in Sources */,
 				EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
+				EB8831C32AAAEC8200D92D3D /* UIColor + Extension.swift in Sources */,
 				EBC0157F2AA1C5B70006E7A5 /* RecentCell.swift in Sources */,
+				EB8831C22AAAEC8200D92D3D /* UIFont + Extension.swift in Sources */,
 				EB538A792A9C575700B62658 /* HTTPMethod.swift in Sources */,
 				EBD517C72AA07E44002A2C75 /* CategoryCell.swift in Sources */,
 				EB6E47B62A9CDC8F008AC86B /* Section.swift in Sources */,

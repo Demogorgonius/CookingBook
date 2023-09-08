@@ -33,20 +33,13 @@ final class PopularCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.boldSize(size: 14)
         return label
     }()
-    
-    private lazy var timeLabel: UILabel = {
-        let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
-        label.textColor = .systemGray
-        return label
-    }()
-    
+        
     private lazy var minutesLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont.boldSize(size: 12)
         return label
     }()
     
@@ -87,22 +80,21 @@ final class PopularCell: UICollectionViewCell {
         contentView.addSubview(nameLabel)
         contentView.addSubview(favoriteButton)
         contentView.addSubview(minutesLabel)
-        contentView.addSubview(timeLabel)
         
         backgroungView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.top.equalTo(contentView.snp.top).inset(contentView.bounds.height * 0.2)
+            make.top.equalTo(contentView.snp.top).inset(contentView.bounds.height * 0.1)
         }
         
         logoImage.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.bottom.equalTo(backgroungView.snp.centerY).inset(-10)
+            make.bottom.equalTo(backgroungView.snp.centerY)
             make.top.equalToSuperview()
         }
         
         nameLabel.snp.makeConstraints { make in
-            make.top.equalTo(logoImage.snp.bottom).inset(-12)
+            make.top.equalTo(logoImage.snp.bottom).inset(-10)
             make.horizontalEdges.equalToSuperview().inset(10)
         }
         
@@ -113,12 +105,6 @@ final class PopularCell: UICollectionViewCell {
         minutesLabel.snp.makeConstraints { make in
             make.left.bottom.equalToSuperview().inset(10)
         }
-        
-        timeLabel.snp.makeConstraints { make in
-            make.bottom.equalTo(minutesLabel.snp.top).inset(-4)
-            make.left.equalToSuperview().inset(10)
-        }
-        
     }
     
     //MARK: - Target
@@ -133,7 +119,7 @@ final class PopularCell: UICollectionViewCell {
     
     func configure(with model: Results, state: Bool) {
         
-        favoriteButton.tintColor = state ? .systemPink : .systemGray
+        favoriteButton.tintColor = state ? .primary50 : .systemGray
         nameLabel.text = model.title
         minutesLabel.text = "\(model.readyInMinutes?.description ?? "5")  Mins"
         
