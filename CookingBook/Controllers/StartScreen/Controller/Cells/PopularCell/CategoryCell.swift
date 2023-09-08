@@ -21,7 +21,7 @@ final class CategoryCell: UICollectionViewCell {
     
     lazy var categoryLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.boldSize(size: 12)
         label.textColor = .black
         label.sizeToFit()
         return label
@@ -78,7 +78,7 @@ final class CategoryCell: UICollectionViewCell {
     func configure(with model: CategoryModel) {
         
         categoryLabel.text = model.category
-        categoryLabel.textColor = model.isSelectedCategory ? .white : .systemPink
-        cellView.backgroundColor = model.isSelectedCategory ? .systemPink : .white
+        categoryLabel.textColor = model.isSelectedCategory ? .white : .primary50
+        cellView.backgroundColor = model.isSelectedCategory ? .primary50 : .white
     }
 }

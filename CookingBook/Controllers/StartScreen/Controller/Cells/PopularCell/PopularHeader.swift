@@ -14,7 +14,7 @@ final class PopularHeader: UICollectionReusableView {
     
     var trendLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 26, weight: .semibold)
+        label.font = UIFont.boldSize(size: 20)
         return label
     }()
     

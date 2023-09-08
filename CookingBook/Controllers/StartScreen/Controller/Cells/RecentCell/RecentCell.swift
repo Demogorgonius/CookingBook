@@ -26,14 +26,14 @@ final class RecentCell: UICollectionViewCell {
     
     private lazy var avatarLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .medium)
+        label.font = UIFont.boldSize(size: 10)
         label.textColor = .systemGray
         return label
     }()
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont.boldSize(size: 14)
         return label
     }()
     

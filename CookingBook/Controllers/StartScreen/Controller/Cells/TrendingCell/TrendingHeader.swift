@@ -15,15 +15,15 @@ final class TrendingHeader: UICollectionReusableView {
     
     var trendLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 24, weight: .semibold)
+        label.font = UIFont.boldSize(size: 20)
         return label
     }()
     
     private lazy var seeAllLabel: UILabel = {
         let label = UILabel()
         label.text = "See all "
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
-        label.textColor = .systemPink
+        label.font = UIFont.boldSize(size: 14)
+        label.textColor = UIColor.primary50
         return label
     }()
     
