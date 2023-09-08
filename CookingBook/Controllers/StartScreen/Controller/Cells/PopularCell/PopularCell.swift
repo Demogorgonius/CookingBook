@@ -25,6 +25,7 @@ final class PopularCell: UICollectionViewCell {
     
     private lazy var logoImage: UIImageView = {
         let image = UIImageView()
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -96,7 +97,7 @@ final class PopularCell: UICollectionViewCell {
         
         logoImage.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
-            make.bottom.equalTo(backgroungView.snp.top).inset(contentView.bounds.height * 0.3)
+            make.bottom.equalTo(backgroungView.snp.centerY).inset(-10)
             make.top.equalToSuperview()
         }
         

@@ -18,7 +18,7 @@ final class RecentCell: UICollectionViewCell {
     
     private lazy var mainImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .center
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 10
         image.clipsToBounds = true
         return image

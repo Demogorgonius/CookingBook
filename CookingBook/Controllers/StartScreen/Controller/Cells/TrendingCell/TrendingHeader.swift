@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import UIKit.UIFont
 
 final class TrendingHeader: UICollectionReusableView {
         
