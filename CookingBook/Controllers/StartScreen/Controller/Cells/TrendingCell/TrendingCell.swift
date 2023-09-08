@@ -35,14 +35,14 @@ final class TrendingCell: UICollectionViewCell {
     
     private lazy var mainImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .center
+        image.contentMode = .scaleAspectFill
         return image
     }()
     
     private lazy var avatarImage: UIImageView = {
         let image = UIImageView()
-        image.layer.cornerRadius = 20
         image.clipsToBounds = true
+        image.layer.cornerRadius = 16
         return image
     }()
     
@@ -50,6 +50,7 @@ final class TrendingCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .medium)
         label.textColor = .systemGray
+        label.textAlignment = .left
         return label
     }()
     
@@ -216,8 +217,10 @@ final class TrendingCell: UICollectionViewCell {
         
         if mainImage.image == nil {
             networkManager.loadImage(from: model.image) { [weak self] image in
+                
                 DispatchQueue.main.async {
                     self?.mainImage.image = image
+                    self?.avatarImage.image = image
                 }
             }
         }
