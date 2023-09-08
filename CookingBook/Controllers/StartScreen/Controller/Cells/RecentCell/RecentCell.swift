@@ -33,7 +33,6 @@ final class RecentCell: UICollectionViewCell {
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "How to sharwama at home"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
@@ -82,12 +81,6 @@ final class RecentCell: UICollectionViewCell {
         }
     }
     
-    //MARK: - Target
-    
-    @objc private func tapFavoriteButton() {
-        
-    }
-    
     //MARK: - Configure
     
     func configure(with model: Results) {
@@ -95,8 +88,10 @@ final class RecentCell: UICollectionViewCell {
         nameLabel.text = model.title
         avatarLabel.text = model.sourceName
         
-        networkManager.loadImage(from: model.image) { [weak self] image in
-            DispatchQueue.main.async { self?.mainImage.image = image }
+        if mainImage.image == nil {
+            networkManager.loadImage(from: model.image) { [weak self] image in
+                DispatchQueue.main.async { self?.mainImage.image = image }
+            }
         }
     }
 }

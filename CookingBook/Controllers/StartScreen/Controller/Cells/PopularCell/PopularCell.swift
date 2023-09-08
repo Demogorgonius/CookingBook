@@ -25,9 +25,6 @@ final class PopularCell: UICollectionViewCell {
     
     private lazy var logoImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "video")
-        image.layer.cornerRadius = 50
-        image.clipsToBounds = true
         return image
     }()
     
@@ -35,14 +32,12 @@ final class PopularCell: UICollectionViewCell {
         let label = UILabel()
         label.numberOfLines = 2
         label.textAlignment = .center
-        label.text = "Chiken with chesee"
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         return label
     }()
     
     private lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Time"
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.textColor = .systemGray
         return label
@@ -141,8 +136,16 @@ final class PopularCell: UICollectionViewCell {
         nameLabel.text = model.title
         minutesLabel.text = "\(model.readyInMinutes?.description ?? "5")  Mins"
         
-        networkManager.loadImage(from: model.image) { [weak self] image in
-            DispatchQueue.main.async { self?.logoImage.image = image }
+        if logoImage.image == nil {
+            
+            networkManager.loadImage(from: model.image) { [weak self] image in
+                DispatchQueue.main.async {
+                    self?.logoImage.image = image
+                    self?.logoImage.clipsToBounds = true
+                    let minSize = min(self?.logoImage.frame.size.width ?? 100.0, self?.logoImage.frame.size.height ?? 100.0)
+                    self?.logoImage.layer.cornerRadius = minSize / 2
+                }
+            }
         }
     }
 }

@@ -20,7 +20,6 @@ final class StartScreenController: UIViewController {
     
     lazy var headerlabel: UILabel = {
         let label = UILabel()
-        label.text = "Get amazing recipes for cooking"
         label.font = UIFont.systemFont(ofSize: 30, weight: .semibold)
         label.numberOfLines = 2
         return label
