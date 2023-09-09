@@ -22,6 +22,13 @@
 		E5E83CE12A9E1DB400F96424 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */; };
 		E5E83CE32A9E1DCA00F96424 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */; };
 		E8DC70582AA8A8850026AFA2 /* RecipeInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */; };
+		E8DC705A2AAC818F0026AFA2 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70592AAC818F0026AFA2 /* DetailPresenter.swift */; };
+		E8DC705C2AAC81BA0026AFA2 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC705B2AAC81BA0026AFA2 /* DetailView.swift */; };
+		E8DC705E2AAC81F20026AFA2 /* TitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC705D2AAC81F20026AFA2 /* TitleSupplementaryView.swift */; };
+		E8DC70612AAC88890026AFA2 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70602AAC88890026AFA2 /* ApiClient.swift */; };
+		E8DC70642AAC89540026AFA2 /* Recepie.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70632AAC89540026AFA2 /* Recepie.swift */; };
+		E8DC70662AAC89940026AFA2 /* Ingridient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70652AAC89940026AFA2 /* Ingridient.swift */; };
+		E8DC70682AAC89CC0026AFA2 /* Amount.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DC70672AAC89CC0026AFA2 /* Amount.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +48,13 @@
 		E5E83CE02A9E1DB400F96424 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		E5E83CE22A9E1DCA00F96424 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeInformationViewController.swift; sourceTree = "<group>"; };
+		E8DC70592AAC818F0026AFA2 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		E8DC705B2AAC81BA0026AFA2 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		E8DC705D2AAC81F20026AFA2 /* TitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleSupplementaryView.swift; sourceTree = "<group>"; };
+		E8DC70602AAC88890026AFA2 /* ApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		E8DC70632AAC89540026AFA2 /* Recepie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recepie.swift; sourceTree = "<group>"; };
+		E8DC70652AAC89940026AFA2 /* Ingridient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingridient.swift; sourceTree = "<group>"; };
+		E8DC70672AAC89CC0026AFA2 /* Amount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Amount.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +88,11 @@
 		A5B046B82A9BF068004F6386 /* CookingBook */ = {
 			isa = PBXGroup;
 			children = (
+				E8DC70622AAC893B0026AFA2 /* Models */,
 				E5417A822A9D176A00AB0891 /* Extension */,
 				A5B046CD2A9BF2DF004F6386 /* App */,
 				A5B046CE2A9BF308004F6386 /* Resources */,
+				E8DC705F2AAC88660026AFA2 /* Services */,
 				A5B046D02A9BF33F004F6386 /* Controllers */,
 			);
 			path = CookingBook;
@@ -241,8 +257,29 @@
 			isa = PBXGroup;
 			children = (
 				E8DC70572AA8A8850026AFA2 /* RecipeInformationViewController.swift */,
+				E8DC70592AAC818F0026AFA2 /* DetailPresenter.swift */,
+				E8DC705B2AAC81BA0026AFA2 /* DetailView.swift */,
+				E8DC705D2AAC81F20026AFA2 /* TitleSupplementaryView.swift */,
 			);
 			path = RecipeInformation;
+			sourceTree = "<group>";
+		};
+		E8DC705F2AAC88660026AFA2 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E8DC70602AAC88890026AFA2 /* ApiClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E8DC70622AAC893B0026AFA2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E8DC70632AAC89540026AFA2 /* Recepie.swift */,
+				E8DC70652AAC89940026AFA2 /* Ingridient.swift */,
+				E8DC70672AAC89CC0026AFA2 /* Amount.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,9 +361,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5417A862A9D215F00AB0891 /* UIColor + Extension.swift in Sources */,
+				E8DC705C2AAC81BA0026AFA2 /* DetailView.swift in Sources */,
 				A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */,
+				E8DC70642AAC89540026AFA2 /* Recepie.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
 				A5B046EA2A9BF84F004F6386 /* FavoritesViewController.swift in Sources */,
+				E8DC705A2AAC818F0026AFA2 /* DetailPresenter.swift in Sources */,
+				E8DC705E2AAC81F20026AFA2 /* TitleSupplementaryView.swift in Sources */,
+				E8DC70662AAC89940026AFA2 /* Ingridient.swift in Sources */,
+				E8DC70682AAC89CC0026AFA2 /* Amount.swift in Sources */,
+				E8DC70612AAC88890026AFA2 /* ApiClient.swift in Sources */,
 				A5B046E82A9BF7FE004F6386 /* NotificationViewController.swift in Sources */,
 				A5B046E62A9BF7B1004F6386 /* ProfileViewController.swift in Sources */,
 				A5B046D82A9BF400004F6386 /* CustomTabBar.swift in Sources */,
