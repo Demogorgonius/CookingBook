@@ -96,7 +96,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = recipeTable.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else {
             return UITableViewCell()
         }
-        cell.setUpCell()
+       // cell.setUpCell()
         return cell
     }
 }
