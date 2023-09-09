@@ -42,7 +42,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let windowScene = scene as? UIWindowScene else { return }
             let window = UIWindow(windowScene: windowScene)
             window.makeKeyAndVisible()
-            window.rootViewController = StartScreenController()
+//            window.rootViewController = StartScreenController()
+            window.rootViewController = SeeAllController(trending: MainModel.shared.recipeData, recent: nil)
             self.window = window
         }
     }
