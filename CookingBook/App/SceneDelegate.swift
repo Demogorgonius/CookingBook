@@ -46,5 +46,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             self.window = window
         }
     }
+    
+    func sceneWillResignActive(_ scene: UIScene) {
+        MainModel.shared.saveUserDef()
+    }
 }
 

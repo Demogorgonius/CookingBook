@@ -24,6 +24,10 @@ class MainModel {
         CategoryModel(category: "Drink")
     ]
     
+    var userDefaults = UserDefaults.standard
+    var userDefTrending = Set<Int>()
+    var userDefPopular =  Set<Int>()
+    
     var indexTrending = Set<Int>()
     var stateTrending: [Bool]?
     
@@ -93,6 +97,67 @@ class MainModel {
         
         stateTrending = item
     }
+    
+    func addTrending(id: Int?) {
+        
+        guard let id = id else { return }
+        userDefTrending.insert(id)
+    }
+    
+    func addPopular(id: Int?) {
+        
+        guard let id = id else { return }
+        userDefPopular.insert(id)
+    }
+    
+    func saveUserDef() {
+        print("SAVE")
+        let trend = userDefTrending.map { Int($0) }
+        let pop = userDefPopular.map { Int($0) }
+        
+        userDefaults.set(trend, forKey: "saveTrend")
+        userDefaults.set(pop, forKey: "savePop")
+    }
+    
+    func loadFromUserDef() {
+        print("LOAD")
+        guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int],
+              let popular = userDefaults.object(forKey: "savePop") as? [Int] else { return }
+        
+        trending.forEach { MainModel.shared.userDefTrending.insert($0) }
+        popular.forEach {  MainModel.shared.userDefPopular.insert($0) }
+        
+        for (index, value) in categoryFood.enumerated() {
+            guard let id = value.id else { return }
+            
+            popular.forEach {
+                if id == $0 {
+                    checkPopularIndex(tag: index)
+                }
+            }
+        }
+        
+        for (index, value) in recipeData.enumerated() {
+            guard let id = value.id else { return }
+            
+            trending.forEach {
+                if id == $0 {
+                    checkTrendingIndex(tag: index)
+                }
+            }
+        }
+    }
+    
+    func getPopularCategory() {
+        
+        for (index, value) in categoryFood.enumerated() {
+            guard let id = value.id else { return }
+            
+            userDefPopular.forEach {
+                if id == $0 {
+                    checkPopularIndex(tag: index)
+                }
+            }
+        }
+    }
 }
-
-

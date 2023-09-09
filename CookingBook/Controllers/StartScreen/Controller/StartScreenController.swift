@@ -36,6 +36,7 @@ final class StartScreenController: UIViewController {
         textField.clearButtonMode = .always
         textField.leftView = contentView
         textField.leftViewMode = .always
+        textField.delegate = self
         return textField
     }()
     
@@ -53,7 +54,16 @@ final class StartScreenController: UIViewController {
         configureCollectionView()
         createDataSourse()
         applySnapshot()
-        
+
+//        networkManager.loadRecipeFor(id: "794349") { [weak self] (result: Result<Results, RequestError>) in
+//            switch result {
+//
+//            case .success(let data):
+//                print(data)
+//            case .failure(let error):
+//                print(error.customMessage)
+//            }
+//        }
     }
     
     //MARK: - Setup UI
@@ -93,6 +103,8 @@ final class StartScreenController: UIViewController {
                 print(error.customMessage)
             }
         }
+        
+//        MainModel.shared.getPopularCategory()
     }
 }
 
@@ -232,9 +244,10 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<TrendingCell, Item> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
+            let model = MainModel.shared.recipeData[indexPath.row]
             cell.favoriteButton.tag = indexPath.row
             cell.tappedButton = { self.present(self.sharedControl, animated: true) }
-            cell.configure(with: MainModel.shared.recipeData[indexPath.row], state: MainModel.shared.createState()[indexPath.row])
+            cell.configure(with: model, state: MainModel.shared.createState()[indexPath.row])
         }
     }
     
@@ -248,7 +261,9 @@ extension StartScreenController {
     private func registrPopularFood() -> UICollectionView.CellRegistration<PopularCell, Results> {
         
         return UICollectionView.CellRegistration<PopularCell, Results> { (cell, indexPath, recipe) in
-            cell.configure(with: MainModel.shared.categoryFood[indexPath.row], state: MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row])
+            let model = MainModel.shared.categoryFood[indexPath.row]
+            let state = MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row]
+            cell.configure(with: model, state: state)
             cell.favoriteButton.tag = indexPath.row
         }
     }
@@ -349,6 +364,8 @@ extension StartScreenController {
     
     private func applySnapshot() {
         
+        MainModel.shared.loadFromUserDef()
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
@@ -387,6 +404,7 @@ extension StartScreenController: UICollectionViewDelegate {
             let popular = MainModel.shared.categoryModel[indexPath.row].category
             
             loadCategory(type: popular)
+            
             for i in 0..<MainModel.shared.categoryModel.count {
                 MainModel.shared.categoryModel[i].isSelectedCategory = false
             }
@@ -400,5 +418,15 @@ extension StartScreenController: UICollectionViewDelegate {
         case .creators:
             print("creators: \(indexPath.row)")
         }
+    }
+}
+
+//MARK: - Extension
+
+extension StartScreenController: UITextFieldDelegate {
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("ds")
+        return true
     }
 }
