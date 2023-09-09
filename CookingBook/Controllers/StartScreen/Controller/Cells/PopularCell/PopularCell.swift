@@ -113,6 +113,7 @@ final class PopularCell: UICollectionViewCell {
         
         sender.tintColor = sender.tintColor == .systemGray ? .systemPink : .systemGray
         MainModel.shared.checkPopularIndex(tag: sender.tag)
+        MainModel.shared.addPopular(id: MainModel.shared.categoryFood[sender.tag].id)
     }
     
     //MARK: - Configure

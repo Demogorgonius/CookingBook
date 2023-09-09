@@ -10,6 +10,11 @@ import Foundation
 //MARK: - RecipeService
 
 struct RecipeService: RecipeClient, Serviceable {
+    
+    func searchId<T: Decodable>(id: String) async -> Result<T, RequestError> {
+        return await sendIdRequest(endpoint: RecipeEndpoint.getRecipe, responseModel: T.self, id: id)
+    }
+    
     func getRecipe<T: Decodable>() async -> Result<T, RequestError> {
         return await sendRequest(endpoint: RecipeEndpoint.getRandomRecipe, responseModel: T.self)
     }

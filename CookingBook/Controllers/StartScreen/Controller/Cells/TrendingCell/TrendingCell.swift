@@ -83,12 +83,19 @@ final class TrendingCell: UICollectionViewCell {
         return button
     }()
     
+    private lazy var indicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.hidesWhenStopped = true
+        return view
+    }()
+    
     //MARK: - Inits
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         mainImage.image = nil
+        avatarImage.image = nil
         
     }
     
@@ -115,6 +122,7 @@ final class TrendingCell: UICollectionViewCell {
         contentView.addSubview(favoriteButton)
         
         mainImage.addSubview(ratingView)
+        mainImage.addSubview(indicator)
         
         ratingView.addSubview(ratingImage)
         ratingView.addSubview(ratingLabel)
@@ -172,6 +180,10 @@ final class TrendingCell: UICollectionViewCell {
             make.right.equalTo(mainImage.snp.right)
             make.centerY.equalTo(avatarImage.snp.centerY)
         }
+        
+        indicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
     
     //MARK: - Target
@@ -180,6 +192,7 @@ final class TrendingCell: UICollectionViewCell {
         
         sender.tintColor = sender.tintColor == .systemGray3 ? .systemPink : .systemGray3
         MainModel.shared.checkTrendingIndex(tag: sender.tag)
+        MainModel.shared.addTrending(id: MainModel.shared.recipeData[sender.tag].id)
     }
     
     @objc private func tapAdditionalButton() {
@@ -206,6 +219,8 @@ final class TrendingCell: UICollectionViewCell {
     
     func configure(with model: Results, state: Bool) {
         
+        indicator.startAnimating()
+        
         let likes = model.aggregateLikes ?? 0
         let rating = checkLikes(with: likes.description)
         ratingLabel.text = rating
@@ -221,6 +236,7 @@ final class TrendingCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self?.mainImage.image = image
                     self?.avatarImage.image = image
+                    self?.indicator.stopAnimating()
                 }
             }
         }

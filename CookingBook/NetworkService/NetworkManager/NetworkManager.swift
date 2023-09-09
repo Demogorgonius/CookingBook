@@ -12,6 +12,7 @@ import UIKit
 protocol NetworkManagerProtocol {
     func fetch<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void)
     func searchRecipe<T: Decodable>(type: String, completion: @escaping (Result<T, RequestError>) -> Void)
+    func loadRecipeFor<T: Decodable>(id: String, completion: @escaping (Result<T, RequestError>) -> Void)
 }
 
 //MARK: - NetworkManager
@@ -37,26 +38,34 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
     
-    //MARK: - LoadImage
+    func loadRecipeFor<T: Decodable>(id: String, completion: @escaping (Result<T, RequestError>) -> Void) {
+        
+        Task(priority: .background) {
+            let result: Result<T, RequestError> = await service.searchId(id: id)
+            completion(result)
+        }
+    }
     
+    //MARK: - LoadImage
+        
     func loadImage(from urlString: String?, completion: @escaping (UIImage) -> Void) {
         
-        DispatchQueue.global().async {
-            
-            guard let urlString = urlString,
-                  let url = URL(string: urlString) else { return }
-            
-            let uniqueKey = urlString + UUID().uuidString
-            
-            if let cachedImege = self.imageCache.object(forKey: uniqueKey as NSString) {
-                completion(cachedImege)
-            } else {
-                let data = try? Data(contentsOf: url)
+        guard let imageString = urlString, let url = URL(string: imageString) else { return }
+        
+        if let cachedImege = imageCache.object(forKey: imageString as NSString) {
+            completion(cachedImege)
+        } else {
+            let session = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
+            let task = URLSession.shared.dataTask(with: session) { data, response, error in
+                if let error = error {
+                    print(error)
+                }
                 guard let data = data else { return }
                 let image = UIImage(data: data) ?? UIImage()
-                self.imageCache.setObject(image, forKey: uniqueKey as NSString)
+                self.imageCache.setObject(image, forKey: imageString as NSString)
                 completion(image)
             }
+            task.resume()
         }
     }
 }
