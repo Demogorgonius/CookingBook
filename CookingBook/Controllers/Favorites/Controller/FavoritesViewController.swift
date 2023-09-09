@@ -34,7 +34,7 @@ class FavoritesViewController: UIViewController {
     }()
     
 // MARK: - properties
-    var favouritesArray = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    var favouritesArray = [1, 1, 1, 1, 1, 1]
     
 // MARK: - life cycle funcs
     override func viewDidLoad() {

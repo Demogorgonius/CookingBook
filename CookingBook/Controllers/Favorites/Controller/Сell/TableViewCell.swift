@@ -8,6 +8,9 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
+    let networkManager = NetworkManager()
+    var recipeData = MainModel.shared
+    
 // MARK: - properties
     private let cellView: UIView = {
         let element = UIView()
@@ -111,7 +114,9 @@ class TableViewCell: UITableViewCell {
     private let avatar: UIImageView = {
         let element = UIImageView()
         element.layer.cornerRadius = 16
-        element.image = UIImage(systemName: "person.circle.fill")
+        element.image = UIImage(named: "avatar")
+        element.contentMode = .scaleToFill
+        element.clipsToBounds = true
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -120,6 +125,7 @@ class TableViewCell: UITableViewCell {
         let element = UILabel()
         element.text = "By Vinsmoke Sanji"
         element.textColor = .darkGray
+        element.font = .systemFont(ofSize: 12)
         element.translatesAutoresizingMaskIntoConstraints = false
         return element
     }()
@@ -140,7 +146,7 @@ class TableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        setUpCell()
+        configure(with: recipeData.recipeData[3], state: true)
     }
     
 // MARK: - flow funcs
@@ -214,5 +220,13 @@ class TableViewCell: UITableViewCell {
         
         authorStack.addSubview(avatar)
         authorStack.addSubview(authorName)
+    }
+    
+    func configure(with model: Results, state: Bool) {
+        nameLabel.text = model.title
+        authorName.text = model.sourceName
+        networkManager.loadImage(from: model.image) { [weak self] image in
+            DispatchQueue.main.async { self?.imgView.image = image }
+        }
     }
 }
