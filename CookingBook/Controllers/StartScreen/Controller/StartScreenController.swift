@@ -54,16 +54,7 @@ final class StartScreenController: UIViewController {
         configureCollectionView()
         createDataSourse()
         applySnapshot()
-
-//        networkManager.loadRecipeFor(id: "794349") { [weak self] (result: Result<Results, RequestError>) in
-//            switch result {
-//
-//            case .success(let data):
-//                print(data)
-//            case .failure(let error):
-//                print(error.customMessage)
-//            }
-//        }
+        
     }
     
     //MARK: - Setup UI
@@ -103,8 +94,6 @@ final class StartScreenController: UIViewController {
                 print(error.customMessage)
             }
         }
-        
-//        MainModel.shared.getPopularCategory()
     }
 }
 
@@ -393,12 +382,10 @@ extension StartScreenController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let sectionKind = Section(rawValue: indexPath.section) else { return }
-        
         switch sectionKind {
             
         case .trending:
             print("trending: \(indexPath.row)")
-            
         case .popular:
             
             let popular = MainModel.shared.categoryModel[indexPath.row].category
