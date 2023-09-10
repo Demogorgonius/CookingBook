@@ -77,7 +77,8 @@ class OnboardingViewController: UIViewController {
         skipButton.alpha = 0.5
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.skipButton.alpha = 1
-            let newVC = WelcomeViewController()
+            UserDefaults.standard.setValue(true, forKey: "isOnboarding")
+            let newVC = CustomTabBarController()
             newVC.modalPresentationStyle = .fullScreen
             newVC.modalTransitionStyle = .crossDissolve
             self.present(newVC, animated: true)
@@ -150,7 +151,8 @@ class OnboardingViewController: UIViewController {
                 skipButton.isHidden = true
             }
         } else {
-            let newVC = WelcomeViewController()
+            UserDefaults.standard.setValue(true, forKey: "isOnboarding")
+            let newVC = CustomTabBarController()
             newVC.modalPresentationStyle = .fullScreen
             newVC.modalTransitionStyle = .crossDissolve
             present(newVC, animated: true)
