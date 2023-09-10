@@ -70,6 +70,7 @@ extension RecipeEndpoint: Endpoint {
         switch self {
             
         case .getRandomRecipe:
+
             return [URLQueryItem(name: "number", value: "15"),
 //                    URLQueryItem(name: "apiKey", value: "5f4e2fd189314d2a829f2dcd7b06f5c1"),
 //                    URLQueryItem(name: "apiKey", value: "d560af6bb33a4ad289d3cc2c562ab5a5"),
@@ -82,6 +83,7 @@ extension RecipeEndpoint: Endpoint {
 //                    URLQueryItem(name: "apiKey", value: "063d1857a795427880770e2f44a84d4d"),
                     URLQueryItem(name: "apiKey", value: "73fd55a714424229b20abc76421fc3b1"),
                     
+
                     URLQueryItem(name: "addRecipeInformation", value: "true"),
                     URLQueryItem(name: "sort", value: "popularity")
             ]
@@ -89,7 +91,7 @@ extension RecipeEndpoint: Endpoint {
         case .getCategoryRecipe:
             return nil
         case .getRecipe:
-            return [URLQueryItem(name: "apiKey", value: "76c720e3086144478cbcd27fb948b527")]
+            return [URLQueryItem(name: "apiKey", value: "dde8d8c3cbd74e8594a9d0cf1687b507")]
         }
     }
 }

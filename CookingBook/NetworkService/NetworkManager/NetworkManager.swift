@@ -47,13 +47,13 @@ class NetworkManager: NetworkManagerProtocol {
     }
     
     //MARK: - LoadImage
-        
+    
     func loadImage(from urlString: String?, completion: @escaping (UIImage) -> Void) {
         
         guard let imageString = urlString, let url = URL(string: imageString) else { return }
         
-        if let cachedImege = imageCache.object(forKey: imageString as NSString) {
-            completion(cachedImege)
+        if let image = imageCache.object(forKey: imageString as NSString) {
+            completion(image)
         } else {
             let session = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
             let task = URLSession.shared.dataTask(with: session) { data, response, error in
@@ -69,4 +69,3 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
 }
-

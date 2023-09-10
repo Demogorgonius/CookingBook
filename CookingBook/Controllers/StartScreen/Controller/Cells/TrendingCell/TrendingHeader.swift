@@ -11,6 +11,10 @@ import UIKit.UIFont
 
 final class TrendingHeader: UICollectionReusableView {
         
+    //MARK: - Properties
+    
+    var completionHandler: (() -> Void)?
+    
     //MARK: - UI Elements
     
     var trendLabel: UILabel = {
@@ -87,6 +91,6 @@ final class TrendingHeader: UICollectionReusableView {
     }
     
     @objc private func tapTrendButton() {
-        print("Tap see all")
+        completionHandler?()
     }
 }

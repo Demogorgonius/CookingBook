@@ -10,6 +10,10 @@ import SnapKit
 
 final class HeaderCreators: UICollectionReusableView {
         
+    //MARK: - Properties
+    
+    var completionHandler: (() -> Void)?
+    
     //MARK: - UI Elements
     
     var creatorsLabel: UILabel = {
@@ -86,6 +90,6 @@ final class HeaderCreators: UICollectionReusableView {
     }
     
     @objc private func tapCreatorsButton() {
-        print("Tap see all")
+        completionHandler?()
     }
 }

@@ -12,15 +12,16 @@ class SeeAllController: UIViewController {
     
     //MARK: - Properties
     
-    var identifier = "cellId"
     var trending: [Results]?
     var recent: [Results]?
+    var creators: [Results]?
+    
+    private let identifier = "cellId"
     
     //MARK: - UI Elements
     
     private lazy var headerlabel: UILabel = {
         let label = UILabel()
-        label.text = "Trending now"
         label.textAlignment = .center
         label.font = UIFont.boldSize(size: 20)
         return label
@@ -39,9 +40,10 @@ class SeeAllController: UIViewController {
     
     //MARK: - Inits
     
-    init(trending: [Results]?, recent: [Results]?) {
+    init(trending: [Results]?, recent: [Results]?, creators: [Results]?) {
         self.trending = trending
         self.recent = recent
+        self.creators = creators
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -55,26 +57,37 @@ class SeeAllController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-        
+        setHeader()
     }
     
     //MARK: - Methods
     
     private func setupViews() {
+        view.backgroundColor = .white
         
         view.addSubview(headerlabel)
         view.addSubview(collectionView)
         
         headerlabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).inset(6)
             make.horizontalEdges.equalToSuperview()
-            make.bottom.equalTo(collectionView.snp.top)
         }
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(headerlabel.snp.bottom)
+            make.top.equalTo(headerlabel.snp.bottom).inset(-12)
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setHeader() {
+        
+        if trending != nil {
+            headerlabel.text = "Trending now"
+        } else if recent != nil {
+            headerlabel.text = "Recent recipe"
+        } else {
+            headerlabel.text = "Popular creators"
         }
     }
 }
@@ -90,7 +103,7 @@ extension SeeAllController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let model = trending ?? recent ?? [Results]()
+        let model = trending ?? recent ?? creators ?? [Results]()
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? SeeAllCell
         cell?.configure(with: model[indexPath.row])
         return cell ?? UICollectionViewCell()

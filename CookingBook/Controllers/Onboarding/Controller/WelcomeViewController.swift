@@ -136,17 +136,10 @@ class WelcomeViewController: UIViewController {
         startButton.alpha = 0.5
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
             self.startButton.alpha = 1
-            if UserDefaults.standard.object(forKey: "isOnboarding") != nil {
-                let newVC = CustomTabBarController()
-                newVC.modalPresentationStyle = .fullScreen
-                newVC.modalTransitionStyle = .crossDissolve
-                self.present(newVC, animated: true)
-            } else {
-                let newVC = OnboardingViewController()
-                newVC.modalPresentationStyle = .fullScreen
-                newVC.modalTransitionStyle = .crossDissolve
-                self.present(newVC, animated: true)
-            }
+            let newVC = OnboardingViewController()
+            newVC.modalPresentationStyle = .fullScreen
+            newVC.modalTransitionStyle = .crossDissolve
+            self.present(newVC, animated: true)
         }
     }
     
