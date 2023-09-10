@@ -367,8 +367,6 @@ extension StartScreenController {
     
     private func applySnapshot() {
         
-        MainModel.shared.loadFromUserDef()
-        
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
