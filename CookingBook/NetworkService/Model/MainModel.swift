@@ -125,7 +125,10 @@ class MainModel {
         
         guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int] else { return }
         guard let pop = userDefaults.object(forKey: "savePop") as? [String : [Int]] else { return }
-        print(pop)
+        
+        trending.forEach { userDefTrending.insert($0) }
+        userDefPopular = pop
+        
         trending.forEach { userDefTrending.insert($0) }
         for (index, value) in recipeData.enumerated() {
             guard let id = value.id else { return }
@@ -138,6 +141,18 @@ class MainModel {
         }
         
         for (index, value) in pop[keyCategory]!.enumerated() {
+            categoryFood.forEach {
+                guard let id = $0.id else { return }
+                if id == value {
+                    indexPopular[keyCategory]?.append(index)
+                }
+            }
+        }
+    }
+    
+    func getActyallyCategory() {
+        
+        for (index, value) in userDefPopular[keyCategory]!.enumerated() {
             categoryFood.forEach {
                 guard let id = $0.id else { return }
                 if id == value {
