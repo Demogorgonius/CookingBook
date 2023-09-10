@@ -53,6 +53,7 @@ final class StartScreenController: UIViewController {
         setupViews()
         configureCollectionView()
         createDataSourse()
+        MainModel.shared.loadFromUserDef()
         applySnapshot()
         
     }
@@ -365,8 +366,6 @@ extension StartScreenController {
     //MARK: - SnapShot
     
     private func applySnapshot() {
-        
-        MainModel.shared.loadFromUserDef()
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])

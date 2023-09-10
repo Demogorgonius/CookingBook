@@ -27,7 +27,7 @@ class MainModel {
     
     var userDefaults = UserDefaults.standard
     var userDefTrending = Set<Int>()
-    var userDefPopular =  Set<Int>()
+    var userDefPopular: [String : [Int]] = ["Salad" : [], "Breakfast" : [], "Dessert" : [], "Appetizer" : [], "Soup" : [], "Snack" : [], "Drink" : []]
     
     var indexTrending = Set<Int>()
     var stateTrending: [Bool]?
@@ -108,36 +108,25 @@ class MainModel {
     func addPopular(id: Int?) {
         
         guard let id = id else { return }
-        userDefPopular.insert(id)
+        userDefPopular[keyCategory]?.append(id)
     }
     
     func saveUserDef() {
         
         let trend = userDefTrending.map { Int($0) }
-        let pop = userDefPopular.map { Int($0) }
-        
         userDefaults.set(trend, forKey: "saveTrend")
+
+        let pop = userDefPopular
         userDefaults.set(pop, forKey: "savePop")
+        print(pop)
     }
     
     func loadFromUserDef() {
         
-        guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int],
-              let popular = userDefaults.object(forKey: "savePop") as? [Int] else { return }
-        
-        trending.forEach { MainModel.shared.userDefTrending.insert($0) }
-        popular.forEach {  MainModel.shared.userDefPopular.insert($0) }
-        
-        for (index, value) in categoryFood.enumerated() {
-            guard let id = value.id else { return }
-            
-            popular.forEach {
-                if id == $0 {
-                    indexPopular[keyCategory]?.append(index)
-                }
-            }
-        }
-        
+        guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int] else { return }
+        guard let pop = userDefaults.object(forKey: "savePop") as? [String : [Int]] else { return }
+        print(pop)
+        trending.forEach { userDefTrending.insert($0) }
         for (index, value) in recipeData.enumerated() {
             guard let id = value.id else { return }
             
@@ -147,17 +136,12 @@ class MainModel {
                 }
             }
         }
-    }
-    
-    func getPopularCategory() {
         
-        for (index, value) in categoryFood.enumerated() {
-            guard let id = value.id else { return }
-            
-            userDefPopular.forEach {
-                if id == $0 {
+        for (index, value) in pop[keyCategory]!.enumerated() {
+            categoryFood.forEach {
+                guard let id = $0.id else { return }
+                if id == value {
                     indexPopular[keyCategory]?.append(index)
-                    checkPopularState()
                 }
             }
         }
