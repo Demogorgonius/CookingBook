@@ -9,6 +9,10 @@ import UIKit.UIFont
 
 extension UIFont {
     
+    static func boldSize(size: CGFloat) -> UIFont? {
+        return UIFont(name: "Poppins-Bold", size: size)
+    }
+    
     static func semiBold10() -> UIFont? {
         return UIFont(name: "Poppins-SemiBold", size: 10)
     }
