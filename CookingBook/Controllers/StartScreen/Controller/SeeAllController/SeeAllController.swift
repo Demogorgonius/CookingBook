@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class SeeAllController: UIViewController {
+final class SeeAllController: UIViewController {
     
     //MARK: - Properties
     
@@ -98,7 +98,7 @@ class SeeAllController: UIViewController {
 extension SeeAllController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return trending?.count ?? recent?.count ?? 10
+        return trending?.count ?? recent?.count ?? creators?.count ?? 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -10,7 +10,7 @@ import SnapKit
 import UIKit.UIFont
 
 final class TrendingHeader: UICollectionReusableView {
-        
+    
     //MARK: - Properties
     
     var completionHandler: (() -> Void)?
@@ -65,12 +65,12 @@ final class TrendingHeader: UICollectionReusableView {
         addSubview(seeAllLabel)
         addSubview(seeAllImage)
         addSubview(trendButton)
-
+        
         trendLabel.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.centerY.equalToSuperview()
         }
-
+        
         seeAllImage.snp.makeConstraints { make in
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
