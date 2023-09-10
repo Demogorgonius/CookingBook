@@ -274,6 +274,11 @@ extension StartScreenController {
     private func registrHeader() -> UICollectionView.SupplementaryRegistration<TrendingHeader> {
         return UICollectionView.SupplementaryRegistration<TrendingHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.trendLabel.text = "Trending now 🔥"
+            header.completionHandler = { [weak self] in
+                let vc = SeeAllController(trending: MainModel.shared.recipeData, recent: nil, creators: nil)
+                self?.present(vc, animated: true)
+                
+            }
         }
     }
     
@@ -286,12 +291,20 @@ extension StartScreenController {
     private func registrRecentHeader() -> UICollectionView.SupplementaryRegistration<RecentHeader> {
         return UICollectionView.SupplementaryRegistration<RecentHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.recentLabel.text = "Recent recipe"
+            header.completionHandler = { [weak self] in
+                let vc = SeeAllController(trending: nil, recent: MainModel.shared.recipeData, creators: nil)
+                self?.present(vc, animated: true)
+            }
         }
     }
     
     private func registrCreatorsHeader() -> UICollectionView.SupplementaryRegistration<HeaderCreators> {
         return UICollectionView.SupplementaryRegistration<HeaderCreators>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.creatorsLabel.text = "Popular creators"
+            header.completionHandler = { [weak self] in
+                let vc = SeeAllController(trending: nil, recent: nil, creators: MainModel.shared.recipeData)
+                self?.present(vc, animated: true)
+            }
         }
     }
     
@@ -397,7 +410,7 @@ extension StartScreenController: UICollectionViewDelegate {
             }
             
             MainModel.shared.categoryModel[indexPath.row].isSelectedCategory = true
-            
+                        
         case .popularFood:
             print("popularFood: \(indexPath.row)")
         case .recent:
@@ -412,8 +425,12 @@ extension StartScreenController: UICollectionViewDelegate {
 
 extension StartScreenController: UITextFieldDelegate {
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        print("ds")
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        guard let text = textField.text else { return false }
+        
+        let vc = SearchBarController(search: text)
+        present(vc, animated: true)
         return true
     }
 }

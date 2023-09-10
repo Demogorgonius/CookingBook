@@ -17,6 +17,7 @@ class MainModel {
     
     var recipeData = [Results]()
     var categoryFood = [Results]()
+    var searchBar = [Results]()
     var categoryModel = [
         CategoryModel(category: "Salad", isSelectedCategory: true), CategoryModel(category: "Breakfast"),
         CategoryModel(category: "Dessert"), CategoryModel(category: "Appetizer"),
@@ -73,7 +74,7 @@ class MainModel {
         }
     }
     
-    private func checkPopularState() {
+    func checkPopularState() {
         
         let keys = categoryModel.map { $0.category }
         let values = Array(repeating: false, count: categoryFood.count)
@@ -111,7 +112,7 @@ class MainModel {
     }
     
     func saveUserDef() {
-        print("SAVE")
+        
         let trend = userDefTrending.map { Int($0) }
         let pop = userDefPopular.map { Int($0) }
         
@@ -120,7 +121,7 @@ class MainModel {
     }
     
     func loadFromUserDef() {
-        print("LOAD")
+        
         guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int],
               let popular = userDefaults.object(forKey: "savePop") as? [Int] else { return }
         
@@ -132,7 +133,7 @@ class MainModel {
             
             popular.forEach {
                 if id == $0 {
-                    checkPopularIndex(tag: index)
+                    indexPopular[keyCategory]?.append(index)
                 }
             }
         }
@@ -142,7 +143,7 @@ class MainModel {
             
             trending.forEach {
                 if id == $0 {
-                    checkTrendingIndex(tag: index)
+                    indexTrending.insert(index)
                 }
             }
         }
@@ -155,7 +156,8 @@ class MainModel {
             
             userDefPopular.forEach {
                 if id == $0 {
-                    checkPopularIndex(tag: index)
+                    indexPopular[keyCategory]?.append(index)
+                    checkPopularState()
                 }
             }
         }

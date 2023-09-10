@@ -10,6 +10,10 @@ import SnapKit
 
 final class RecentHeader: UICollectionReusableView {
         
+    //MARK: - Properties
+    
+    var completionHandler: (() -> Void)?
+    
     //MARK: - UI Elements
     
     var recentLabel: UILabel = {
@@ -86,7 +90,7 @@ final class RecentHeader: UICollectionReusableView {
     }
     
     @objc private func tapRecentButton() {
-        print("Tap see all")
+        completionHandler?()
     }
 }
 

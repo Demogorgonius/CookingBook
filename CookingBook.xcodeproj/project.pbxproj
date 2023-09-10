@@ -48,6 +48,8 @@
 		EBD517C72AA07E44002A2C75 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBD517C62AA07E44002A2C75 /* CategoryCell.swift */; };
 		EBE74A872AACA5EA00900990 /* SeeAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE74A862AACA5EA00900990 /* SeeAllController.swift */; };
 		EBE74A892AACA89B00900990 /* SeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE74A882AACA89B00900990 /* SeeAllCell.swift */; };
+		EBF97FC82AAD7F73009AAC9C /* SearchBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF97FC72AAD7F73009AAC9C /* SearchBarController.swift */; };
+		EBF97FCC2AAD895D009AAC9C /* SearchBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF97FCB2AAD895D009AAC9C /* SearchBarCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +95,8 @@
 		EBD517C62AA07E44002A2C75 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		EBE74A862AACA5EA00900990 /* SeeAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllController.swift; sourceTree = "<group>"; };
 		EBE74A882AACA89B00900990 /* SeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllCell.swift; sourceTree = "<group>"; };
+		EBF97FC72AAD7F73009AAC9C /* SearchBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarController.swift; sourceTree = "<group>"; };
+		EBF97FCB2AAD895D009AAC9C /* SearchBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +182,8 @@
 		A5B046D22A9BF384004F6386 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A5B046D52A9BF3D5004F6386 /* StartScreenController.swift */,
+				EBF97FC52AAD7F57009AAC9C /* StartScreenController */,
+				EBF97FC62AAD7F64009AAC9C /* SearchBarController */,
 				EBE74A852AACA5B300900990 /* SeeAllController */,
 				EB538A912A9C979600B62658 /* Cells */,
 			);
@@ -359,6 +364,7 @@
 				EBC0157B2AA1C3790006E7A5 /* RecentCell */,
 				EBC015802AA1D0540006E7A5 /* Creators */,
 				EBE74A8A2AACA8B300900990 /* SeeAllCell */,
+				EBF97FCA2AAD8947009AAC9C /* SearchBarCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -425,6 +431,30 @@
 				EBE74A882AACA89B00900990 /* SeeAllCell.swift */,
 			);
 			path = SeeAllCell;
+			sourceTree = "<group>";
+		};
+		EBF97FC52AAD7F57009AAC9C /* StartScreenController */ = {
+			isa = PBXGroup;
+			children = (
+				A5B046D52A9BF3D5004F6386 /* StartScreenController.swift */,
+			);
+			path = StartScreenController;
+			sourceTree = "<group>";
+		};
+		EBF97FC62AAD7F64009AAC9C /* SearchBarController */ = {
+			isa = PBXGroup;
+			children = (
+				EBF97FC72AAD7F73009AAC9C /* SearchBarController.swift */,
+			);
+			path = SearchBarController;
+			sourceTree = "<group>";
+		};
+		EBF97FCA2AAD8947009AAC9C /* SearchBarCell */ = {
+			isa = PBXGroup;
+			children = (
+				EBF97FCB2AAD895D009AAC9C /* SearchBarCell.swift */,
+			);
+			path = SearchBarCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,9 +543,11 @@
 				EB8831C12AAAEC8200D92D3D /* String + Exstension.swift in Sources */,
 				EBC015822AA1D0850006E7A5 /* HeaderCreators.swift in Sources */,
 				A5B046D62A9BF3D5004F6386 /* StartScreenController.swift in Sources */,
+				EBF97FC82AAD7F73009AAC9C /* SearchBarController.swift in Sources */,
 				EBD517C52AA06A02002A2C75 /* Item.swift in Sources */,
 				EB4E93D22AA469E100C0E556 /* MainModel.swift in Sources */,
 				EB538A772A9C571100B62658 /* Endpoint.swift in Sources */,
+				EBF97FCC2AAD895D009AAC9C /* SearchBarCell.swift in Sources */,
 				EB8831C52AAAEC8200D92D3D /* UIImageView + Exstension.swift in Sources */,
 				EBD517C12AA05F97002A2C75 /* CategoryRecipe.swift in Sources */,
 				EB538A902A9C6B3D00B62658 /* RecipeModel.swift in Sources */,
