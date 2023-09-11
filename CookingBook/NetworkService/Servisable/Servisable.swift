@@ -12,5 +12,6 @@ import Foundation
 protocol Serviceable {
     func getRecipe<T: Decodable>() async -> Result<T, RequestError>
     func searchRecipe<T: Decodable>(type: String) async -> Result<T, RequestError>
+    func searchRandom<T: Decodable>() async -> Result<T, RequestError>
     func searchId<T: Decodable>(id: String) async -> Result<T, RequestError>
 }

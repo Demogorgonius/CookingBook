@@ -12,6 +12,8 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
+    weak var delegate: StartScreenProtocol?
+    
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
@@ -45,7 +47,11 @@ final class StartScreenController: UIViewController {
         return view
     }()
     
-    //MARK: - Init
+    //MARK: - Inits
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.updateFavorites()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,9 +59,8 @@ final class StartScreenController: UIViewController {
         setupViews()
         configureCollectionView()
         createDataSourse()
-        MainModel.shared.loadFromUserDef()
         applySnapshot()
-        
+
     }
     
     //MARK: - Setup UI
@@ -235,9 +240,9 @@ extension StartScreenController {
         return UICollectionView.CellRegistration<TrendingCell, Item> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
             let model = MainModel.shared.recipeData[indexPath.row]
-            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.tag = model.id ?? 0
             cell.tappedButton = { self.present(self.sharedControl, animated: true) }
-            cell.configure(with: model, state: MainModel.shared.createState()[indexPath.row])
+            cell.configure(with: model)
         }
     }
     
@@ -252,16 +257,15 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<PopularCell, Results> { (cell, indexPath, recipe) in
             let model = MainModel.shared.categoryFood[indexPath.row]
-            let state = MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row]
-            cell.configure(with: model, state: state)
-            cell.favoriteButton.tag = indexPath.row
+            cell.configure(with: model)
+            cell.favoriteButton.tag = model.id ?? 0
         }
     }
     
     private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
         
         return UICollectionView.CellRegistration<RecentCell, Item> { (cell, indexPath, recipe) in
-            cell.configure(with: MainModel.shared.recipeData[indexPath.row])
+            cell.configure(with: MainModel.shared.recentData[indexPath.row])
         }
     }
     
@@ -293,7 +297,7 @@ extension StartScreenController {
         return UICollectionView.SupplementaryRegistration<RecentHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.recentLabel.text = "Recent recipe"
             header.completionHandler = { [weak self] in
-                let vc = SeeAllController(trending: nil, recent: MainModel.shared.recipeData, creators: nil)
+                let vc = SeeAllController(trending: nil, recent: MainModel.shared.recentData, creators: nil)
                 self?.present(vc, animated: true)
             }
         }
@@ -367,15 +371,13 @@ extension StartScreenController {
     
     private func applySnapshot() {
         
-        MainModel.shared.loadFromUserDef()
-        
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
         let item = MainModel.shared.recipeData.map { Item(recipes: $0) }
         let item2 = MainModel.shared.categoryModel.map { Item(category: $0) }
         let item3 = MainModel.shared.categoryFood.map { Item(categoryFood: $0) }
-        let item4 = MainModel.shared.recipeData.map { Item(recipes: $0) }
+        let item4 = MainModel.shared.recentData.map { Item(recipes: $0) }
         let item5 = MainModel.shared.recipeData.map { Item(recipes: $0) }
         
         snapshot.appendItems(item, toSection: .trending)
@@ -411,7 +413,7 @@ extension StartScreenController: UICollectionViewDelegate {
             }
             
             MainModel.shared.categoryModel[indexPath.row].isSelectedCategory = true
-                        
+            
         case .popularFood:
             print("popularFood: \(indexPath.row)")
         case .recent:
@@ -422,7 +424,7 @@ extension StartScreenController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - Extension
+//MARK: - Extension UITextFieldDelegate
 
 extension StartScreenController: UITextFieldDelegate {
     
@@ -434,4 +436,19 @@ extension StartScreenController: UITextFieldDelegate {
         present(vc, animated: true)
         return true
     }
+}
+
+//MARK: - FavoriteDelegate
+
+extension StartScreenController: FavoriteDelegate {
+    
+    func update() {
+        applySnapshot()
+    }
+}
+
+//MARK: - StartScreenProtocol
+
+protocol StartScreenProtocol: AnyObject {
+    func updateFavorites()
 }

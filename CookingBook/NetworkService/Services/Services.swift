@@ -11,8 +11,8 @@ import Foundation
 
 struct RecipeService: RecipeClient, Serviceable {
     
-    func searchId<T: Decodable>(id: String) async -> Result<T, RequestError> {
-        return await sendIdRequest(endpoint: RecipeEndpoint.getRecipe, responseModel: T.self, id: id)
+    func searchRandom<T: Decodable>() async -> Result<T, RequestError> {
+        return await sendRecentRequest(endpoint: RecipeEndpoint.getRecipe, responseModel: T.self)
     }
     
     func getRecipe<T: Decodable>() async -> Result<T, RequestError> {
@@ -21,5 +21,9 @@ struct RecipeService: RecipeClient, Serviceable {
     
     func searchRecipe<T: Decodable>(type: String) async -> Result<T, RequestError> {
         return await sendSearchRequest(endpoint: RecipeEndpoint.getCategoryRecipe, responseModel: T.self, type: type)
+    }
+    
+    func searchId<T: Decodable>(id: String) async -> Result<T, RequestError> {
+        return await sendIdRequest(id: id, endpoint: RecipeEndpoint.getWithId, responseModel: T.self)
     }
 }

@@ -112,15 +112,14 @@ final class PopularCell: UICollectionViewCell {
     @objc private func tapFavoriteButton(_ sender: UIButton) {
         
         sender.tintColor = sender.tintColor == .systemGray ? .systemPink : .systemGray
-        MainModel.shared.checkPopularIndex(tag: sender.tag)
-        MainModel.shared.addPopular(id: MainModel.shared.categoryFood[sender.tag].id)
+        MainModel.shared.checkId(sender.tag)
     }
     
     //MARK: - Configure
     
-    func configure(with model: Results, state: Bool) {
+    func configure(with model: Results) {
         
-        favoriteButton.tintColor = state ? .primary50 : .systemGray
+        favoriteButton.tintColor = MainModel.shared.setState(model: model) ? .primary50 : .systemGray
         nameLabel.text = model.title
         minutesLabel.text = "\(model.readyInMinutes?.description ?? "5")  Mins"
         

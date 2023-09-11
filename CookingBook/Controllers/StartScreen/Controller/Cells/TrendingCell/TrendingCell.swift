@@ -29,7 +29,7 @@ final class TrendingCell: UICollectionViewCell {
     private lazy var ratingImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "heart.fill")
-        image.tintColor = UIColor.primary50
+        image.tintColor = .primary50
         return image
     }()
     
@@ -190,9 +190,8 @@ final class TrendingCell: UICollectionViewCell {
     
     @objc private func tapFavoriteButton(_ sender: UIButton) {
         
-        sender.tintColor = sender.tintColor == .systemGray3 ? .systemPink : .systemGray3
-        MainModel.shared.checkTrendingIndex(tag: sender.tag)
-        MainModel.shared.addTrending(id: MainModel.shared.recipeData[sender.tag].id)
+        sender.tintColor = sender.tintColor == .systemGray ? .systemPink : .systemGray
+        MainModel.shared.checkId(sender.tag)
     }
     
     @objc private func tapAdditionalButton() {
@@ -217,7 +216,7 @@ final class TrendingCell: UICollectionViewCell {
     
     //MARK: - Configure
     
-    func configure(with model: Results, state: Bool) {
+    func configure(with model: Results) {
         
         indicator.startAnimating()
         
@@ -228,7 +227,7 @@ final class TrendingCell: UICollectionViewCell {
         avatarLabel.text = model.sourceName
         mainImage.layer.cornerRadius = 20
         mainImage.clipsToBounds = true
-        favoriteButton.tintColor = state ? .primary50 : .systemGray3
+        favoriteButton.tintColor = MainModel.shared.setState(model: model) ? .primary50 : .systemGray
         
         if mainImage.image == nil {
             networkManager.loadImage(from: model.image) { [weak self] image in
