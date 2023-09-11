@@ -12,7 +12,7 @@ import UIKit
 protocol NetworkManagerProtocol {
     func fetch<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void)
     func searchRecipe<T: Decodable>(type: String, completion: @escaping (Result<T, RequestError>) -> Void)
-    func loadRecipeFor<T: Decodable>(id: String, completion: @escaping (Result<T, RequestError>) -> Void)
+    func loadRandomRecipe<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void)
 }
 
 //MARK: - NetworkManager
@@ -38,10 +38,10 @@ class NetworkManager: NetworkManagerProtocol {
         }
     }
     
-    func loadRecipeFor<T: Decodable>(id: String, completion: @escaping (Result<T, RequestError>) -> Void) {
+    func loadRandomRecipe<T: Decodable>(completion: @escaping (Result<T, RequestError>) -> Void) {
         
         Task(priority: .background) {
-            let result: Result<T, RequestError> = await service.searchId(id: id)
+            let result: Result<T, RequestError> = await service.searchRandom()
             completion(result)
         }
     }

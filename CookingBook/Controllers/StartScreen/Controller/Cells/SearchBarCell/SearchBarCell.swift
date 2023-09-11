@@ -176,8 +176,7 @@ final class SearchBarCell: UICollectionViewCell {
     @objc private func tapFavoriteButton(_ sender: UIButton) {
         
         sender.tintColor = sender.tintColor == .systemGray3 ? .systemPink : .systemGray3
-        MainModel.shared.checkTrendingIndex(tag: sender.tag)
-        MainModel.shared.addTrending(id: MainModel.shared.recipeData[sender.tag].id)
+
     }
     
     @objc private func tapAdditionalButton() {
@@ -202,7 +201,7 @@ final class SearchBarCell: UICollectionViewCell {
     
     //MARK: - Configure
     
-    func configure(with model: Results, state: Bool) {
+    func configure(with model: Results) {
         
         indicator.startAnimating()
         

@@ -28,7 +28,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         dispatchGroup.enter()
-        networkManager.searchRecipe(type: "Salad") {(result: Result<RecipeModel, RequestError>) in
+        networkManager.loadRandomRecipe { (result: Result<RecipeModel, RequestError>) in
+            switch result {
+            case .success(let response):
+                MainModel.shared.recentData = response.results
+            case .failure(let error):
+                print(error.customMessage)
+            }
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.enter()
+        networkManager.searchRecipe(type: "Salad") { (result: Result<RecipeModel, RequestError>) in
             switch result {
             case .success(let data):
                 MainModel.shared.categoryFood = data.results

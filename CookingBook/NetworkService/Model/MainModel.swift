@@ -16,6 +16,7 @@ class MainModel {
     //MARK: - Properties
     
     var recipeData = [Results]()
+    var recentData = [Results]()
     var categoryFood = [Results]()
     var searchBar = [Results]()
     var categoryModel = [
@@ -25,15 +26,10 @@ class MainModel {
         CategoryModel(category: "Drink")
     ]
     
+    var saveId = Set<Int>()
+    
     var userDefaults = UserDefaults.standard
-    var userDefTrending = Set<Int>()
-    var userDefPopular: [String : [Int]] = ["Salad" : [], "Breakfast" : [], "Dessert" : [], "Appetizer" : [], "Soup" : [], "Snack" : [], "Drink" : []]
-    
-    var indexTrending = Set<Int>()
-    var stateTrending: [Bool]?
-    
-    var indexPopular: [String : [Int]] = ["Salad" : [], "Breakfast" : [], "Dessert" : [], "Appetizer" : [], "Soup" : [], "Snack" : [], "Drink" : []]
-    var statePopular: [String : [Bool]]?
+
     var keyCategory = "Salad"
     
     //MARK: - Private init
@@ -42,123 +38,33 @@ class MainModel {
     
     //MARK: - Methods
     
-    func createState() -> [Bool] {
-        checkTrendingState()
-        return stateTrending!
-    }
-    
-    func createPopulatState() -> [String : [Bool]] {
-        checkPopularState()
-        return statePopular!
-    }
-    
-    func checkTrendingIndex(tag: Int) {
+    func checkId(_ id: Int) {
         
-        if indexTrending.contains(tag) {
-            indexTrending.remove(tag)
+        if saveId.contains(id) {
+            saveId.remove(id)
         } else {
-            indexTrending.insert(tag)
+            saveId.insert(id)
         }
     }
     
-    func checkPopularIndex(tag: Int) {
+    func setState(model: Results) -> Bool {
         
-        if indexPopular[keyCategory] != nil, indexPopular[keyCategory]!.contains(tag) {
-            for (index, value) in indexPopular[keyCategory]!.enumerated() {
-                if value == tag {
-                    indexPopular[keyCategory]?.remove(at: index)
-                }
-            }
-        } else {
-            indexPopular[keyCategory]?.append(tag)
+        guard let id = model.id else { return false }
+        if saveId.contains(id) {
+            return true
         }
+        return false
     }
-    
-    func checkPopularState() {
-        
-        let keys = categoryModel.map { $0.category }
-        let values = Array(repeating: false, count: categoryFood.count)
-        var item = [String : [Bool]]()
-        keys.forEach { item[$0] = values }
-        
-        indexPopular[keyCategory]?.forEach { index in
-            item[keyCategory]![index] = !item[keyCategory]![index]
-        }
-        
-        statePopular = item
-    }
-    
-    private func checkTrendingState() {
-        
-        var item = Array(repeating: false, count: recipeData.count)
-        
-        indexTrending.forEach {
-            item[$0] = !item[$0]
-        }
-        
-        stateTrending = item
-    }
-    
-    func addTrending(id: Int?) {
-        
-        guard let id = id else { return }
-        userDefTrending.insert(id)
-    }
-    
-    func addPopular(id: Int?) {
-        
-        guard let id = id else { return }
-        userDefPopular[keyCategory]?.append(id)
-    }
-    
+
     func saveUserDef() {
         
-        let trend = userDefTrending.map { Int($0) }
-        userDefaults.set(trend, forKey: "saveTrend")
-
-        let pop = userDefPopular
-        userDefaults.set(pop, forKey: "savePop")
-        print(pop)
+        let saveObject = saveId.map { $0 }
+        userDefaults.set(saveObject, forKey: "saveUD")
     }
     
     func loadFromUserDef() {
         
-        guard let trending = userDefaults.object(forKey: "saveTrend") as? [Int] else { return }
-        guard let pop = userDefaults.object(forKey: "savePop") as? [String : [Int]] else { return }
-        
-        trending.forEach { userDefTrending.insert($0) }
-        userDefPopular = pop
-        
-        trending.forEach { userDefTrending.insert($0) }
-        for (index, value) in recipeData.enumerated() {
-            guard let id = value.id else { return }
-            
-            trending.forEach {
-                if id == $0 {
-                    indexTrending.insert(index)
-                }
-            }
-        }
-        
-        for (index, value) in pop[keyCategory]!.enumerated() {
-            categoryFood.forEach {
-                guard let id = $0.id else { return }
-                if id == value {
-                    indexPopular[keyCategory]?.append(index)
-                }
-            }
-        }
-    }
-    
-    func getActyallyCategory() {
-        
-        for (index, value) in userDefPopular[keyCategory]!.enumerated() {
-            categoryFood.forEach {
-                guard let id = $0.id else { return }
-                if id == value {
-                    indexPopular[keyCategory]?.append(index)
-                }
-            }
-        }
+        guard let object = userDefaults.object(forKey: "saveUD") as? [Int] else { return }
+        object.forEach { saveId.insert($0) }
     }
 }

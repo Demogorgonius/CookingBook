@@ -12,7 +12,7 @@ import Foundation
 protocol RecipeClient {
     func sendRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type) async -> Result<T, RequestError>
     func sendSearchRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type, type: String) async -> Result<T, RequestError>
-    func sendIdRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type, id: String) async -> Result<T, RequestError>
+    func sendIdRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type) async -> Result<T, RequestError>
 }
 
 
@@ -101,16 +101,16 @@ extension RecipeClient {
         }
     }
     
-    func sendIdRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type, id: String) async -> Result<T, RequestError> {
+    func sendIdRequest<T: Decodable>(endpoint: RecipeEndpoint, responseModel: T.Type) async -> Result<T, RequestError> {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = endpoint.scheme
         urlComponents.host = endpoint.host
-        urlComponents.path = "/recipes/\(id)/information"
+        urlComponents.path = endpoint.path
         urlComponents.queryItems = endpoint.item
         
         guard let url = urlComponents.url else { return .failure(.invalidURL)}
-        print(url)
+        
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header

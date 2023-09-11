@@ -235,9 +235,9 @@ extension StartScreenController {
         return UICollectionView.CellRegistration<TrendingCell, Item> { [weak self] (cell, indexPath, recipe) in
             guard let self = self else { return }
             let model = MainModel.shared.recipeData[indexPath.row]
-            cell.favoriteButton.tag = indexPath.row
+            cell.favoriteButton.tag = model.id ?? 0
             cell.tappedButton = { self.present(self.sharedControl, animated: true) }
-            cell.configure(with: model, state: MainModel.shared.createState()[indexPath.row])
+            cell.configure(with: model)
         }
     }
     
@@ -252,16 +252,15 @@ extension StartScreenController {
         
         return UICollectionView.CellRegistration<PopularCell, Results> { (cell, indexPath, recipe) in
             let model = MainModel.shared.categoryFood[indexPath.row]
-            let state = MainModel.shared.createPopulatState()[MainModel.shared.keyCategory]![indexPath.row]
-            cell.configure(with: model, state: state)
-            cell.favoriteButton.tag = indexPath.row
+            cell.configure(with: model)
+            cell.favoriteButton.tag = model.id ?? 0
         }
     }
     
     private func registrRecent() -> UICollectionView.CellRegistration<RecentCell, Item> {
         
         return UICollectionView.CellRegistration<RecentCell, Item> { (cell, indexPath, recipe) in
-            cell.configure(with: MainModel.shared.recipeData[indexPath.row])
+            cell.configure(with: MainModel.shared.recentData[indexPath.row])
         }
     }
     
@@ -367,15 +366,13 @@ extension StartScreenController {
     
     private func applySnapshot() {
         
-        MainModel.shared.loadFromUserDef()
-        
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.trending, .popular, .popularFood, .recent, .creators])
         
         let item = MainModel.shared.recipeData.map { Item(recipes: $0) }
         let item2 = MainModel.shared.categoryModel.map { Item(category: $0) }
         let item3 = MainModel.shared.categoryFood.map { Item(categoryFood: $0) }
-        let item4 = MainModel.shared.recipeData.map { Item(recipes: $0) }
+        let item4 = MainModel.shared.recentData.map { Item(recipes: $0) }
         let item5 = MainModel.shared.recipeData.map { Item(recipes: $0) }
         
         snapshot.appendItems(item, toSection: .trending)
