@@ -14,6 +14,7 @@ final class FavoritesViewController: UIViewController {
     
     private let identifier = "favoritesCell"
     private let networkManager = NetworkManager()
+    weak var delegate: FavoriteDelegate?
     
     //MARK: - UI Elements
     
@@ -40,7 +41,7 @@ final class FavoritesViewController: UIViewController {
     //MARK: - Methods
     
     private func setupViews() {
-        
+
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
@@ -67,6 +68,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
             if let indexPathToDelete = collectionView.indexPath(for: cell!) {
                 MainModel.shared.favorites.remove(at: indexPathToDelete.row)
                 collectionView.deleteItems(at: [indexPathToDelete])
+                delegate?.update()
             }
         }
         
@@ -75,3 +77,30 @@ extension FavoritesViewController: UICollectionViewDataSource {
 }
 
 
+//MARK: - Extension StartScreenProtocol
+
+extension FavoritesViewController: StartScreenProtocol {
+    
+    func updateFavorites() {
+        
+        MainModel.shared.saveId.forEach {
+            networkManager.loadWithId(id: $0.description) { [weak self] (result: Result<Results, RequestError>) in
+                switch result {
+                case .success(let data):
+                    if !MainModel.shared.favorites.contains(data) {
+                        MainModel.shared.favorites.append(data)
+                        DispatchQueue.main.async { self?.collectionView.reloadData() }
+                    }
+                case .failure(let error):
+                    print(error.customMessage)
+                }
+            }
+        }
+    }
+}
+
+//MARK: - Extension FavoriteDelegate
+
+protocol FavoriteDelegate: AnyObject {
+    func update()
+}

@@ -12,6 +12,8 @@ final class StartScreenController: UIViewController {
     
     //MARK: - Properties
     
+    weak var delegate: StartScreenProtocol?
+    
     private var networkManager = NetworkManager()
     private var collectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
@@ -45,7 +47,11 @@ final class StartScreenController: UIViewController {
         return view
     }()
     
-    //MARK: - Init
+    //MARK: - Inits
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        delegate?.updateFavorites()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +60,7 @@ final class StartScreenController: UIViewController {
         configureCollectionView()
         createDataSourse()
         applySnapshot()
-        
+
     }
     
     //MARK: - Setup UI
@@ -432,3 +438,17 @@ extension StartScreenController: UITextFieldDelegate {
     }
 }
 
+//MARK: - FavoriteDelegate
+
+extension StartScreenController: FavoriteDelegate {
+    
+    func update() {
+        applySnapshot()
+    }
+}
+
+//MARK: - StartScreenProtocol
+
+protocol StartScreenProtocol: AnyObject {
+    func updateFavorites()
+}

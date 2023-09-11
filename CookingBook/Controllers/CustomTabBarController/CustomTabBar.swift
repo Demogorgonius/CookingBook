@@ -61,9 +61,14 @@ extension CustomTabBarController {
         let emptyViewController = UIViewController()
         emptyViewController.tabBarItem = UITabBarItem(title: nil, image: nil, tag: 2)
         
+        let start = StartScreenController()
+        let favorites = FavoritesViewController()
+        favorites.delegate = start
+        start.delegate = favorites
+        
         viewControllers = [
-            makeViewControllers(vc: StartScreenController(), image: UIImage(named: "home"), selectedImage: UIImage(named: "home.selected")),
-            makeViewControllers(vc: FavoritesViewController(), image: UIImage(named: "bookmark"), selectedImage: UIImage(named: "bookmark.selected")),
+            makeViewControllers(vc: start, image: UIImage(named: "home"), selectedImage: UIImage(named: "home.selected")),
+            makeViewControllers(vc: favorites, image: UIImage(named: "bookmark"), selectedImage: UIImage(named: "bookmark.selected")),
             emptyViewController,
             makeViewControllers(vc: NotificationViewController(), image: UIImage(named: "bell"), selectedImage: UIImage(named: "bell.selected")),
             makeViewControllers(vc: ProfileViewController(), image: UIImage(named: "person"), selectedImage: UIImage(named: "person.selected"))
