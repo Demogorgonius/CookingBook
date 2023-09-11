@@ -83,6 +83,7 @@ extension SearchBarController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? SearchBarCell
+        cell?.favoriteButton.tag = MainModel.shared.searchBar[indexPath.row].id ?? 0
         cell?.configure(with: MainModel.shared.searchBar[indexPath.row])
         return cell ?? UICollectionViewCell()
     }

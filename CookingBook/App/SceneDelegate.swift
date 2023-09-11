@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        
+
         let networkManager = NetworkManager()
         let dispatchGroup = DispatchGroup()
         
@@ -48,6 +48,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             dispatchGroup.leave()
         }
+        
+        dispatchGroup.enter()
+        MainModel.shared.saveId.forEach { id in
+            networkManager.loadWithId(id: id.description) { (result: Result<Results, RequestError>) in
+                switch result {
+                    
+                case .success(let data):
+                    MainModel.shared.favorites.append(data)
+                case .failure(let error):
+                    print(error.customMessage)
+                }
+            }
+        }
+        dispatchGroup.leave()
         
         dispatchGroup.notify(queue: .main) {
             guard let windowScene = scene as? UIWindowScene else { return }

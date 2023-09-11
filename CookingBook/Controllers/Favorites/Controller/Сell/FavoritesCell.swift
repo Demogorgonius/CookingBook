@@ -1,18 +1,19 @@
 //
-//  SearchBarCell.swift
+//  FavoritesCell.swift
 //  CookingBook
 //
-//  Created by sidzhe on 10.09.2023.
+//  Created by sidzhe on 11.09.2023.
 //
 
 import UIKit
 import SnapKit
 
-final class SearchBarCell: UICollectionViewCell {
+final class FavoritesCell: UICollectionViewCell {
     
     //MARK: - Properties
     
     var tappedButton: (() -> Void)?
+    var deleteItem: (() -> Void)?
     
     private var networkManager = NetworkManager()
     
@@ -29,7 +30,7 @@ final class SearchBarCell: UICollectionViewCell {
     private lazy var ratingImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "heart.fill")
-        image.tintColor = UIColor.primary50
+        image.tintColor = .primary50
         return image
     }()
     
@@ -67,19 +68,19 @@ final class SearchBarCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var additionalButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
-        button.tintColor = UIColor.primary50
-        button.addTarget(self, action: #selector(tapAdditionalButton), for: .touchUpInside)
-        return button
-    }()
-    
     lazy var favoriteButton: UIButton = {
         let button = UIButton()
         button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
         button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
-        button.tintColor = .systemGray3
+        button.tintColor = .primary50
+        return button
+    }()
+    
+    private lazy var additionalButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
+        button.tintColor = .primary50
+        button.addTarget(self, action: #selector(tapAdditionalButton), for: .touchUpInside)
         return button
     }()
     
@@ -130,12 +131,11 @@ final class SearchBarCell: UICollectionViewCell {
         mainImage.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(16)
             make.height.equalTo(180)
-            make.top.equalToSuperview().inset(16)
+            make.top.equalToSuperview()
         }
         
         ratingView.snp.makeConstraints { make in
-            make.top.equalTo(mainImage.snp.top).inset(16)
-            make.left.equalTo(mainImage.snp.left).inset(16)
+            make.top.left.equalToSuperview().inset(16)
             make.width.equalTo(60)
             make.height.equalTo(30)
         }
@@ -151,6 +151,12 @@ final class SearchBarCell: UICollectionViewCell {
             make.centerY.equalToSuperview()
             make.left.equalTo(ratingImage.snp.right).inset(-4)
             make.right.equalToSuperview().inset(6)
+        }
+        
+        favoriteButton.snp.makeConstraints { make in
+            make.size.equalTo(30)
+            make.centerY.equalTo(ratingLabel.snp.centerY)
+            make.right.equalToSuperview().inset(42)
         }
         
         nameLabel.snp.makeConstraints { make in
@@ -179,20 +185,14 @@ final class SearchBarCell: UICollectionViewCell {
         indicator.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
-        
-        favoriteButton.snp.makeConstraints { make in
-            make.top.equalTo(mainImage.snp.top).inset(16)
-            make.right.equalTo(mainImage.snp.right).inset(16)
-            make.size.equalTo(30)
-        }
     }
     
     //MARK: - Target
     
     @objc private func tapFavoriteButton(_ sender: UIButton) {
         
-        sender.tintColor = sender.tintColor == .systemGray3 ? .primary50 : .systemGray3
         MainModel.shared.checkId(sender.tag)
+        deleteItem?()
     }
     
     @objc private func tapAdditionalButton() {
@@ -228,7 +228,7 @@ final class SearchBarCell: UICollectionViewCell {
         avatarLabel.text = model.sourceName
         mainImage.layer.cornerRadius = 20
         mainImage.clipsToBounds = true
-        favoriteButton.tintColor = MainModel.shared.setState(model: model) ? .primary50 : .systemGray3
+        favoriteButton.tintColor = MainModel.shared.setState(model: model) ? .primary50 : .systemGray
         
         if mainImage.image == nil {
             networkManager.loadImage(from: model.image) { [weak self] image in

@@ -19,6 +19,7 @@ class MainModel {
     var recentData = [Results]()
     var categoryFood = [Results]()
     var searchBar = [Results]()
+    var favorites = [Results]()
     var categoryModel = [
         CategoryModel(category: "Salad", isSelectedCategory: true), CategoryModel(category: "Breakfast"),
         CategoryModel(category: "Dessert"), CategoryModel(category: "Appetizer"),
@@ -26,7 +27,7 @@ class MainModel {
         CategoryModel(category: "Drink")
     ]
     
-    var saveId = Set<Int>()
+    var saveId = Set<Int>() 
     
     var userDefaults = UserDefaults.standard
 

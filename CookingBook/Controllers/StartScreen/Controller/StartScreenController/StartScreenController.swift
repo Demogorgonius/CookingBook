@@ -53,7 +53,6 @@ final class StartScreenController: UIViewController {
         setupViews()
         configureCollectionView()
         createDataSourse()
-        MainModel.shared.loadFromUserDef()
         applySnapshot()
         
     }
@@ -292,7 +291,7 @@ extension StartScreenController {
         return UICollectionView.SupplementaryRegistration<RecentHeader>(elementKind: UICollectionView.elementKindSectionHeader) { header, _, _ in
             header.recentLabel.text = "Recent recipe"
             header.completionHandler = { [weak self] in
-                let vc = SeeAllController(trending: nil, recent: MainModel.shared.recipeData, creators: nil)
+                let vc = SeeAllController(trending: nil, recent: MainModel.shared.recentData, creators: nil)
                 self?.present(vc, animated: true)
             }
         }
@@ -408,7 +407,7 @@ extension StartScreenController: UICollectionViewDelegate {
             }
             
             MainModel.shared.categoryModel[indexPath.row].isSelectedCategory = true
-                        
+            
         case .popularFood:
             print("popularFood: \(indexPath.row)")
         case .recent:
@@ -419,7 +418,7 @@ extension StartScreenController: UICollectionViewDelegate {
     }
 }
 
-//MARK: - Extension
+//MARK: - Extension UITextFieldDelegate
 
 extension StartScreenController: UITextFieldDelegate {
     
@@ -432,3 +431,4 @@ extension StartScreenController: UITextFieldDelegate {
         return true
     }
 }
+

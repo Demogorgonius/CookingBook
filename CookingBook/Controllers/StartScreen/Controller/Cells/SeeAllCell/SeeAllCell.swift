@@ -11,7 +11,7 @@ import SnapKit
 final class SeeAllCell: UICollectionViewCell {
     
     //MARK: - Properties
-        
+    
     private var networkManager = NetworkManager()
     
     //MARK: - UI Elements
@@ -59,7 +59,7 @@ final class SeeAllCell: UICollectionViewCell {
         label.textColor = .white
         return label
     }()
-
+    
     private lazy var indicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
         view.hidesWhenStopped = true
@@ -137,7 +137,7 @@ final class SeeAllCell: UICollectionViewCell {
             make.center.equalToSuperview()
         }
     }
-   
+    
     //MARK: - checkLikes
     
     private func checkLikes(with like: String) -> String {
