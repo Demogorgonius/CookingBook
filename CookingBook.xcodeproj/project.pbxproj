@@ -68,6 +68,7 @@
 		EBDF848D2AADCF25001A5BF8 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBDF848A2AADCF25001A5BF8 /* Poppins-SemiBold.ttf */; };
 		EBDF848E2AADCF25001A5BF8 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBDF848B2AADCF25001A5BF8 /* Poppins-Bold.ttf */; };
 		EBDF848F2AADCF25001A5BF8 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EBDF848C2AADCF25001A5BF8 /* Poppins-Regular.ttf */; };
+		EBE644912AB0033800531B6D /* DetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE644902AB0033800531B6D /* DetailViewCell.swift */; };
 		EBE74A872AACA5EA00900990 /* SeeAllController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE74A862AACA5EA00900990 /* SeeAllController.swift */; };
 		EBE74A892AACA89B00900990 /* SeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBE74A882AACA89B00900990 /* SeeAllCell.swift */; };
 		EBF97FC82AAD7F73009AAC9C /* SearchBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBF97FC72AAD7F73009AAC9C /* SearchBarController.swift */; };
@@ -137,6 +138,7 @@
 		EBDF848A2AADCF25001A5BF8 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		EBDF848B2AADCF25001A5BF8 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		EBDF848C2AADCF25001A5BF8 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		EBE644902AB0033800531B6D /* DetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewCell.swift; sourceTree = "<group>"; };
 		EBE74A862AACA5EA00900990 /* SeeAllController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllController.swift; sourceTree = "<group>"; };
 		EBE74A882AACA89B00900990 /* SeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllCell.swift; sourceTree = "<group>"; };
 		EBF97FC72AAD7F73009AAC9C /* SearchBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarController.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				EB3601D12AAF4AB20045A8B4 /* DetailViewController.swift */,
+				EBE644902AB0033800531B6D /* DetailViewCell.swift */,
 			);
 			path = DetailViewController;
 			sourceTree = "<group>";
@@ -717,6 +720,7 @@
 				EBDF846E2AADCCAB001A5BF8 /* OnboardingData.swift in Sources */,
 				EBDF846C2AADCCAB001A5BF8 /* OnboardingDataManager.swift in Sources */,
 				EBD517BD2AA04B8E002A2C75 /* PopularHeader.swift in Sources */,
+				EBE644912AB0033800531B6D /* DetailViewCell.swift in Sources */,
 				EBDF84852AADCD6A001A5BF8 /* Recepie.swift in Sources */,
 				EBDF846D2AADCCAB001A5BF8 /* WelcomeViewController.swift in Sources */,
 			);

@@ -67,7 +67,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let windowScene = scene as? UIWindowScene else { return }
             let window = UIWindow(windowScene: windowScene)
             window.makeKeyAndVisible()
-            window.rootViewController = DetailViewController()
+            window.rootViewController = DetailViewController(model: MainModel.shared.recipeData[1])
+//            window.rootViewController = WelcomeViewController()
             self.window = window
         }
     }
