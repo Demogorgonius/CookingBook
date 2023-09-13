@@ -35,6 +35,7 @@ final class SeeAllController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(SeeAllCell.self, forCellWithReuseIdentifier: identifier)
         view.dataSource = self
+        view.delegate = self
         return view
     }()
     
@@ -107,5 +108,16 @@ extension SeeAllController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? SeeAllCell
         cell?.configure(with: model[indexPath.row])
         return cell ?? UICollectionViewCell()
+    }
+}
+
+//MARK: - Extension UICollectionViewDelegate
+
+extension SeeAllController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let model = trending ?? recent ?? creators ?? [Results]()
+        present(DetailViewController(model: model[indexPath.row]), animated: true)
     }
 }

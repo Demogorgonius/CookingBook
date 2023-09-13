@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+        
         let networkManager = NetworkManager()
         let dispatchGroup = DispatchGroup()
         
@@ -67,8 +67,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let windowScene = scene as? UIWindowScene else { return }
             let window = UIWindow(windowScene: windowScene)
             window.makeKeyAndVisible()
-            window.rootViewController = DetailViewController(model: MainModel.shared.recipeData[1])
-//            window.rootViewController = WelcomeViewController()
+            window.rootViewController = WelcomeViewController()
             self.window = window
         }
     }

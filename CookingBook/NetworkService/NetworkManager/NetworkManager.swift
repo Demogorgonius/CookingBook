@@ -70,7 +70,7 @@ class NetworkManager: NetworkManagerProtocol {
                     print(error)
                 }
                 guard let data = data else { return }
-                let image = UIImage(data: data) ?? UIImage()
+                let image = UIImage(data: data) ?? UIImage(named: "dish") ?? UIImage()
                 self.imageCache.setObject(image, forKey: imageString as NSString)
                 completion(image)
             }

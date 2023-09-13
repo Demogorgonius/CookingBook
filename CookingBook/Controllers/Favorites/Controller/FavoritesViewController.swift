@@ -26,6 +26,7 @@ final class FavoritesViewController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(FavoritesCell.self, forCellWithReuseIdentifier: identifier)
         view.dataSource = self
+        view.delegate = self
         return view
     }()
     
@@ -35,13 +36,13 @@ final class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
-
+        
     }
     
     //MARK: - Methods
     
     private func setupViews() {
-
+        
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
@@ -76,6 +77,16 @@ extension FavoritesViewController: UICollectionViewDataSource {
     }
 }
 
+//MARK: - Extension UICollectionViewDelegate
+
+extension FavoritesViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        present(DetailViewController(model: MainModel.shared.favorites[indexPath.row]), animated: true)
+    }
+}
+
 
 //MARK: - Extension StartScreenProtocol
 
@@ -104,3 +115,4 @@ extension FavoritesViewController: StartScreenProtocol {
 protocol FavoriteDelegate: AnyObject {
     func update()
 }
+

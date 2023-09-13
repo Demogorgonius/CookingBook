@@ -59,7 +59,9 @@ final class DetailViewCell: UITableViewCell {
             make.right.equalToSuperview().inset(16)
         }
     }
-        
+    
+    //MARK: - Configure
+    
     func configure(model: Ent) {
         
         ingridientLabel.text = model.name
