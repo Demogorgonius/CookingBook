@@ -25,6 +25,7 @@ final class SearchBarController: UIViewController {
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
         view.register(SearchBarCell.self, forCellWithReuseIdentifier: identifier)
         view.dataSource = self
+        view.delegate = self
         return view
     }()
     
@@ -86,5 +87,15 @@ extension SearchBarController: UICollectionViewDataSource {
         cell?.favoriteButton.tag = MainModel.shared.searchBar[indexPath.row].id ?? 0
         cell?.configure(with: MainModel.shared.searchBar[indexPath.row])
         return cell ?? UICollectionViewCell()
+    }
+}
+
+//MARK: - Extension UICollectionViewDelegate
+
+extension SearchBarController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        present(DetailViewController(model: MainModel.shared.searchBar[indexPath.row]), animated: true)
     }
 }
