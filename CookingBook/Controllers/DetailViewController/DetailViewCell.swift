@@ -28,6 +28,12 @@ final class DetailViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var checkBox: CheckBox = {
+        let button = CheckBox()
+        button.isChecked = false
+        return button
+    }()
+    
     //MARK: - Inits
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -45,8 +51,11 @@ final class DetailViewCell: UITableViewCell {
     
     private func setupViews() {
         
+        checkBox.addTarget(self, action: #selector(checkBoxTapped), for: .touchUpInside)
+        
         contentView.addSubview(mainImage)
         contentView.addSubview(ingridientLabel)
+        contentView.addSubview(checkBox)
         
         mainImage.snp.makeConstraints { make in
             make.size.equalTo(44)
@@ -56,7 +65,14 @@ final class DetailViewCell: UITableViewCell {
         
         ingridientLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().inset(16)
+            make.trailing.equalTo(checkBox.snp.leading).offset(-16)
+        }
+        
+        checkBox.snp.makeConstraints { make in
+            make.height.equalTo(44)
+            make.width.equalTo(44)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-16)
         }
     }
     
@@ -71,8 +87,13 @@ final class DetailViewCell: UITableViewCell {
         mainImage.clipsToBounds = true
         mainImage.layer.cornerRadius = 10
         
+        
+        
         networnManager.loadImage(from: url) { [weak self] image in
             DispatchQueue.main.async { self?.mainImage.image = image }
         }
+    }
+    @objc func checkBoxTapped(_ sender: CheckBox) {
+        sender.isChecked.toggle()
     }
 }
