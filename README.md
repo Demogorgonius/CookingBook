@@ -1,6 +1,6 @@
 # CookingBook
 
-## The application was created as part of the 8th stream of the Swift Marathon project (https://t.me/swiftmarathon) by 6th team. Mobile app for finding new recipes and getting inspiration in the kitchen. And even more... 
+## The application was created as part of the 8th stream of the Swift Marathon project (https://t.me/swiftmarathon) by 5th team. Mobile app for finding new recipes and getting inspiration in the kitchen. And even more... 
 ![cookbook](https://github.com/Demogorgonius/CookingBook/assets/51359795/0c1f4395-0812-4fc8-a463-4d199c7d69b0)
 
 ### Screenshots:
