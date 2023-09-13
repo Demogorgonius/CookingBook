@@ -65,7 +65,17 @@ final class DetailViewController: UIViewController {
     private func createIngrigients() {
         
         guard let model = model.analyzedInstructions?.first?.steps else { return }
-        for item in model { item.ingredients?.forEach {  cellModel.append($0) }}
+        for item in model { item.ingredients?.forEach { ingridient in
+        
+            if cellModel.isEmpty {
+                cellModel.append(ingridient)
+            } else {
+                if !cellModel.contains(ingridient) {
+                    cellModel.append(ingridient)
+                }
+            }
+        }}
+        
     }
 }
 
@@ -82,7 +92,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifierHeader) as? HeaderCell
-            cell?.configure(model: model)
+            cell?.configure(model: model, itemLabel: cellModel.count)
             return cell ?? UITableViewCell()
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as? DetailViewCell

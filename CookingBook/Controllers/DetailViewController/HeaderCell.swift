@@ -162,23 +162,18 @@ class HeaderCell: UITableViewCell {
     
     //MARK: - Configure
     
-    func configure(model: Results) {
+    func configure(model: Results, itemLabel: Int) {
         
         var ingridients = 0
         var steps = ""
         
         guard let items = model.analyzedInstructions?.first?.steps else { return }
         
-        itemsLabel.text = items.count.description
-        
         for item in items {
-            
-            ingridients += item.ingredients?.count ?? 0
             steps += "\(item.number?.description ?? "0"). \(item.step ?? "non") \n"
-            
         }
         
-        itemsLabel.text = ingridients.description
+        itemsLabel.text = itemLabel.description
         header.text = model.title
         ratingLabel.text = model.aggregateLikes?.description
         instructionList.text = steps

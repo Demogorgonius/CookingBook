@@ -66,7 +66,7 @@ extension RecipeClient {
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
         urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: "1242f412ecc44f2c9fbbe22061784465"),
+            URLQueryItem(name: "apiKey", value: "76c720e3086144478cbcd27fb948b527"),
             URLQueryItem(name: "addRecipeInformation", value: "true"),
             URLQueryItem(name: "type", value: type)
             

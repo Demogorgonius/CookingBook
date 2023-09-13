@@ -61,20 +61,16 @@ class NetworkManager: NetworkManagerProtocol {
         
         guard let imageString = urlString, let url = URL(string: imageString) else { return }
         
-        if let image = imageCache.object(forKey: imageString as NSString) {
-            completion(image)
-        } else {
-            let session = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
-            let task = URLSession.shared.dataTask(with: session) { data, response, error in
-                if let error = error {
-                    print(error)
-                }
-                guard let data = data else { return }
-                let image = UIImage(data: data) ?? UIImage(named: "dish") ?? UIImage()
-                self.imageCache.setObject(image, forKey: imageString as NSString)
-                completion(image)
+        let session = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 10)
+        let task = URLSession.shared.dataTask(with: session) { data, response, error in
+            if let error = error {
+                print(error)
             }
-            task.resume()
+            guard let data = data else { return }
+            let image = UIImage(data: data) ?? UIImage(named: "dish") ?? UIImage()
+            self.imageCache.setObject(image, forKey: imageString as NSString)
+            completion(image)
         }
+        task.resume()
     }
 }
