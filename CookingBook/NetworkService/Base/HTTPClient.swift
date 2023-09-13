@@ -29,7 +29,7 @@ extension RecipeClient {
         urlComponents.queryItems = endpoint.item
         
         guard let url = urlComponents.url else { return .failure(.invalidURL)}
-        
+   
         var request = URLRequest(url: url)
         request.httpMethod = endpoint.method.rawValue
         request.allHTTPHeaderFields = endpoint.header
@@ -66,7 +66,7 @@ extension RecipeClient {
         urlComponents.host = endpoint.host
         urlComponents.path = endpoint.path
         urlComponents.queryItems = [
-            URLQueryItem(name: "apiKey", value: "7a8cd7f64b124dd3841868f8dc77bfb8"),
+            URLQueryItem(name: "apiKey", value: "1242f412ecc44f2c9fbbe22061784465"),
             URLQueryItem(name: "addRecipeInformation", value: "true"),
             URLQueryItem(name: "type", value: type)
             

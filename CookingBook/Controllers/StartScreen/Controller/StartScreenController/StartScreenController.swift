@@ -397,15 +397,16 @@ extension StartScreenController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        let model = MainModel.shared
+        
         guard let sectionKind = Section(rawValue: indexPath.section) else { return }
         switch sectionKind {
             
         case .trending:
-            print("trending: \(indexPath.row)")
+            present(DetailViewController(model: model.recipeData[indexPath.row]), animated: true)
         case .popular:
             
             let popular = MainModel.shared.categoryModel[indexPath.row].category
-            
             loadCategory(type: popular)
             
             for i in 0..<MainModel.shared.categoryModel.count {
@@ -415,11 +416,11 @@ extension StartScreenController: UICollectionViewDelegate {
             MainModel.shared.categoryModel[indexPath.row].isSelectedCategory = true
             
         case .popularFood:
-            print("popularFood: \(indexPath.row)")
+            present(DetailViewController(model: model.categoryFood[indexPath.row]), animated: true)
         case .recent:
-            print("recent: \(indexPath.row)")
+            present(DetailViewController(model: model.recentData[indexPath.row]), animated: true)
         case .creators:
-            print("creators: \(indexPath.row)")
+            present(DetailViewController(model: model.recipeData[indexPath.row]), animated: true)
         }
     }
 }
