@@ -10,6 +10,7 @@
 		6D8C5FC02AAA1C5000DB7DB6 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046D72A9BF400004F6386 /* CustomTabBar.swift */; };
 		A58D849B2AADB300003E7A20 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D84802AADB300003E7A20 /* Item.swift */; };
 		A58D849C2AADB300003E7A20 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58D84812AADB300003E7A20 /* Section.swift */; };
+		A59C54202AB231BA003E6B89 /* CustomCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59C541F2AB231BA003E6B89 /* CustomCheckBox.swift */; };
 		A5B046BA2A9BF068004F6386 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046B92A9BF068004F6386 /* AppDelegate.swift */; };
 		A5B046BC2A9BF068004F6386 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */; };
 		A5B046C32A9BF069004F6386 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5B046C22A9BF069004F6386 /* Assets.xcassets */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		A58D84802AADB300003E7A20 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		A58D84812AADB300003E7A20 /* Section.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
+		A59C541F2AB231BA003E6B89 /* CustomCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCheckBox.swift; sourceTree = "<group>"; };
 		A5B046B62A9BF068004F6386 /* CookingBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CookingBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5B046B92A9BF068004F6386 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5B046BB2A9BF068004F6386 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				EB8831BE2AAAEC8200D92D3D /* UIColor + Extension.swift */,
 				EB8831BF2AAAEC8200D92D3D /* NSMutableAttributedString + Extension.swift */,
 				EB8831C02AAAEC8200D92D3D /* UIImageView + Exstension.swift */,
+				A59C541F2AB231BA003E6B89 /* CustomCheckBox.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -678,6 +681,7 @@
 				EBE644912AB0033800531B6D /* DetailViewCell.swift in Sources */,
 				EBDF84852AADCD6A001A5BF8 /* Recepie.swift in Sources */,
 				EBDF846D2AADCCAB001A5BF8 /* WelcomeViewController.swift in Sources */,
+				A59C54202AB231BA003E6B89 /* CustomCheckBox.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
