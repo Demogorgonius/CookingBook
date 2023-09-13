@@ -83,6 +83,14 @@ class HeaderCell: UITableViewCell {
         return image
     }()
     
+    private lazy var favoriteButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(tapFavoriteButton), for: .touchUpInside)
+        button.setBackgroundImage(UIImage(systemName: "bookmark.circle.fill"), for: .normal)
+        button.tintColor = .systemGray3
+        return button
+    }()
+    
     private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
@@ -111,6 +119,7 @@ class HeaderCell: UITableViewCell {
         stackView.addArrangedSubview(instructionList)
         
         contentView.addSubview(header)
+        contentView.addSubview(favoriteButton)
         contentView.addSubview(mainImage)
         contentView.addSubview(ratingImage)
         contentView.addSubview(ratingLabel)
@@ -121,6 +130,12 @@ class HeaderCell: UITableViewCell {
         header.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(16)
             make.horizontalEdges.equalToSuperview().inset(16)
+        }
+        
+        favoriteButton.snp.makeConstraints { make in
+            make.size.equalTo(30)
+            make.centerY.equalTo(header.snp.centerY)
+            make.trailing.equalToSuperview().offset(-16)
         }
         
         mainImage.snp.makeConstraints { make in
@@ -177,11 +192,19 @@ class HeaderCell: UITableViewCell {
         header.text = model.title
         ratingLabel.text = model.aggregateLikes?.description
         instructionList.text = steps
-        
+        favoriteButton.tintColor = MainModel.shared.setState(model: model) ? .primary50 : .systemGray
+        favoriteButton.tag = model.id ?? 0
         networkManager.loadImage(from: model.image) { [weak self] image in
             guard let self = self else { return }
             DispatchQueue.main.async { self.mainImage.image = image }
         }
     }
+    
+    @objc private func tapFavoriteButton(_ sender: UIButton) {
+        
+        sender.tintColor = sender.tintColor == .systemGray ? .systemPink : .systemGray
+        MainModel.shared.checkId(sender.tag)
+    }
+    
 }
 

@@ -93,6 +93,8 @@ final class DetailViewCell: UITableViewCell {
             DispatchQueue.main.async { self?.mainImage.image = image }
         }
     }
+    
+    
     @objc func checkBoxTapped(_ sender: CheckBox) {
         sender.isChecked.toggle()
     }
