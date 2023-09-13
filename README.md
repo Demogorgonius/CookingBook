@@ -20,6 +20,7 @@
 * UICollectionViewCompositionalLayout
 * UICollectionViewDiffableDataSource
 * UserDefaults
+* SnapKit
 
 ### Project created by:
 * [](https://github.com/CarolineTV)https://github.com/CarolineTV
